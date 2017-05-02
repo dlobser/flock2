@@ -15,6 +15,7 @@ public class SetMeshAttributes : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		mesh = GetComponent<MeshFilter> ().mesh;
+    Set();
 	}
 	
 	// Update is called once per frame

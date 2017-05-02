@@ -37,7 +37,7 @@ SubShader {
 //				half2 texcoord : TEXCOORD0;
 				float2 uv : TEXCOORD0;
 				float2 uv2 : TEXCOORD1;
-				UNITY_FOG_COORDS(2)
+				UNITY_FOG_COORDS(3)
 			};
 
 			sampler2D _MainTex;

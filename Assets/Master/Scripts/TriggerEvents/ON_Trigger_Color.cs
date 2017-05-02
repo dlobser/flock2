@@ -18,7 +18,7 @@ namespace ON{
 
 		public MeshRenderer renderer;
 
-		void Start(){
+		void Awake(){
 			if (renderer == null)
 				mat = this.GetComponent<MeshRenderer> ().material;
 			else
@@ -29,7 +29,7 @@ namespace ON{
 
 	    public override void Ping()
 	    {
-			base.Ping ();
+			    base.Ping ();
 	        if(getOldColorFromCurrent)
 	            oldColor = mat.GetColor(channel);
 	        StartCoroutine(Animate());

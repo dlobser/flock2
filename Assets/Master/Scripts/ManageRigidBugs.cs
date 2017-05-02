@@ -61,7 +61,7 @@ public class ManageRigidBugs : MonoBehaviour {
 					B.AddForce ((Force2 / (dist))*pullForce);
 
 				if(dist!=0)
-				B.AddForce((Force/(dist*dist))*pushForce);
+				B.AddForce((Force/(dist*dist*dist))*pushForce);
 
 				rigidToWorld = new Vector3 (B.transform.position.x, 
 					Mathf.Lerp(display.transform.GetChild (i).position.y, Camera.main.transform.position.y, heightLerpSpeed), 
@@ -81,12 +81,7 @@ public class ManageRigidBugs : MonoBehaviour {
 
 	public void ResetPosition(BugMVideo b){
 		RigidParent.transform.GetChild (b.id).transform.position = GetRandomPositionCircle ();
-//		SetMeshAttributes att = b.transform.GetChild (0).GetComponent<SetMeshAttributes> ();
-//		float prev = att.whichBug;
-//		float curr = prev++;
-//		if (prev > 7)
-//			curr = 0;
-//		att.whichBug = curr;
+
 	}
 
 	Vector2 GetRandomPositionCircle(){
@@ -103,10 +98,16 @@ public class ManageRigidBugs : MonoBehaviour {
 
 	public void SwapTexture(BugMVideo b){
 		b.transform.GetChild(0).gameObject.GetComponent<MaterialSwapperContinuous> ().swapMat ((int)(Random.value*6));
-	}
+    SetMeshAttributes att = b.transform.GetChild(0).GetComponent<SetMeshAttributes>();
+    float prev = att.whichBug;
+    float curr = prev++;
+    if (prev > 7)
+      curr = 0;
+    att.whichBug = curr;
+  }
 
 
-	Vector3 GetNoiseVec(Vector3 origin, float scale, float wScale,  float noiseCounter, float off){
+  Vector3 GetNoiseVec(Vector3 origin, float scale, float wScale,  float noiseCounter, float off){
 		Vector3 newPos = origin;
 		return origin + new Vector3 (
 			scale * (float)PNoise.Noise (wScale * newPos.x + noiseCounter + off, noiseCounter + newPos.y * wScale, noiseCounter + wScale * newPos.z),

@@ -12,11 +12,13 @@ namespace ON{
 		public string channel;
 		public Vector2 offsetSpeed;
 		Vector2 offset;
+		Vector2 init;
 
 		public offsetUV uvOffset;
 
 		void Start(){
 			mat = renderer.material;
+			init = uvOffset.speed;
 		}
 
 	    public override void Ping()
@@ -50,7 +52,7 @@ namespace ON{
 	    }
 
 		void Animate(float t){
-			uvOffset.speed = Vector2.Lerp (Vector2.zero, offsetSpeed, t);
+			uvOffset.speed = Vector2.Lerp (init, offsetSpeed, t);
 		}
 	}
 }

@@ -21,8 +21,9 @@ namespace ON{
 		bool triggered = false;
 
 		void Awake(){
+      init = objectToRotate.transform.localEulerAngles;
 
-			if (objectToRotate == null)
+      if (objectToRotate == null)
 				objectToRotate = this.gameObject;
 			
 		}
@@ -70,8 +71,8 @@ namespace ON{
 		}
 
 		void GetInitialRotation(){
-			if(!triggered)
-				init = objectToRotate.transform.localEulerAngles;
+			//if(!triggered)
+			//	init = objectToRotate.transform.localEulerAngles;
 			privateRotation = relativeRotation ? objectToRotate.transform.localEulerAngles + initialRotation : privateRotation;
 
 			if (randomize) {

@@ -1,0 +1,102 @@
+fileFormatVersion: 2
+guid: 4a0b482a94d78412bbf27b080b07386e
+timeCreated: 1473782641
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: BirdBody
+    100004: BirdFar
+    100006: BirdHead_Far
+    100008: BirdHead_Med2
+    100010: BirdMask
+    100012: wingLeft
+    100014: wingRight
+    100016: BirdHead_FarInside
+    400000: //RootNode
+    400002: BirdBody
+    400004: BirdFar
+    400006: BirdHead_Far
+    400008: BirdHead_Med2
+    400010: BirdMask
+    400012: wingLeft
+    400014: wingRight
+    400016: BirdHead_FarInside
+    2300000: wingLeft
+    2300002: wingRight
+    3300000: wingLeft
+    3300002: wingRight
+    4300000: wingLeft
+    4300002: wingRight
+    4300004: BirdHead_Med2
+    4300006: BirdHead_Far
+    4300008: BirdHead_FarInside
+    9500000: //RootNode
+    13700000: BirdHead_Far
+    13700002: BirdHead_Med2
+    13700004: BirdHead_FarInside
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

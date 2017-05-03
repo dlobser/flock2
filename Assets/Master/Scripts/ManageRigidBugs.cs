@@ -28,20 +28,32 @@ public class ManageRigidBugs : MonoBehaviour {
 
 	public float initialPositionScale = 1;
 
+	public GameObject[] Avatar;
+	public string avatarTag;
+
+
 	void Start () {
+		
+	
+		PNoise = new ImageTools.Core.PerlinNoise (1);
+		Init ();
+
+	}
+
+	void Init(){
+
 		if (Display != null) {
 			display = new GameObject ();
 			display.name = "display";
 			for (int i = 0; i < amount; i++) {
 				GameObject B = Instantiate (BugRigidPrefab,GetRandomPositionCircle(),Quaternion.identity,RigidParent.transform);
-//				B.transform.SetParent (RigidParent.transform);
+				//				B.transform.SetParent (RigidParent.transform);
 
 				GameObject b = Instantiate (Display);
 				b.GetComponent<BugMVideo> ().id = i;
 				b.transform.SetParent (display.transform);
 			}
 		}
-		PNoise = new ImageTools.Core.PerlinNoise (1);
 	}
 
 	public void ResetRigidBody(int index, Vector3 Pos){
@@ -49,27 +61,33 @@ public class ManageRigidBugs : MonoBehaviour {
 	}
 	
 	void Update () {
-		for (int i = 0; i < RigidParent.transform.childCount; i++) {
-			for (int j = 0;j < Avatars.transform.childCount; j++) {
-				Vector3 pos = RigidParent.transform.GetChild(i).position;
-				Vector3 pos2 = Avatars.transform.GetChild(j).position;
-				Vector2 Force = new Vector2(pos.x,pos.y) - new Vector2(pos2.x,pos2.z) ;
-				Vector2 Force2 = new Vector2(pos2.x,pos2.z) - new Vector2(pos.x,pos.y)  ;
-				float dist = Vector2.Distance(new Vector2(pos.x,pos.y) , new Vector2(pos2.x,pos2.z));
-				Rigidbody2D B = RigidParent.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>();
-				if(dist>1)
-					B.AddForce ((Force2 / (dist))*pullForce);
 
-				if(dist!=0)
-				B.AddForce((Force/(dist*dist*dist))*pushForce);
+		Avatar = GameObject.FindGameObjectsWithTag (avatarTag);
+		
+		if (Avatar.Length > 0) {
+			for (int i = 0; i < RigidParent.transform.childCount; i++) {
+				for (int j = 0; j < Avatar.Length; j++) {
+					Vector3 pos = RigidParent.transform.GetChild (i).position;
+					Vector3 pos2 = Avatar [j].transform.position;
+					Vector2 Force = new Vector2 (pos.x, pos.y) - new Vector2 (pos2.x, pos2.z);
+					Vector2 Force2 = new Vector2 (pos2.x, pos2.z) - new Vector2 (pos.x, pos.y);
+					float dist = Vector2.Distance (new Vector2 (pos.x, pos.y), new Vector2 (pos2.x, pos2.z));
+					Rigidbody2D B = RigidParent.transform.GetChild (i).gameObject.GetComponent<Rigidbody2D> ();
+					if (dist > 1)
+						B.AddForce ((Force2 / (dist)) * pullForce);
 
-				rigidToWorld = new Vector3 (B.transform.position.x, 
-					Mathf.Lerp(display.transform.GetChild (i).position.y, Camera.main.transform.position.y, heightLerpSpeed), 
-					B.transform.position.y);
-				worldWithNoise = GetNoiseVec (rigidToWorld, noiseMult, noiseFreq, Time.time*noiseSpeed, 1);
-				display.transform.GetChild (i).position = worldWithNoise;
+					if (dist != 0)
+						B.AddForce ((Force / (dist * dist * dist)) * pushForce);
+
+					rigidToWorld = new Vector3 (B.transform.position.x, 
+						Mathf.Lerp (display.transform.GetChild (i).position.y, Camera.main.transform.position.y, heightLerpSpeed), 
+						B.transform.position.y);
+					worldWithNoise = GetNoiseVec (rigidToWorld, noiseMult, noiseFreq, Time.time * noiseSpeed, 1);
+					display.transform.GetChild (i).position = worldWithNoise;
+				}
 			}
 		}
+			
 	}
 
 

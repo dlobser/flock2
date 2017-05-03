@@ -26,6 +26,9 @@ public class LevelHandler : MonoBehaviour {
 	float hungerTimer;
 	float reduceLevelCounter = 0;
 
+	bool PingPong;
+	public bool eatBug;
+
 	// Update is called once per frame
 
 	void Update () {
@@ -46,6 +49,11 @@ public class LevelHandler : MonoBehaviour {
 			deathCount = Mathf.Min(1.0f,deathClock / (timeMax - timeStartDeathClock));
 		}
 
+		if (eatBug) {
+			EatBug ();
+			eatBug = false;
+		}
+
 		UpdateFaders ();
 
 	}
@@ -63,8 +71,18 @@ public class LevelHandler : MonoBehaviour {
 	}
 
 	public void EatBug(){
+		
 		bugsEaten++;
-		level++;
+
+		if (level < maxLevel && PingPong)
+			level++;
+		else 
+			PingPong = false;
+		if (level > 0 && !PingPong)
+			level--;
+		else
+			PingPong = true;
+			
 		hungerTimer = 0;
 	}
 

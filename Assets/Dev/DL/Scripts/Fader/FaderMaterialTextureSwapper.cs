@@ -6,7 +6,7 @@ public class FaderMaterialTextureSwapper : Fader {
 	public Texture[] textures;
 	public Material mat;
 	public string textureName;
-	int which = 0;
+//	int which = 0;
 //	MeshRenderer rend;
 	Vector2 range = Vector2.zero;
 

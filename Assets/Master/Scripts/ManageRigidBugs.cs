@@ -45,10 +45,9 @@ public class ManageRigidBugs : MonoBehaviour {
 		if (Display != null) {
 			display = new GameObject ();
 			display.name = "display";
+			display.transform.SetParent (this.transform);
 			for (int i = 0; i < amount; i++) {
-				GameObject B = Instantiate (BugRigidPrefab,GetRandomPositionCircle(),Quaternion.identity,RigidParent.transform);
-				//				B.transform.SetParent (RigidParent.transform);
-
+				Instantiate (BugRigidPrefab,GetRandomPositionCircle(),Quaternion.identity,RigidParent.transform);
 				GameObject b = Instantiate (Display);
 				b.GetComponent<BugMVideo> ().id = i;
 				b.transform.SetParent (display.transform);

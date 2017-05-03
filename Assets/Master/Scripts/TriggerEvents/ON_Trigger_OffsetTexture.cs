@@ -7,8 +7,8 @@ namespace ON{
 
 	    public float speed;
 	    float counter = 0;
-		public MeshRenderer renderer;
-		Material mat;
+		public MeshRenderer Renderer;
+//		Material mat;
 		public string channel;
 		public Vector2 offsetSpeed;
 		Vector2 offset;
@@ -17,7 +17,7 @@ namespace ON{
 		public offsetUV uvOffset;
 
 		void Start(){
-			mat = renderer.material;
+//			mat = Renderer.material;
 			init = uvOffset.speed;
 		}
 

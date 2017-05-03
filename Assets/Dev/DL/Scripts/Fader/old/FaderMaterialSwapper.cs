@@ -5,7 +5,7 @@ public class FaderMaterialSwapper : Fader {
 
 	public Material[] materials;
 	public GameObject[] obj;
-	int which = 0;
+//	int which = 0;
 	Vector2 range = Vector2.zero;
 
 	void Start(){

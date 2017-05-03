@@ -12,7 +12,7 @@ public class PlayerMove_NoRigidBody : MonoBehaviour
 
 	Vector3 prevPosition;
 	private Mesh mesh;
-	Camera camera;
+//	Camera cam;
 	private Bounds originalBounds;
 	public MeshRenderer rend;
 
@@ -20,7 +20,7 @@ public class PlayerMove_NoRigidBody : MonoBehaviour
 
     void Start()
     {
-		camera = Camera.main;
+//		cam = Camera.main;
 
 		if (rend == null && this.GetComponent<MeshRenderer> () != null)
 			rend = this.GetComponent<MeshRenderer> ();

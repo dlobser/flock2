@@ -17,13 +17,13 @@ namespace ON{
 		public bool pingpong;
 		public bool smoothStep;
 
-		public MeshRenderer renderer;
+		public MeshRenderer Renderer;
 
 		void Start(){
-			if (renderer == null && this.GetComponent<MeshRenderer>()!=null)
+			if (Renderer == null && this.GetComponent<MeshRenderer>()!=null)
 				mat = this.GetComponent<MeshRenderer> ().material;
 			else
-				mat = renderer.material;
+				mat = Renderer.material;
 			if(getOldValueFromMaterial)
 				oldValue = mat.GetFloat(channel);
 		}
@@ -33,7 +33,7 @@ namespace ON{
 			base.Ping ();
 			if(getOldValueFromCurrent)
 				oldValue = mat.GetFloat(channel);
-			StartCoroutine(Animate());
+			StartCoroutine(animate());
 
 		}
 
@@ -59,7 +59,7 @@ namespace ON{
 			yield return null;
 		}
 
-		IEnumerator Animate()
+		IEnumerator animate()
 		{
 			counter = 0;
 			while (counter < speed)

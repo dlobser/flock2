@@ -8,7 +8,7 @@ public class SettingsToValues2 : MonoBehaviour {
 	public LevelHandler levelHandler;
 //	public TextMesh text;
 //
-	ManageRigidBugs bugManagement;
+//	ManageRigidBugs bugManagement;
 //	Bug[] bugs;
 
 //	FaderManager fader;
@@ -19,7 +19,7 @@ public class SettingsToValues2 : MonoBehaviour {
 	void Start () {
 //		settings = GameObject.Find ("SettingsManager").GetComponent<SettingsManager> ();
 //		bugs = bugManager.GetComponentsInChildren<Bug> ();
-		bugManagement = bugManager.GetComponent<ManageRigidBugs> ();
+//		bugManagement = bugManager.GetComponent<ManageRigidBugs> ();
 //		actors = actorManager.GetComponentsInChildren<Holojam.Tools.Actor> ();
 //		prev = new SettingsJSON ();
 ////		propertyCopy (settings.settingsJSON,prev);

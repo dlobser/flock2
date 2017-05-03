@@ -7,7 +7,7 @@ namespace ON{
 
 	    public float speed;
 	    float counter = 0;
-		public AudioSource audio;
+		public AudioSource audi;
 		public float maxVolume = 1;
 		public float minVolume = 0;
 
@@ -28,7 +28,7 @@ namespace ON{
 
 		public override void Reset(){
 			base.Reset ();
-			audio.volume = minVolume;
+			audi.volume = minVolume;
 			counter = 0;
 		}
 	
@@ -46,7 +46,7 @@ namespace ON{
 	    }
 
 		void Animate(float t){
-			audio.volume = Mathf.Lerp (minVolume, maxVolume, t);
+			audi.volume = Mathf.Lerp (minVolume, maxVolume, t);
 		}
 	}
 }

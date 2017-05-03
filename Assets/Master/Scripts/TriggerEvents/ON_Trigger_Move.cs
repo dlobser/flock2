@@ -18,9 +18,9 @@ namespace ON{
 		public GameObject objectToMove;
 
 		float counter = 0;
-		bool triggered = false;
+//		bool triggered = false;
 
-		void OnEnable(){
+		public override void OnEnable(){
 			base.OnEnable ();
 			GetComponent<ON_InteractableEvents> ().OnIdle += Idle;
 
@@ -31,7 +31,7 @@ namespace ON{
 
 		}
 
-		void OnDisable(){
+		public override void OnDisable(){
 			base.OnDisable ();
 			GetComponent<ON_InteractableEvents> ().OnIdle -= Idle;
 		}

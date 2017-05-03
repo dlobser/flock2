@@ -25,7 +25,7 @@ namespace ON{
 				interactable.blockCounter--;
 		}
 
-		public void OnEnable(){
+		public virtual void OnEnable(){
 			interactable = GetComponent<ON_InteractableEvents> ();
 			switch (type) {
 				case parameters.OnEnter:
@@ -46,7 +46,7 @@ namespace ON{
 			interactable.OnIdle += Reset;
 		}
 
-		public void OnDisable()
+		public virtual void OnDisable()
 		{
 			switch (type) {
 				case parameters.OnEnter:

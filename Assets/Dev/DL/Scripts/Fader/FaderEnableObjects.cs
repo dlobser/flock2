@@ -4,7 +4,7 @@ using System.Collections;
 public class FaderEnableObjects : Fader {
 
 	public GameObject[] obj;
-	int which = 0;
+//	int which = 0;
 
 	public override void Fade(){
 		float currentLevel = ((Mathf.Clamp (level, min, max)-min) / levels) * obj.Length;

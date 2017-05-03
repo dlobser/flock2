@@ -18,7 +18,7 @@ namespace ON{
 
 
 		float counter = 0;
-		bool triggered = false;
+//		bool triggered = false;
 
 		void Awake(){
       init = objectToRotate.transform.localEulerAngles;
@@ -28,7 +28,7 @@ namespace ON{
 			
 		}
 
-		void OnEnable(){
+		public override void OnEnable(){
 			base.OnEnable ();
 
 
@@ -39,7 +39,7 @@ namespace ON{
 
 		}
 
-		void OnDisable(){
+		public override void OnDisable(){
 			base.OnDisable ();
 			GetComponent<ON_InteractableEvents> ().OnIdle -= Idle;
 		}

@@ -16,13 +16,13 @@ namespace ON{
 	    public bool reverse = false;
 		public bool pingpong;
 
-		public MeshRenderer renderer;
+		public MeshRenderer Renderer;
 
 		void Awake(){
-			if (renderer == null)
+			if (Renderer == null)
 				mat = this.GetComponent<MeshRenderer> ().material;
 			else
-				mat = renderer.material;
+				mat = Renderer.material;
 			if(getOldColorFromMaterial)
 				oldColor = mat.GetColor(channel);
 		}
@@ -32,7 +32,7 @@ namespace ON{
 			    base.Ping ();
 	        if(getOldColorFromCurrent)
 	            oldColor = mat.GetColor(channel);
-	        StartCoroutine(Animate());
+	        StartCoroutine(animate());
 
 	    }
 
@@ -58,7 +58,7 @@ namespace ON{
 			yield return null;
 		}
 
-	    IEnumerator Animate()
+	    IEnumerator animate()
 	    {
 			counter = 0;
 	        while (counter < speed)

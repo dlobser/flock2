@@ -21,7 +21,11 @@ public class NetworkVRHands : NetworkBehaviour
 	private bool hasTriggerBeenPressedThisFrame;
 	private bool hasGripBeenPressedThisFrame;
 	private bool hasTriggerBeenReleasedThisFrame;
+	#pragma warning disable 414
+
 	private bool hasGripBeenReleasedThisFrame;
+	#pragma warning restore 414
+
     private bool isTriggerPressed;
 	private bool isGripPressed;
 

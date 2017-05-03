@@ -11,7 +11,7 @@ namespace ON{
 		public GameObject wireParent;
 		ON_Node node;
 
-		float counter = 0;
+//		float counter = 0;
 
 		ON_NodeGraph nodes;
 		bool finishedBuilding;

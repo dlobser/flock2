@@ -94,11 +94,16 @@ public class SettingsManager2 :  NetworkBehaviour {
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
 
-		if(resetHeadsetImmediate || resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
-      ResetHeadset = false;
-      resetHeadset = false;
+    if (resetHeadsetImmediate)
+     {
       ResetHeadsetImmediate = false;
       resetHeadsetImmediate = false;
+      reset.Reset();
+      fader.Refresh();
+    }
+    if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
+      ResetHeadset = false;
+      resetHeadset = false;
       reset.Reset();
       fader.Refresh();
 		}

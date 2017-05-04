@@ -19,11 +19,11 @@ public class SettingsManager2 :  NetworkBehaviour {
   [SyncVar(hook="OnChangeHeadsetText")]
   public string headsetText;
 
-  public float   ExperienceLengthSeconds;
-  public float   DeathLengthSeconds;
-  public float   FaderLevelsMax;
-  public float   BugPushStrength;
-  public float   BugPullStrength;
+  public float   ExperienceLengthSeconds = 420;
+  public float   DeathLengthSeconds = 30;
+  public float   FaderLevelsMax = 200;
+  public float   BugPushStrength = .15f;
+  public float   BugPullStrength = .1f;
   public int     ResetHeadset = -2;
   public string  HeadsetText;
 

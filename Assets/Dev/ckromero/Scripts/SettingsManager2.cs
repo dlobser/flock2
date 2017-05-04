@@ -40,6 +40,7 @@ public class SettingsManager2 :  NetworkBehaviour {
         {
             Debug.Log("i'm server");
         }
+    Debug.Log("Network Player#: " + (Network.player.ToString()));
   }
 
     public void OnChangeExperienceLength(float e)

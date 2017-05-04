@@ -86,6 +86,7 @@ public class SettingsManager2 :  NetworkBehaviour {
 				Debug.Log ("reset: " + resetHeadset);
 			}
 			resetHeadset = -2;
+      ResetHeadset = -2;
 		}
 
         prevHeadsetText = headsetText;

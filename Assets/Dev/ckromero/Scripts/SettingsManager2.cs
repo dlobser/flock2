@@ -16,6 +16,8 @@ public class SettingsManager2 :  NetworkBehaviour {
   public float bugPullStrength;
   [SyncVar(hook="OnChangeResetHeadset")]
   public bool resetHeadset = false;
+  [SyncVar(hook = "OnChangeResetHeadsetImmediate")]
+  public bool resetHeadsetImmediate = false;
   [SyncVar(hook="OnChangeHeadsetText")]
   public string headsetText;
 
@@ -25,6 +27,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public float   BugPushStrength = .15f;
   public float   BugPullStrength = .1f;
   public bool    ResetHeadset;
+  public bool ResetHeadsetImmediate;
   public string  HeadsetText;
 
   public LevelHandler levelHandler;
@@ -56,6 +59,8 @@ public class SettingsManager2 :  NetworkBehaviour {
   public void OnChangeBugPushStrength(float e) { bugPushStrength = e; }
   public void OnChangeBugPullStrength(float e) { bugPullStrength = e; }
   public void OnChangeResetHeadset(bool e) { resetHeadset = e; }
+  public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e; }
+
   public void OnChangeHeadsetText(string e) { headsetText = e; }
 
 
@@ -66,11 +71,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     }
     if (Input.GetKeyUp(KeyCode.B))
     {
-      ResetHeadset = false;
-      resetHeadset = false;
-      reset.Reset();
-      fader.Refresh();
-      levelHandler.timer = 0;
+      ResetHeadsetImmediate = true;
     }
     if (isServer)
     {
@@ -80,6 +81,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       bugPushStrength = BugPushStrength;
       bugPullStrength = BugPullStrength;
       resetHeadset = ResetHeadset;
+      resetHeadsetImmediate = ResetHeadsetImmediate;
       headsetText = HeadsetText;
       experienceLengthSeconds = ExperienceLengthSeconds;
     }
@@ -92,9 +94,11 @@ public class SettingsManager2 :  NetworkBehaviour {
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
 
-		if(resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
+		if(resetHeadsetImmediate || resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
       ResetHeadset = false;
       resetHeadset = false;
+      ResetHeadsetImmediate = false;
+      resetHeadsetImmediate = false;
       reset.Reset();
       fader.Refresh();
 		}

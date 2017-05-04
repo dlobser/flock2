@@ -6,14 +6,21 @@ using UnityEngine.Networking;
 public class SpawnSettingsManager : NetworkBehaviour {
 
     public GameObject settings;
+    bool spawned;
 	// Use this for initialization
 	void Start () {
-        NetworkServer.Spawn(settings);
-        Debug.Log("spawned");
+       
 	}
-	
-	//// Update is called once per frame
-	//void Update () {
-		
-	//}
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!spawned && NetworkServer.active)
+        {
+            NetworkServer.Spawn(settings);
+            Debug.Log("spawned");
+            spawned = true;
+        }
+        Debug.Log(NetworkServer.active);
+    }
 }

@@ -14,7 +14,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public float bugPushStrength;
   [SyncVar(hook="OnChangeBugPullStrength")]
   public float bugPullStrength;
-  [SyncVar(hook="OnChangResetHeadset")]
+  [SyncVar(hook="OnChangeResetHeadset")]
   public int resetHeadset = -2;
   [SyncVar(hook="OnChangeHeadsetText")]
   public string headsetText;

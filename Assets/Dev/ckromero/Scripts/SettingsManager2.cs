@@ -102,9 +102,11 @@ public class SettingsManager2 :  NetworkBehaviour {
       resetHeadsetImmediate = false;
       reset.Reset();
       fader.Refresh();
+      Debug.Log("resetImmediate");
     }
     if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
-     // ResetHeadset = false;
+      // ResetHeadset = false;
+      Debug.Log("reset");
       resetHeadset = false;
       reset.Reset();
       fader.Refresh();

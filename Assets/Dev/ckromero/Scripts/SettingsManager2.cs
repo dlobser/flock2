@@ -38,8 +38,6 @@ public class SettingsManager2 :  NetworkBehaviour {
 
     public void OnChangeExperienceLength(float e)
     {
-        if (!isServer)
-            return;
 
         experienceLengthSeconds = e;
         levelHandler.timeMax = e;
@@ -48,7 +46,7 @@ public class SettingsManager2 :  NetworkBehaviour {
 
 	void Update(){
 
-        if(experienceLengthSeconds!=timeMax)
+        if(isServer)
             experienceLengthSeconds = timeMax;
 		
 		levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;

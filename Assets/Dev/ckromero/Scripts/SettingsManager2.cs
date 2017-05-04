@@ -68,10 +68,12 @@ public class SettingsManager2 :  NetworkBehaviour {
     if (Input.GetKeyUp(KeyCode.A))
     {
       ResetHeadset = true;
+      resetHeadset = true;
     }
     if (Input.GetKeyUp(KeyCode.B))
     {
       ResetHeadsetImmediate = true;
+      resetHeadset = true;
     }
     if (isServer)
     {

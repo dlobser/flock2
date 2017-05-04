@@ -4,51 +4,71 @@ using UnityEngine.Networking;
 
 public class SettingsManager2 :  NetworkBehaviour {
 
-	[SyncVar(hook ="OnChangeExperienceLength")]
-	public float experienceLengthSeconds;
-	[SyncVar]
-	public float deathLengthSeconds;
-	[SyncVar]
-	public float faderLevelsMax;
-	[SyncVar]
-	public float bugPushStrength;
-	[SyncVar]
-	public float bugPullStrength;
-	[SyncVar]
-	public int resetHeadset = -2;
-    [SyncVar]
-    public string headsetText;
+  [SyncVar(hook ="OnChangeExperienceLength")]
+  public float experienceLengthSeconds;
+  [SyncVar(hook="OnChangeDeathLengthSeconds")]
+  public float deathLengthSeconds;
+  [SyncVar(hook="OnChangeFaderLevelsMax")]
+  public float faderLevelsMax;
+  [SyncVar(hook="OnChangeBugPushStrength")]
+  public float bugPushStrength;
+  [SyncVar(hook="OnChangeBugPullStrength")]
+  public float bugPullStrength;
+  [SyncVar(hook="OnChangResetHeadset")]
+  public int resetHeadset = -2;
+  [SyncVar(hook="OnChangeHeadsetText")]
+  public string headsetText;
 
-    public float timeMax;
+  public float   ExperienceLengthSeconds;
+  public float   DeathLengthSeconds;
+  public float   FaderLevelsMax;
+  public float   BugPushStrength;
+  public float   BugPullStrength;
+  public int     ResetHeadset = -2;
+  public string  HeadsetText;
 
-    public LevelHandler levelHandler;
-	public ManageRigidBugs bugManagement;
-	public TapToReset reset;
-	public FaderManager fader;
-    public TextMesh displayText;
-    string prevHeadsetText;
+  public LevelHandler levelHandler;
+  public ManageRigidBugs bugManagement;
+  public TapToReset reset;
+  public FaderManager fader;
+  public TextMesh displayText;
+  string prevHeadsetText;
 
-    void Start () {
-		resetHeadset = -2;
+  void Start () {
+	  resetHeadset = -2;
         if (isServer)
         {
             Debug.Log("i'm server");
         }
-	}
+  }
 
     public void OnChangeExperienceLength(float e)
     {
-
         experienceLengthSeconds = e;
         levelHandler.timeMax = e;
-        Debug.Log(experienceLengthSeconds);
     }
 
-	void Update(){
+    public void OnChangeDeathLengthSeconds(float e) { DeathLengthSeconds = e; }
+  public void OnChangeFaderLevelsMax(float e) { faderLevelsMax = e; }
+  public void OnChangeBugPushStrength(float e) { bugPushStrength = e; }
+  public void OnChangeBugPullStrength(float e) { bugPullStrength = e; }
+  public void OnChangeResetHeadset(int e) { resetHeadset = e; }
+  public void OnChangeHeadsetText(string e) { headsetText = e; }
 
-        if(isServer)
-            experienceLengthSeconds = timeMax;
-		
+
+  void Update(){
+
+    if (isServer)
+    {
+      experienceLengthSeconds = ExperienceLengthSeconds;
+      deathLengthSeconds = DeathLengthSeconds;
+      faderLevelsMax = FaderLevelsMax;
+      bugPushStrength = BugPushStrength;
+      bugPullStrength = BugPullStrength;
+      resetHeadset = ResetHeadset = -2;
+      headsetText = HeadsetText;
+      experienceLengthSeconds = ExperienceLengthSeconds;
+    }
 		levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;
 		levelHandler.maxLevel = faderLevelsMax;
 		bugManagement.pullForce = bugPullStrength;

@@ -54,12 +54,19 @@ public class SettingsManager2 :  NetworkBehaviour {
         levelHandler.timeMax = e;
     }
 
-    public void OnChangeDeathLengthSeconds(float e) { DeathLengthSeconds = e; }
+  public void OnChangeDeathLengthSeconds(float e) { deathLengthSeconds = e;}
   public void OnChangeFaderLevelsMax(float e) { faderLevelsMax = e; }
   public void OnChangeBugPushStrength(float e) { bugPushStrength = e; }
-  public void OnChangeBugPullStrength(float e) { bugPullStrength = e; }
-  public void OnChangeResetHeadset(bool e) { resetHeadset = e; }
-  public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e; }
+  public void OnChangeBugPullStrength(float e) { bugPullStrength = e;  }
+  public void OnChangeResetHeadset(bool e) { resetHeadset = e;  }
+  public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e;  }
+
+  //public void OnChangeDeathLengthSeconds2(float e) { DeathLengthSeconds = e; }
+  //public void OnChangeFaderLevelsMax(float e) { faderLevelsMax = e; FaderLevelsMax = e; }
+  //public void OnChangeBugPushStrength(float e) { bugPushStrength = e; BugPushStrength = e; }
+  //public void OnChangeBugPullStrength(float e) { bugPullStrength = e; BugPullStrength = e; }
+  //public void OnChangeResetHeadset(bool e) { resetHeadset = e; ResetHeadset = e; }
+  //public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e; ResetHeadsetImmediate = e; }
 
   public void OnChangeHeadsetText(string e) { headsetText = e; }
 

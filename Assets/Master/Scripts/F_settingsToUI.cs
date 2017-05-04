@@ -20,9 +20,9 @@ public class F_settingsToUI : MonoBehaviour {
             "length: " + settings.experienceLengthSeconds + " , " +
             "pull: " + settings.bugPullStrength + " , " +
             "push: " + settings.bugPushStrength + " , " +
-            
-            "deathTime: " + settings.deathLengthSeconds + " , " +
+            "deathTime: " + settings.timeStartDeathClock + " , " +
             "level: " + lHandler.level + "\n" +
+
             "time: " + lHandler.timer;
     }
 }

@@ -11,6 +11,7 @@ public class VRPlayerController : NetworkBehaviour
     private GameObject vrCameraRigInstance;
 	public GameObject[] masks;
 	public GameObject[] show;
+    public Transform copyXform;
 
 	public override void OnStartLocalPlayer ()
 	{
@@ -31,7 +32,10 @@ public class VRPlayerController : NetworkBehaviour
 			bodyOfVrPlayer.parent = null;
 
 		GameObject head = vrCameraRigInstance.GetComponentInChildren<SteamVR_Camera> ().gameObject;
-		transform.parent = head.transform;
+        //transform.parent = head.transform;
+        copyXform.parent = head.transform;
+
+        //copyXform.target = head.transform;
 
 		if (isLocalPlayer) {
 			for (int i = 0; i < masks.Length; i++) {

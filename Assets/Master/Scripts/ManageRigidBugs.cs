@@ -8,6 +8,7 @@ public class ManageRigidBugs : MonoBehaviour {
 	public GameObject RigidParent;
 	public GameObject BugRigidPrefab;
 	public GameObject Display;
+    public GameObject BugParent;
 	GameObject display;
 	public float heightLerpSpeed;
 	public int amount;
@@ -43,8 +44,8 @@ public class ManageRigidBugs : MonoBehaviour {
 	void Init(){
 
 		if (Display != null) {
-			display = new GameObject ();
-			display.name = "display";
+            display = BugParent;
+			//display.name = "display";
 			display.transform.SetParent (this.transform);
 			for (int i = 0; i < amount; i++) {
 				Instantiate (BugRigidPrefab,GetRandomPositionCircle(),Quaternion.identity,RigidParent.transform);

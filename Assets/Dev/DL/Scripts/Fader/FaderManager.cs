@@ -7,12 +7,14 @@ public class FaderManager : MonoBehaviour {
 	public float level;
 	public float minLevel;
 	public float maxLevel;
+    public bool dontInitialize = false;
 
 	float prevLevel = -1f;
 	// Use this for initialization
 	void Start () {
 		faders = GetComponentsInChildren<Fader> ();
-		Refresh ();
+        if(!dontInitialize)
+		    Refresh ();
 	}
 
 	void Refresh(){

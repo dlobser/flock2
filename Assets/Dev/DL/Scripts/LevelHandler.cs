@@ -20,6 +20,8 @@ public class LevelHandler : MonoBehaviour {
 	public FaderManager[] LevelDelta;
 	public FaderManager[] DeathCount;
 
+    public GameObject DeathFader;
+
 	float deathClock;
 	float deathCount;
 	float lerpLevel = 0;
@@ -28,6 +30,8 @@ public class LevelHandler : MonoBehaviour {
 
 	bool PingPong;
 	public bool eatBug;
+
+    public bool debug;
 
 	// Update is called once per frame
 
@@ -45,6 +49,8 @@ public class LevelHandler : MonoBehaviour {
 
 
 		if (timer > timeStartDeathClock && timer < timeMax) {
+            if (DeathFader != null && DeathFader.activeInHierarchy == false)
+                DeathFader.SetActive(true);
 			deathClock += Time.deltaTime;
 			deathCount = Mathf.Min(1.0f,deathClock / (timeMax - timeStartDeathClock));
 		}
@@ -53,6 +59,11 @@ public class LevelHandler : MonoBehaviour {
 			EatBug ();
 			eatBug = false;
 		}
+
+        if (debug)
+        {
+            Debug.Log(deathClock);
+        }
 
 		UpdateFaders ();
 
@@ -120,7 +131,8 @@ public class LevelHandler : MonoBehaviour {
 			fader.level = levelDelta;
 		}
 		foreach (FaderManager fader in DeathCount) {
-			fader.level = deathCount;
+ 
+	        fader.level = deathCount;
 		}
 
 	}

@@ -15,14 +15,19 @@ public class SettingsManager2 :  NetworkBehaviour {
 	[SyncVar]
 	public float bugPullStrength;
 	[SyncVar]
-	public int resetHeadset;
+	public int resetHeadset = -2;
+    [SyncVar]
+    public string headsetText;
 
-	public LevelHandler levelHandler;
+
+    public LevelHandler levelHandler;
 	public ManageRigidBugs bugManagement;
 	public TapToReset reset;
 	public FaderManager fader;
+    public TextMesh displayText;
+    string prevHeadsetText;
 
-	void Start () {
+    void Start () {
 		resetHeadset = -2;
 	}
 
@@ -34,6 +39,9 @@ public class SettingsManager2 :  NetworkBehaviour {
 		bugManagement.pushForce = bugPushStrength;
 		fader.maxLevel = faderLevelsMax;
 
+        if (prevHeadsetText != headsetText)
+            displayText.text = headsetText;
+
 		if(resetHeadset>-2){
 			Debug.Log ((Network.player.ToString ()));
 
@@ -43,6 +51,8 @@ public class SettingsManager2 :  NetworkBehaviour {
 			}
 			resetHeadset = -2;
 		}
+
+        prevHeadsetText = headsetText;
 	}
 		
 }

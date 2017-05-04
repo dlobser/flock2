@@ -9,6 +9,7 @@ public class TapToReset : MonoBehaviour {
 	LevelHandler lHandler;
 	public GameObject[] activateOnReset;
 	public GameObject[] deactivateOnReset;
+    public string[] resetPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -24,25 +25,34 @@ public class TapToReset : MonoBehaviour {
 			if (deactivateOnReset [i].activeInHierarchy)
 				deactivateOnReset [i].gameObject.SetActive (false);
 		}
+        for (int i = 0; i < resetPosition.Length; i++)
+        {
+            GameObject.Find(resetPosition[i]).transform.position = Vector3.zero;
+        }
 		lHandler.Reset ();
 	}
-	
-//	// Update is called once per frame
-//	void Update () {
-//		tapCounter -= Time.deltaTime;
-//		if (tapCounter <= 0) {
-//			tapCounter = 1.5f;
-//			if (taps > 0)
-//				taps--;
-//		}
-//		if (Input.GetMouseButtonDown (0) && tapCounter>0) {
-//			taps++;
-//			tapCounter = 1.5f;
-//			if (taps == 4) {
-////				Debug.Log ("poop");
-//				Reset();
-//				taps = 0;
-//			}
-//		}
-//	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        //tapCounter -= Time.deltaTime;
+        //if (tapCounter <= 0)
+        //{
+        //    tapCounter = 1.5f;
+        //    if (taps > 0)
+        //        taps--;
+        //}
+        if (Input.GetMouseButtonDown(0))// && tapCounter > 0)
+        {
+            Debug.Log("reset");
+            //taps++;
+            //tapCounter = 1.5f;
+            //if (taps == 4)
+            //{
+            //    //				Debug.Log ("poop");
+                Reset();
+            //    taps = 0;
+            //}
+        }
+    }
 }

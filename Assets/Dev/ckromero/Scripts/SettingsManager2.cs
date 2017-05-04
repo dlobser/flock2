@@ -67,13 +67,13 @@ public class SettingsManager2 :  NetworkBehaviour {
   void Update(){
     if (Input.GetKeyUp(KeyCode.A))
     {
-      //ResetHeadset = true;
-      resetHeadset = true;
+      ResetHeadset = true;
+      //resetHeadset = true;
     }
     if (Input.GetKeyUp(KeyCode.B))
     {
-     // ResetHeadsetImmediate = true;
-      resetHeadset = true;
+      ResetHeadsetImmediate = true;
+      //resetHeadset = true;
     }
     if (isServer)
     {
@@ -98,16 +98,16 @@ public class SettingsManager2 :  NetworkBehaviour {
 
     if (resetHeadsetImmediate)
      {
-     // ResetHeadsetImmediate = false;
-      resetHeadsetImmediate = false;
+      ResetHeadsetImmediate = false;
+      //resetHeadsetImmediate = false;
       reset.Reset();
       fader.Refresh();
       Debug.Log("resetImmediate");
     }
     if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
-      // ResetHeadset = false;
+      ResetHeadset = false;
       Debug.Log("reset");
-      resetHeadset = false;
+      //resetHeadset = false;
       reset.Reset();
       fader.Refresh();
 		}

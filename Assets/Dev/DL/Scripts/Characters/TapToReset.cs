@@ -43,7 +43,7 @@ public class TapToReset : MonoBehaviour {
         //    if (taps > 0)
         //        taps--;
         //}
-        if (Input.GetMouseButtonDown(0))// && tapCounter > 0)
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyUp(KeyCode.Space))// && tapCounter > 0)
         {
             Debug.Log("reset");
             //taps++;

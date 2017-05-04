@@ -33,7 +33,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public FaderManager fader;
   public TextMesh displayText;
   string prevHeadsetText;
-
+  
   void Start () {
 
         if (isServer)
@@ -60,7 +60,17 @@ public class SettingsManager2 :  NetworkBehaviour {
 
 
   void Update(){
-
+    if (Input.GetKeyUp(KeyCode.A))
+    {
+      ResetHeadset = true;
+    }
+    if (Input.GetKeyUp(KeyCode.B))
+    {
+      ResetHeadset = false;
+      resetHeadset = false;
+      reset.Reset();
+      fader.Refresh();
+    }
     if (isServer)
     {
       experienceLengthSeconds = ExperienceLengthSeconds;
@@ -81,10 +91,11 @@ public class SettingsManager2 :  NetworkBehaviour {
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
 
-		if(resetHeadset && levelHandler.timer > experienceLengthSeconds ){
+		if(resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
       ResetHeadset = false;
       resetHeadset = false;
       reset.Reset();
+      fader.Refresh();
 		}
 
         prevHeadsetText = headsetText;

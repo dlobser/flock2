@@ -17,7 +17,7 @@ public class FaderManager : MonoBehaviour {
 		    Refresh ();
 	}
 
-	void Refresh(){
+	public void Refresh(){
 		for (int i = 0; i < faders.Length; i++) {
 			faders [i].min = minLevel;
 			faders [i].max = maxLevel;

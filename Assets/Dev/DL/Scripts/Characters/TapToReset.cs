@@ -27,7 +27,8 @@ public class TapToReset : MonoBehaviour {
 		}
         for (int i = 0; i < resetPosition.Length; i++)
         {
-            GameObject.Find(resetPosition[i]).transform.position = Vector3.zero;
+            if (GameObject.Find(resetPosition[i])!=null)
+                GameObject.Find(resetPosition[i]).transform.position = Vector3.zero;
         }
 		lHandler.Reset ();
 	}

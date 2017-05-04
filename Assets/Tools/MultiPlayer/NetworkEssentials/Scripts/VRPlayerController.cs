@@ -11,7 +11,8 @@ public class VRPlayerController : NetworkBehaviour
     private GameObject vrCameraRigInstance;
 	public GameObject[] masks;
 	public GameObject[] show;
-    public Transform copyXform;
+    //public F_CopyXForms copyXform;
+    //public GameObject birdHead;
 
 	public override void OnStartLocalPlayer ()
 	{
@@ -32,13 +33,14 @@ public class VRPlayerController : NetworkBehaviour
 			bodyOfVrPlayer.parent = null;
 
 		GameObject head = vrCameraRigInstance.GetComponentInChildren<SteamVR_Camera> ().gameObject;
-        //transform.parent = head.transform;
-        copyXform.parent = head.transform;
+        transform.parent = head.transform;
+        //copyXform.parent = head.transform;
 
-        //copyXform.target = head.transform;
 
-		if (isLocalPlayer) {
-			for (int i = 0; i < masks.Length; i++) {
+
+        if (isLocalPlayer) {
+            //copyXform.target = head.transform;
+            for (int i = 0; i < masks.Length; i++) {
 				masks [i].SetActive (false);
 			}
 			for (int i = 0; i < show.Length; i++) {

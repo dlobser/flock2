@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class SettingsManager2 :  NetworkBehaviour {
 
-	[SyncVar]
+	[SyncVar(hook ="OnChangeExperienceLength")]
 	public float experienceLengthSeconds;
 	[SyncVar]
 	public float deathLengthSeconds;
@@ -19,6 +19,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     [SyncVar]
     public string headsetText;
 
+    public float timeMax;
 
     public LevelHandler levelHandler;
 	public ManageRigidBugs bugManagement;
@@ -29,10 +30,27 @@ public class SettingsManager2 :  NetworkBehaviour {
 
     void Start () {
 		resetHeadset = -2;
+        if (isServer)
+        {
+            Debug.Log("i'm server");
+        }
 	}
 
+    public void OnChangeExperienceLength(float e)
+    {
+        if (!isServer)
+            return;
+
+        experienceLengthSeconds = e;
+        levelHandler.timeMax = e;
+        Debug.Log(experienceLengthSeconds);
+    }
+
 	void Update(){
-		levelHandler.timeMax = experienceLengthSeconds;
+
+        if(experienceLengthSeconds!=timeMax)
+            experienceLengthSeconds = timeMax;
+		
 		levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;
 		levelHandler.maxLevel = faderLevelsMax;
 		bugManagement.pullForce = bugPullStrength;

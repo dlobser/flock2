@@ -65,7 +65,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       faderLevelsMax = FaderLevelsMax;
       bugPushStrength = BugPushStrength;
       bugPullStrength = BugPullStrength;
-      resetHeadset = ResetHeadset = -2;
+      resetHeadset = ResetHeadset;
       headsetText = HeadsetText;
       experienceLengthSeconds = ExperienceLengthSeconds;
     }

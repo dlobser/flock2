@@ -15,7 +15,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   [SyncVar(hook="OnChangeBugPullStrength")]
   public float bugPullStrength;
   [SyncVar(hook="OnChangeResetHeadset")]
-  public int resetHeadset = -2;
+  public bool resetHeadset = false;
   [SyncVar(hook="OnChangeHeadsetText")]
   public string headsetText;
 
@@ -24,7 +24,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public float   FaderLevelsMax = 200;
   public float   BugPushStrength = .15f;
   public float   BugPullStrength = .1f;
-  public int     ResetHeadset = -2;
+  public bool     ResetHeadset;
   public string  HeadsetText;
 
   public LevelHandler levelHandler;
@@ -35,12 +35,14 @@ public class SettingsManager2 :  NetworkBehaviour {
   string prevHeadsetText;
 
   void Start () {
-	  resetHeadset = -2;
+
         if (isServer)
         {
             Debug.Log("i'm server");
         }
-    Debug.Log("Network Player#: " + (Network.player.ToString()));
+ 
+    Debug.Log("Network Player#: " +  (Network.player.ToString()));
+    
   }
 
     public void OnChangeExperienceLength(float e)
@@ -53,7 +55,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public void OnChangeFaderLevelsMax(float e) { faderLevelsMax = e; }
   public void OnChangeBugPushStrength(float e) { bugPushStrength = e; }
   public void OnChangeBugPullStrength(float e) { bugPullStrength = e; }
-  public void OnChangeResetHeadset(int e) { resetHeadset = e; }
+  public void OnChangeResetHeadset(bool e) { resetHeadset = e; }
   public void OnChangeHeadsetText(string e) { headsetText = e; }
 
 
@@ -79,15 +81,10 @@ public class SettingsManager2 :  NetworkBehaviour {
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
 
-		if(resetHeadset>-2){
-			Debug.Log ((Network.player.ToString ()));
-
-			if (resetHeadset == int.Parse (Network.player.ToString ())) {
-				reset.Reset();
-				Debug.Log ("reset: " + resetHeadset);
-			}
-			resetHeadset = -2;
-      ResetHeadset = -2;
+		if(resetHeadset && levelHandler.timer > experienceLengthSeconds ){
+      ResetHeadset = false;
+      resetHeadset = false;
+      reset.Reset();
 		}
 
         prevHeadsetText = headsetText;

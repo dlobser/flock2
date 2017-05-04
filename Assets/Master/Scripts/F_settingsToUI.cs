@@ -15,10 +15,14 @@ public class F_settingsToUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		uiText.text =
-            "faders: " + settings.faderLevelsMax + " , "+
+    uiText.text =
+            "faders: " + settings.faderLevelsMax + " , " +
             "length: " + settings.experienceLengthSeconds + " , " +
-            "pull: " + settings.bugPullStrength;
-
+            "pull: " + settings.bugPullStrength + " , " +
+            "push: " + settings.bugPushStrength + " , " +
+            
+            "deathTime: " + settings.deathLengthSeconds + " , " +
+            "level: " + lHandler.level + "\n" +
+            "time: " + lHandler.timer;
     }
 }

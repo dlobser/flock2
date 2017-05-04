@@ -9,7 +9,7 @@ public class TapToReset : MonoBehaviour {
 	LevelHandler lHandler;
 	public GameObject[] activateOnReset;
 	public GameObject[] deactivateOnReset;
-    public string[] resetPosition;
+  public string[] resetPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +43,7 @@ public class TapToReset : MonoBehaviour {
         //    if (taps > 0)
         //        taps--;
         //}
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyUp(KeyCode.Space))// && tapCounter > 0)
+        if (Input.GetKeyUp(KeyCode.Space))// && tapCounter > 0)
         {
             Debug.Log("reset");
             //taps++;

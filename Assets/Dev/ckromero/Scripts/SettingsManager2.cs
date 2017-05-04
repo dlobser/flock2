@@ -24,7 +24,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public float   FaderLevelsMax = 200;
   public float   BugPushStrength = .15f;
   public float   BugPullStrength = .1f;
-  public bool     ResetHeadset;
+  public bool    ResetHeadset;
   public string  HeadsetText;
 
   public LevelHandler levelHandler;
@@ -70,6 +70,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       resetHeadset = false;
       reset.Reset();
       fader.Refresh();
+      levelHandler.timer = 0;
     }
     if (isServer)
     {

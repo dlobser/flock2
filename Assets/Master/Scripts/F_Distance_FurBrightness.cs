@@ -21,15 +21,17 @@ public class F_Distance_FurBrightness : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (objectWithMat != null && objectWithMat.GetComponent<MeshRenderer> ().material)
-			mat = objectWithMat.GetComponent<MeshRenderer> ().material;
-		float distance = Mathf.Clamp( dist.distance, nearDistance,farDistance);
-		distance -= nearDistance;
+		if (dist != null) {
+			if (objectWithMat != null && objectWithMat.GetComponent<MeshRenderer> ().material)
+				mat = objectWithMat.GetComponent<MeshRenderer> ().material;
+			Debug.Log (dist);
+			float distance = Mathf.Clamp (dist.distance, nearDistance, farDistance);
+			distance -= nearDistance;
 //		distance /= (farDistance);
-		scale = Mathf.Lerp (nearScale, farScale, distance/(farDistance-nearDistance));
+			scale = Mathf.Lerp (nearScale, farScale, distance / (farDistance - nearDistance));
 //		scale = Mathf.Max(farScale, Mathf.Min(nearScale, map (distance, nearDistance, farDistance, nearScale, farScale)));
-		mat.SetFloat(Channel,scale);
-
+			mat.SetFloat (Channel, scale);
+		}
 	}
 
 	float map(float s, float a1, float a2, float b1, float b2)

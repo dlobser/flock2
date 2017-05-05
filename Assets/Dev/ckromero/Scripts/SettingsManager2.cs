@@ -33,7 +33,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public LevelHandler levelHandler;
   public ManageRigidBugs bugManagement;
   public TapToReset reset;
-  public FaderManager fader;
+  public FaderManager[] fader;
   public TextMesh displayText;
   string prevHeadsetText;
   
@@ -98,7 +98,8 @@ public class SettingsManager2 :  NetworkBehaviour {
 		levelHandler.maxLevel = faderLevelsMax;
 		bugManagement.pullForce = bugPullStrength;
 		bugManagement.pushForce = bugPushStrength;
-		fader.maxLevel = faderLevelsMax;
+
+		fader[0].maxLevel = faderLevelsMax;
 
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
@@ -108,7 +109,11 @@ public class SettingsManager2 :  NetworkBehaviour {
       ResetHeadsetImmediate = false;
       //resetHeadsetImmediate = false;
       reset.Reset();
-      fader.Refresh();
+			foreach (FaderManager fade in fader) {
+				fade.Refresh ();
+				fade.level = 0;
+			}
+//      fader.Refresh();
       Debug.Log("resetImmediate");
     }
     if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
@@ -116,7 +121,11 @@ public class SettingsManager2 :  NetworkBehaviour {
       Debug.Log("reset");
       //resetHeadset = false;
       reset.Reset();
-      fader.Refresh();
+			foreach (FaderManager fade in fader) {
+				fade.Refresh ();
+				fade.level = 0;
+			}
+//      fader.Refresh();
 		}
 
         prevHeadsetText = headsetText;

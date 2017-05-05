@@ -18,18 +18,21 @@ public class FaderManager : MonoBehaviour {
 	}
 
 	public void Refresh(){
-    if (faders != null)
-    {
-      if (faders.Length > 0)
-      {
-        for (int i = 0; i < faders.Length; i++)
-        {
-          faders[i].min = minLevel;
-          faders[i].max = maxLevel;
-          faders[i].Init();
-        }
-      }
-    }
+	    if (faders != null)
+	    {
+	      if (faders.Length > 0)
+	      {
+	        for (int i = 0; i < faders.Length; i++)
+	        {
+	          faders[i].min = minLevel;
+	          faders[i].max = maxLevel;
+	          faders[i].Init();
+	//			faders [i].Fade ();
+
+	        }
+	      }
+	    }
+		prevLevel = -1;
 	}
 	// Update is called once per frame
 	void Update () {

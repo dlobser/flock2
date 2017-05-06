@@ -8,15 +8,19 @@ namespace ON{
 	    public float speed;
 	    float counter = 0;
 		public float maxTime;
+        public float maxWidth;
 		float[] init;
+        float[] wInit;
 
 		public TrailRenderer[] trailRenderers;
 
 		void Start(){
 			init = new float[trailRenderers.Length];
-			for (int i = 0; i < trailRenderers.Length; i++) {
+            wInit = new float[trailRenderers.Length];
+            for (int i = 0; i < trailRenderers.Length; i++) {
 				init [i] = trailRenderers [i].time;
-			}
+                wInit [i] = trailRenderers[i].widthMultiplier;
+            }
 		}
 
 	    public override void Ping()
@@ -52,7 +56,8 @@ namespace ON{
 		void Animate(float t){
 			for (int i = 0; i < trailRenderers.Length; i++) {
 				trailRenderers [i].time = Mathf.Lerp(init[i],maxTime,t);
-			}
+                trailRenderers[i].widthMultiplier = Mathf.Lerp(wInit[i], maxWidth, t);
+            }
 		}
 	}
 }

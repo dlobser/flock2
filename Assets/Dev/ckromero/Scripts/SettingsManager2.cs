@@ -61,6 +61,13 @@ public class SettingsManager2 :  NetworkBehaviour {
   public void OnChangeResetHeadset(bool e) { resetHeadset = e;  }
   public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e;  }
 
+	public void onChangeExperienceLength(float e){ExperienceLengthSeconds = e;}
+	public void onChangeDeathLengthSeconds(float e) { DeathLengthSeconds = e;}
+	public void onChangeFaderLevelsMax(float e) { FaderLevelsMax = e; }
+	public void onChangeBugPushStrength(float e) { BugPushStrength = e; }
+	public void onChangeBugPullStrength(float e) { BugPullStrength = e;  }
+
+
   //public void OnChangeDeathLengthSeconds2(float e) { DeathLengthSeconds = e; }
   //public void OnChangeFaderLevelsMax(float e) { faderLevelsMax = e; FaderLevelsMax = e; }
   //public void OnChangeBugPushStrength(float e) { bugPushStrength = e; BugPushStrength = e; }

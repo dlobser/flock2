@@ -55,7 +55,7 @@
 				fixed4 col = tex2D(_MainTex, i.uv)*_Color*_Color.a;
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col;//col*col.a;
+				return col*col.a;
 			}
 			ENDCG
 		}

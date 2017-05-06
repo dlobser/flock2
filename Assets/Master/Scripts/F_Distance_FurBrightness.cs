@@ -24,7 +24,7 @@ public class F_Distance_FurBrightness : MonoBehaviour {
 		if (dist != null) {
 			if (objectWithMat != null && objectWithMat.GetComponent<MeshRenderer> ().material)
 				mat = objectWithMat.GetComponent<MeshRenderer> ().material;
-			Debug.Log (dist);
+
 			float distance = Mathf.Clamp (dist.distance, nearDistance, farDistance);
 			distance -= nearDistance;
 //		distance /= (farDistance);

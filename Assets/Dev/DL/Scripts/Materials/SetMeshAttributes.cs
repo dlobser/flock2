@@ -42,10 +42,7 @@ public class SetMeshAttributes : MonoBehaviour {
 			uv4 [i] = new Vector2 (v [2], v [3]);
 			colorsR[i] = new Color(v[4],v[5],v[6],v[7]);
 
-//			uv3 [i] = UV3;
 		}
-
-//		Debug.Log (Mathf.Floor (whichBug * 1000) + (colorCycleSpeed / 10f));
 
 		mesh.uv2 = uv2;
 		mesh.uv3 = uv3;

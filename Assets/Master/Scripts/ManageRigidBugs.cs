@@ -115,13 +115,15 @@ public class ManageRigidBugs : MonoBehaviour {
 	}
 
 	public void SwapTexture(BugMVideo b){
+//		Debug.Log ("Swapped");
 		b.transform.GetChild(0).gameObject.GetComponent<MaterialSwapperContinuous> ().swapMat ((int)(Random.value*6));
-    SetMeshAttributes att = b.transform.GetChild(0).GetComponent<SetMeshAttributes>();
-    float prev = att.whichBug;
-    float curr = prev++;
-    if (prev > 7)
-      curr = 0;
-    att.whichBug = curr;
+	    SetMeshAttributes att = b.transform.GetChild(0).GetComponent<SetMeshAttributes>();
+	    float prev = att.whichBug;
+	    float curr = prev++;
+	    if (prev > 7)
+	      curr = 0;
+	    att.whichBug = curr;
+		att.Set ();
   }
 
 

@@ -45,6 +45,7 @@ public class BugMVideo : MonoBehaviour{
 	//Nothing below here executes on the client.
 	void OnTriggerEnter(Collider c){
 		if(c.name == "Viewer" || c.name==avatarName){
+//			Debug.Log (c.name);
 			bb.SendMessage("ProcessCollision", this); //Callback
 			bb.SendMessage("SwapTexture", this); //Callback
 			bb.SendMessage("LevelUp", this);

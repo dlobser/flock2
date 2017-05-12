@@ -16,11 +16,11 @@ public class F_settingsToUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     uiText.text =
-            "faders: " + settings.faderLevelsMax + " , " +
-            "length: " + settings.experienceLengthSeconds + " , " +
-            "pull: " + settings.bugPullStrength + " , " +
-            "push: " + settings.bugPushStrength + " , " +
-            "deathTime: " + lHandler.timeStartDeathClock + " , " +
+			"faders: " + settings.faderLevelsMax + " \n " +
+			"length: " + settings.experienceLengthSeconds + "\n " +
+			"pull: " + settings.bugPullStrength + " \n " +
+			"push: " + settings.bugPushStrength + " \n " +
+			"deathTime: " + lHandler.timeStartDeathClock + " \n " +
             "level: " + lHandler.level + "\n" +
 
             "time: " + lHandler.timer;

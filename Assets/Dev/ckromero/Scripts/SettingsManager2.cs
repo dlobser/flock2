@@ -20,6 +20,8 @@ public class SettingsManager2 :  NetworkBehaviour {
   public bool resetHeadsetImmediate = false;
   [SyncVar(hook="OnChangeHeadsetText")]
   public string headsetText;
+	[SyncVar(hook="OnChangeWhichHeadset")]
+	public int whichHeadset;
 
   public float   ExperienceLengthSeconds = 420;
   public float   DeathLengthSeconds = 30;
@@ -29,6 +31,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public bool    ResetHeadset;
   public bool ResetHeadsetImmediate;
   public string  HeadsetText;
+	public int WhichHeadset;
 
   public LevelHandler levelHandler;
   public ManageRigidBugs bugManagement;
@@ -60,13 +63,14 @@ public class SettingsManager2 :  NetworkBehaviour {
   public void OnChangeBugPullStrength(float e) { bugPullStrength = e;  }
   public void OnChangeResetHeadset(bool e) { resetHeadset = e;  }
   public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e;  }
+	public void OnChangeWhichHeadset(int e) { whichHeadset = e;  }
 
 	public void onChangeExperienceLength(float e){ExperienceLengthSeconds = e;}
 	public void onChangeDeathLengthSeconds(float e) { DeathLengthSeconds = e;}
 	public void onChangeFaderLevelsMax(float e) { FaderLevelsMax = e; }
 	public void onChangeBugPushStrength(float e) { BugPushStrength = e; }
 	public void onChangeBugPullStrength(float e) { BugPullStrength = e;  }
-
+//	public void onChangeBugPullStrength(float e) { BugPullStrength = e;  }
 
   //public void OnChangeDeathLengthSeconds2(float e) { DeathLengthSeconds = e; }
   //public void OnChangeFaderLevelsMax(float e) { faderLevelsMax = e; FaderLevelsMax = e; }
@@ -89,6 +93,25 @@ public class SettingsManager2 :  NetworkBehaviour {
       ResetHeadsetImmediate = true;
       //resetHeadset = true;
     }
+
+		if (Input.GetKeyUp (KeyCode.Alpha0)) {
+			WhichHeadset = 0;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha1)) {
+			WhichHeadset = 1;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha2)) {
+			WhichHeadset = 2;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha3)) {
+			WhichHeadset = 3;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha4)) {
+			WhichHeadset = 4;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha5)) {
+			WhichHeadset = 5;
+		}
     if (isServer)
     {
       experienceLengthSeconds = ExperienceLengthSeconds;
@@ -100,6 +123,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       resetHeadsetImmediate = ResetHeadsetImmediate;
       headsetText = HeadsetText;
       experienceLengthSeconds = ExperienceLengthSeconds;
+			whichHeadset = WhichHeadset;
     }
 		levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;
 		levelHandler.maxLevel = faderLevelsMax;
@@ -111,21 +135,30 @@ public class SettingsManager2 :  NetworkBehaviour {
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
 
-    if (resetHeadsetImmediate)
-     {
-      ResetHeadsetImmediate = false;
-      //resetHeadsetImmediate = false;
-      reset.Reset();
-			foreach (FaderManager fade in fader) {
-				fade.Refresh ();
-				fade.level = 0;
+	if (resetHeadsetImmediate)
+	{
+			Debug.Log (F_Players.thisPlayerID);
+		if (whichHeadset == F_Players.thisPlayerID) {
+
+
+				levelHandler.timer = 0;
+				//resetHeadsetImmediate = false;
+				reset.Reset ();
+				foreach (FaderManager fade in fader) {
+					fade.Refresh ();
+					fade.level = 0;
+				}
+
+				//      fader.Refresh();
+				Debug.Log ("resetImmediate");
 			}
-//      fader.Refresh();
-      Debug.Log("resetImmediate");
-    }
+			ResetHeadsetImmediate = false;
+			ResetHeadsetImmediate = false;
+	}
     if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
       ResetHeadset = false;
       Debug.Log("reset");
+			levelHandler.timer = 0;
       //resetHeadset = false;
       reset.Reset();
 			foreach (FaderManager fade in fader) {

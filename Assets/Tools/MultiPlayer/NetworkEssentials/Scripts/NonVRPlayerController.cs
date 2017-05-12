@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 public class NonVRPlayerController : NetworkBehaviour
 {
 	public GameObject bulletPrefab;
-	private MouseLook mouseLook;
+	private MouseLook2 mouseLook;
 	public Transform bulletSpawn;
 
 
@@ -18,7 +18,7 @@ public class NonVRPlayerController : NetworkBehaviour
 		Camera.main.transform.localPosition = new Vector3 (0, 1.33f, -0.69f);
 		Camera.main.transform.localRotation = Quaternion.Euler (6.31f, 0, 0);
 
-		mouseLook = new MouseLook ();
+		mouseLook = new MouseLook2 ();
 		mouseLook.Init (transform, Camera.main.transform);
 	}
 

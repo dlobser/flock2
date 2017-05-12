@@ -11,17 +11,23 @@ public class F_HideChild : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    if (Input.GetKeyUp(KeyCode.H))
-    {
-      onOff = true;
-    }
-    if (onOff)
-    {
-      if (this.transform.GetChild(0).gameObject.activeInHierarchy)
-        this.transform.GetChild(0).gameObject.SetActive(false);
-      else
-        this.transform.GetChild(0).gameObject.SetActive(true);
-      onOff = false;
-    }
+	    if (Input.GetKeyUp(KeyCode.H))
+	    {
+	      onOff = true;
+	    }
+	    if (onOff)
+	    {
+			if (this.transform.GetChild (0).gameObject.activeInHierarchy)
+				HideChildren (false);
+			else
+				HideChildren (true);
+	      onOff = false;
+	    }
+	}
+
+	void HideChildren(bool which){
+		for (int i = 0; i < this.transform.childCount; i++) {
+			this.transform.GetChild(i).gameObject.SetActive(which);
+		}
 	}
 }

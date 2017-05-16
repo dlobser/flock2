@@ -30,6 +30,7 @@ public class CustomNetworkManager2 : NetworkManager
         clientsInfoText.text = "Connected Clients : " + connectedClients;
     }
 
+
     //keeping track of Clients connecting.
     public override void OnServerConnect(NetworkConnection conn)
     {

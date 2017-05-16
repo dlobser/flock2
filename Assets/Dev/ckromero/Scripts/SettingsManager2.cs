@@ -88,7 +88,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       ResetHeadset = true;
       //resetHeadset = true;
     }
-    if (Input.GetKeyUp(KeyCode.B))
+    if (Input.GetKeyUp(KeyCode.R))
     {
       ResetHeadsetImmediate = true;
       //resetHeadset = true;
@@ -111,6 +111,12 @@ public class SettingsManager2 :  NetworkBehaviour {
 		}
 		if (Input.GetKeyUp (KeyCode.Alpha5)) {
 			WhichHeadset = 5;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha5)) {
+			WhichHeadset = 6;
+		}
+		if (Input.GetKeyUp (KeyCode.Alpha9)) {
+			WhichHeadset = -1;
 		}
     if (isServer)
     {
@@ -137,23 +143,19 @@ public class SettingsManager2 :  NetworkBehaviour {
 
 	if (resetHeadsetImmediate)
 	{
-			Debug.Log (F_Players.thisPlayerID);
-		if (whichHeadset == F_Players.thisPlayerID) {
-
-
-				levelHandler.timer = 0;
-				//resetHeadsetImmediate = false;
-				reset.Reset ();
-				foreach (FaderManager fade in fader) {
-					fade.Refresh ();
-					fade.level = 0;
-				}
-
-				//      fader.Refresh();
-				Debug.Log ("resetImmediate");
+		Debug.Log (F_Players.thisPlayerID);
+		if (whichHeadset == F_Players.thisPlayerID || whichHeadset == -1) 
+		{
+			levelHandler.timer = 0;
+			reset.Reset ();
+			foreach (FaderManager fade in fader) 
+			{
+				fade.Refresh ();
+				fade.level = 0;
 			}
-			ResetHeadsetImmediate = false;
-			ResetHeadsetImmediate = false;
+		}
+		ResetHeadsetImmediate = false;
+		ResetHeadsetImmediate = false;
 	}
     if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
       ResetHeadset = false;

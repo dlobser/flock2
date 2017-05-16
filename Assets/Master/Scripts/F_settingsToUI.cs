@@ -16,13 +16,15 @@ public class F_settingsToUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     uiText.text =
-			"faders: " + settings.faderLevelsMax + " \n " +
-			"length: " + settings.experienceLengthSeconds + "\n " +
-			"pull: " + settings.bugPullStrength + " \n " +
-			"push: " + settings.bugPushStrength + " \n " +
-			"deathTime: " + lHandler.timeStartDeathClock + " \n " +
-            "level: " + lHandler.level + "\n" +
+			"'h' hides UI, 'r' resets selected headset, '0-8' selects headset, '9' selects all headsets" + "\n" + 
+			"Headset Select: " + settings.whichHeadset + "\n" + 
+			"Faders: " + (int)settings.faderLevelsMax + " \n " +
+			"Length: " + (int)settings.experienceLengthSeconds + "\n " +
+			"Pull: " + settings.bugPullStrength + " \n " +
+			"Push: " + settings.bugPushStrength + " \n " +
+			"DeathTime: " + (int)lHandler.timeStartDeathClock + " \n " +
+			"Level: " + (int)lHandler.level + "\n" +
 
-            "time: " + lHandler.timer;
+            "Time: " + lHandler.timer;
     }
 }

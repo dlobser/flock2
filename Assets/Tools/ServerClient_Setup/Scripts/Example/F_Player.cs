@@ -22,8 +22,8 @@ public class F_Player : NetworkBehaviour {
 
 
     //Setting up the SyncVar.
-    [SyncVar(hook = "OnVarSynced")]//this needs to be above the variable you want to sync. (you can name the "Hook" everything you want, but be aware that this is the name of a function that is called on the clients when the SyncVar changes on the server)
-    public string varToSync; //if this changes on the server a "message" will be send to the clients automaticaly. 
+   // [SyncVar(hook = "OnVarSynced")]//this needs to be above the variable you want to sync. (you can name the "Hook" everything you want, but be aware that this is the name of a function that is called on the clients when the SyncVar changes on the server)
+   // public string varToSync; //if this changes on the server a "message" will be send to the clients automaticaly. 
                              // (if you change this on a client it will only change on THAT client, it will not be send anywhere).
 
     //the "Hook" function is executed on the clients when a change of the SyncVar is recieved.
@@ -100,10 +100,12 @@ public class F_Player : NetworkBehaviour {
 	{
 		if (!isClient)
 			return;
-		// delete main camera
-		DestroyImmediate (Camera.main.gameObject);
+    // delete main camera
+    Camera.main.gameObject.SetActive(false);
 
-		if (VRDevice.isPresent) {
+    //DestroyImmediate (Camera.main.gameObject);
+
+    if (VRDevice.isPresent) {
 			// create camera rig and attach player model to it
 			vrCameraRigInstance = (GameObject)Instantiate (
 				vrCameraRig,
@@ -119,6 +121,8 @@ public class F_Player : NetworkBehaviour {
 
 			GameObject head = vrCameraRigInstance.GetComponentInChildren<SteamVR_Camera> ().gameObject;
 			transform.parent = head.transform;
+
+      GameObject.Find("ResetPlayer").GetComponent<F_ResetPlayer>().PlayerController = vrCameraRigInstance;
 			//copyXform.parent = head.transform;
 		} else {
 			// create camera rig and attach player model to it
@@ -133,10 +137,10 @@ public class F_Player : NetworkBehaviour {
 
 			GameObject head = fpsCtrlInstance.transform.GetChild (0).gameObject;// GetComponentInChildren<SteamVR_Camera> ().gameObject;
 			transform.parent = head.transform;
-			//copyXform.parent = head.transform;
+      //copyXform.parent = head.transform;
 
-
-		}
+      GameObject.Find("ResetPlayer").GetComponent<F_ResetPlayer>().PlayerController = fpsCtrlInstance;
+    }
 
 		F_Players.thisPlayer = this.gameObject;
 		F_Players.thisPlayerID = F_Players.players;
@@ -151,6 +155,9 @@ public class F_Player : NetworkBehaviour {
 			}
 		}
 	}
+
+  /* de nada
+   * 
     //the string "syncedVar" is the new value of "varToSync" that it now has on the server.
     public void OnVarSynced(string syncedVar)//this is the "Hook" function that is called on clients when the Syncvar changes on the server.
     {
@@ -280,7 +287,7 @@ public class F_Player : NetworkBehaviour {
 //		lastRotationSent = newRot;
 //	}
 
-
+    /*
     void ChangeColor()
     {
         if (isGreen)
@@ -304,6 +311,7 @@ public class F_Player : NetworkBehaviour {
         if(isServer) //if you call a RPC from a client you will get an error. (RPC are used to let the server do something on the clients)
             RpcChangeColor();
     }
+ 
 
-
+  */
 }

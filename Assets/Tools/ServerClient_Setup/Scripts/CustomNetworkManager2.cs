@@ -30,9 +30,16 @@ public class CustomNetworkManager2 : NetworkManager
         clientsInfoText.text = "Connected Clients : " + connectedClients;
     }
 
+    public override void OnStartHost()
+    {
+      Debug.Log("starting host"); 
+      base.OnStartHost();
+      RegisterHostHandles();
+    }
 
-    //keeping track of Clients connecting.
-    public override void OnServerConnect(NetworkConnection conn)
+
+  //keeping track of Clients connecting.
+  public override void OnServerConnect(NetworkConnection conn)
     {
         base.OnServerConnect(conn);
         connectedClients += 1;
@@ -54,10 +61,12 @@ public class CustomNetworkManager2 : NetworkManager
     public override void OnStopServer()
     {
         base.OnStopServer();
-    }
+    GameObject.Find("ResetPlayer").GetComponent<F_ResetPlayer>().Reset();
 
-    //Client Side
-    public override void OnStartClient(NetworkClient client)
+  }
+
+  //Client Side
+  public override void OnStartClient(NetworkClient client)
     {
         base.OnStartClient(client);
         RegisterClientHandles();
@@ -95,5 +104,10 @@ public class CustomNetworkManager2 : NetworkManager
     void RegisterClientHandles()
     {
         client.RegisterHandler(MsgType.Highest + 1, OnReceivePassword);
+    }
+
+    void RegisterHostHandles()
+    {
+        NetworkServer.RegisterHandler(MsgType.Highest + 1, OnReceivePassword);
     }
 }

@@ -32,6 +32,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public bool ResetHeadsetImmediate;
   public string  HeadsetText;
 	public int WhichHeadset;
+  public int ThisPlayer { get; set; }
 
   public LevelHandler levelHandler;
   public ManageRigidBugs bugManagement;
@@ -141,7 +142,9 @@ public class SettingsManager2 :  NetworkBehaviour {
         if (prevHeadsetText != headsetText)
             displayText.text = headsetText;
 
-	if (resetHeadsetImmediate)
+    ThisPlayer = F_Players.thisPlayerID;
+
+  if (resetHeadsetImmediate)
 	{
 		Debug.Log (F_Players.thisPlayerID);
 		if (whichHeadset == F_Players.thisPlayerID || whichHeadset == -1) 

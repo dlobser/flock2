@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class F_settingsToUI : MonoBehaviour {
 
@@ -16,8 +17,10 @@ public class F_settingsToUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     uiText.text =
-			"'h' hides UI, 'r' resets selected headset, '0-8' selects headset, '9' selects all headsets" + "\n" + 
-			"Headset Select: " + settings.whichHeadset + "\n" + 
+      "'h' hides UI, 'r' resets selected headset,\n '0-8' selects headset, '9' selects all headsets" + "\n" +
+      "This Player ID: " + settings.ThisPlayer + "\n" +
+
+      "Headset Select: " + settings.whichHeadset + "\n" + 
 			"Faders: " + (int)settings.faderLevelsMax + " \n " +
 			"Length: " + (int)settings.experienceLengthSeconds + "\n " +
 			"Pull: " + settings.bugPullStrength + " \n " +
@@ -25,6 +28,6 @@ public class F_settingsToUI : MonoBehaviour {
 			"DeathTime: " + (int)lHandler.timeStartDeathClock + " \n " +
 			"Level: " + (int)lHandler.level + "\n" +
 
-            "Time: " + lHandler.timer;
+            "Time: " + (int)lHandler.timer;
     }
 }

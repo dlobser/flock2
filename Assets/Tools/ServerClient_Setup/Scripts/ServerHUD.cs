@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ServerHUD : MonoBehaviour {
 
-    public GameObject stopServer, startServer, resetSettings, getIP, checking, clientsInfo;
+    public GameObject stopServer, startHost, startServer, resetSettings, getIP, checking, clientsInfo;
     public Text serverInfoText, portPlaceholderText, paswPlaceholderText, clientsInfoText;
     public InputField portText, passwordText, maxConnText;
 
@@ -95,6 +95,7 @@ public class ServerHUD : MonoBehaviour {
     public void StopHostCustom()
     {
         startServer.SetActive(true);
+        startHost.SetActive(true);
         portText.transform.parent.gameObject.SetActive(true);
         resetSettings.SetActive(true);
         getIP.SetActive(true);
@@ -131,7 +132,8 @@ public class ServerHUD : MonoBehaviour {
         portText.transform.parent.gameObject.SetActive(false);
         getIP.SetActive(false);
         startServer.SetActive(false);
-        stopServer.SetActive(true);
+    startHost.SetActive(false);
+    stopServer.SetActive(true);
         clientsInfo.SetActive(true);
         setText = true;
 
@@ -149,6 +151,58 @@ public class ServerHUD : MonoBehaviour {
         //config.AddChannel(QosType.Unreliable);
 
         //manager.StartServer(config, maximumConnections);
+    }
+
+      public void StartHostCustom()
+    {
+  
+        //setting the network managers port to use.
+        if (portText.text == "")//did we not set a port number ?
+        {
+          if (PlayerPrefs.HasKey("nwPortS"))//did we have a previous one saved.
+          {
+            manager.networkPort = Convert.ToInt32(PlayerPrefs.GetString("nwPortS"));
+          }
+          else//if not, use the default port.
+          {
+            manager.networkPort = 7777;
+            portPlaceholderText.text = manager.networkPort.ToString() + "(Default)";
+          }
+        }
+        else
+        {
+          PlayerPrefs.SetString("nwPortS", portText.text);//save the port we are using.         
+          manager.networkPort = Convert.ToInt32(portText.text);
+          portPlaceholderText.text = manager.networkPort.ToString();
+        }
+
+        PlayerPrefs.SetString("Password", passwordText.text);//save the servers pasword.  
+        PlayerPrefs.SetString("MaxConnections", maxConnText.text.ToString());
+        //Showing and hiding the appropriate buttons and text.  
+        resetSettings.SetActive(false);
+        portText.transform.parent.gameObject.SetActive(false);
+        getIP.SetActive(false);
+        startServer.SetActive(false);
+    startHost.SetActive(false);
+    stopServer.SetActive(true);
+        clientsInfo.SetActive(true);
+        setText = true;
+
+        if (maxConnText.text != "")
+        {
+          maximumConnections = Convert.ToInt32(maxConnText.text);
+        }
+        else maximumConnections = 8;
+        manager.maxConnections = maximumConnections;
+
+        manager.StartHost();
+
+        //var config = new ConnectionConfig();
+        //config.AddChannel(QosType.Reliable);
+        //config.AddChannel(QosType.Unreliable);
+
+        //manager.StartServer(config, maximumConnections);
+    
     }
 
     public void ResetToDefault()

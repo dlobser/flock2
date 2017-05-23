@@ -11,8 +11,14 @@ public class LocalHeadsetEatBug : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c){
 		BugMVideo b = c.GetComponent<BugMVideo>();
-		if(b!=null ){
+		F_VomitMover v = c.GetComponent<F_VomitMover> ();
+		if(b!=null){
 			handler.EatBug ();
+		}
+		if (v != null) {
+			for (int i = 0; i < 10; i++) {
+				handler.EatBug ();
+			}
 		}
 	}
 }

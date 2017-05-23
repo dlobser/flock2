@@ -28,14 +28,17 @@ namespace ON{
 	            GameObject thisPoolObject = Instantiate(poolObject);
 	            thisPoolObject.transform.parent = poolContainer.transform;
 	        }
-
+			poolContainer.transform.GetChild (0).gameObject.SetActive (true);
 	        return poolContainer.transform.GetChild(0).gameObject;
 	    }
 
 	    public void PoolDestroy(GameObject thisPoolObject)
 	    {
 	        thisPoolObject.transform.parent = poolContainer.transform;
-	        thisPoolObject.transform.localScale = scale;
+			thisPoolObject.transform.localPosition = Vector3.zero;
+
+//			thisPoolObject.transform.localScale = Vector3.zero;
+			thisPoolObject.SetActive (false);
 	    }
 	}
 }

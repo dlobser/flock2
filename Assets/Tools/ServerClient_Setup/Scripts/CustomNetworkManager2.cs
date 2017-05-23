@@ -17,6 +17,9 @@ public class CustomNetworkManager2 : NetworkManager
     [HideInInspector]
     public string serverPassword;
 
+    //private int connectionCount;
+    public bool reconnectAutomatically;
+
     //Server Side
 
     public override void OnStartServer()
@@ -92,6 +95,9 @@ public class CustomNetworkManager2 : NetworkManager
     {
         base.OnClientDisconnect(conn);
         clientHudScript.DisConnect(false);
+        if (reconnectAutomatically)
+            StartClient();
+
     }
 
 

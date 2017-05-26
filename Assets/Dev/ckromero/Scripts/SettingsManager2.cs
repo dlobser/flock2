@@ -148,9 +148,11 @@ public class SettingsManager2 :  NetworkBehaviour {
       resetHeadsetImmediate = ResetHeadsetImmediate;
       headsetText = headsetTextInput.text;
       experienceLengthSeconds = ExperienceLengthSeconds;
-			whichHeadset = WhichHeadset;
+      whichHeadset = WhichHeadset;
       fenceSize = FenceSize;
     }
+    else
+      headsetTextInput.text = headsetText;
     //Debug.Log(fenceSize);
     if (fenceSize != fence.transform.localScale.x)
     {

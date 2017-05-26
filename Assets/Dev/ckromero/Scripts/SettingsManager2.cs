@@ -99,7 +99,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       ResetHeadset = true;
       //resetHeadset = true;
     }
-    if (Input.GetKeyUp(KeyCode.R))
+    if (Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.LeftAlt))
     {
       ResetHeadsetImmediate = true;
       //resetHeadset = true;

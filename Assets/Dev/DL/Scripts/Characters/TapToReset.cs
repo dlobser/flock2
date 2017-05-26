@@ -43,7 +43,7 @@ public class TapToReset : MonoBehaviour {
         //    if (taps > 0)
         //        taps--;
         //}
-        if (Input.GetKeyUp(KeyCode.Space))// && tapCounter > 0)
+        if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.LeftAlt))// && tapCounter > 0)
         {
             Debug.Log("reset");
             //taps++;

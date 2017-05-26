@@ -22,7 +22,7 @@ public class LevelHandler : MonoBehaviour {
 
     public GameObject DeathFader;
 
-	float deathClock;
+	public float deathClock { get; set; }
 	float deathCount;
 	float lerpLevel = 0;
 	float hungerTimer;

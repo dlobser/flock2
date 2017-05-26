@@ -17,7 +17,8 @@ public class Object_SyncPosition : NetworkBehaviour
 	private float threshold = 0.5f;
 	float rotThreshold = 1;
 
-
+  private float camYLerp = 0;
+  public float camLerpSpeed = .05f;
 	void Start()
 	{
 		myTransform = GetComponent<Transform>();
@@ -36,6 +37,8 @@ public class Object_SyncPosition : NetworkBehaviour
 	{
 		if (!hasAuthority)
 		{
+      camYLerp = Mathf.Lerp(camYLerp, Camera.main.transform.position.y, camLerpSpeed);
+      syncPos = new Vector3(syncPos.x, camYLerp, syncPos.z);
 			myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
 			myTransform.rotation = Quaternion.Lerp(myTransform.rotation, syncRot, Time.deltaTime * lerpRate);
 		}

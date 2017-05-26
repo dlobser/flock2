@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class F_HideChild : MonoBehaviour {
+
+
   bool onOff;
 	// Use this for initialization
 	void Start () {

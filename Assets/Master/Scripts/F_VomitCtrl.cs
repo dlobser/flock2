@@ -13,8 +13,12 @@ public class F_VomitCtrl : MonoBehaviour {
 	List<float> vomitTime;
 	GameObject vomitParent;
 
-	// Use this for initialization
-	void Start () {
+  public GameObject UpperBeak;
+  public GameObject LowerBeak;
+  public float beakSpeed;
+
+  // Use this for initialization
+  void Start () {
 		vomitParent = GameObject.Find ("VomitParent");	
 		pool = GameObject.Find ("VomitPool").GetComponent<ON.ON_ObjectPool>();
 		vomits = new List<GameObject> ();
@@ -36,12 +40,25 @@ public class F_VomitCtrl : MonoBehaviour {
 			}
 			which++;
 		}
-
 	}
 	
+  IEnumerator AnimateBeak()
+  {
+
+    float counter = 0;
+    while (counter < beakSpeed)
+    {
+
+      counter += Time.deltaTime;
+      UpperBeak.transform.localEulerAngles = new Vector3(((Mathf.Cos((counter / beakSpeed)*6.28f) - 1f) * -.5f) * -20,0, 0);
+      LowerBeak.transform.localEulerAngles = new Vector3(((Mathf.Cos((counter / beakSpeed)*6.28f) - 1f) * -.5f) * 20,0, 0);
+      yield return null;
+    }
+  }
 	void Update () {
 		counter += Time.deltaTime * rate;
 		if (counter > 1) {
+      StartCoroutine(AnimateBeak());
 			GameObject g = pool.PoolInstantiate ();
 			Vector3 v = this.transform.position;
 			g.transform.position = new Vector3 (v.x, v.y, v.z);

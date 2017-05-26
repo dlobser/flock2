@@ -150,7 +150,9 @@ public class SettingsManager2 :  NetworkBehaviour {
 		if (whichHeadset == F_Players.thisPlayerID || whichHeadset == -1) 
 		{
 			levelHandler.timer = 0;
-			reset.Reset ();
+            levelHandler.deathClock = 0;
+            levelHandler.level = 0;
+            reset.Reset ();
 			foreach (FaderManager fade in fader) 
 			{
 				fade.Refresh ();
@@ -164,6 +166,8 @@ public class SettingsManager2 :  NetworkBehaviour {
       ResetHeadset = false;
       Debug.Log("reset");
 			levelHandler.timer = 0;
+            levelHandler.deathClock = 0;
+            levelHandler.level = 0;
       //resetHeadset = false;
       reset.Reset();
 			foreach (FaderManager fade in fader) {

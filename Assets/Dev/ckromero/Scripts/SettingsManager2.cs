@@ -152,7 +152,10 @@ public class SettingsManager2 :  NetworkBehaviour {
       fenceSize = FenceSize;
     }
     else
-      headsetTextInput.text = headsetText;
+    {
+     displayText.text = headsetText;
+
+    }
     //Debug.Log(fenceSize);
     if (fenceSize != fence.transform.localScale.x)
     {

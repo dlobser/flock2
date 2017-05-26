@@ -150,6 +150,7 @@ public class SettingsManager2 :  NetworkBehaviour {
       experienceLengthSeconds = ExperienceLengthSeconds;
       whichHeadset = WhichHeadset;
       fenceSize = FenceSize;
+      displayText.text = headsetTextInput.text;
     }
     else
     {
@@ -169,8 +170,8 @@ public class SettingsManager2 :  NetworkBehaviour {
 
 		fader[0].maxLevel = faderLevelsMax;
 
-        if (prevHeadsetText != headsetText)
-            displayText.text = headsetTextInput.text;
+        //if (prevHeadsetText != headsetText)
+            
 
     ThisPlayer = F_Players.thisPlayerID;
    

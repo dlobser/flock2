@@ -5,16 +5,16 @@ using UnityEngine;
 namespace ON{
 	public class ON_Trigger_Color : ON_TriggerEvents {
 
-	    public Color newColor;
-	    public Color oldColor;
-	    public bool getOldColorFromMaterial = false;
-		public bool getOldColorFromCurrent = false;
-	    public string channel;
-	    public float speed;
-	    float counter = 0;
-	    Material mat;
-	    public bool reverse = false;
-		public bool pingpong;
+    public Color newColor;
+    public Color oldColor;
+    public bool getOldColorFromMaterial = false;
+    public bool getOldColorFromCurrent = false;
+    public string channel;
+    public float speed;
+    float counter = 0;
+    Material mat;
+    public bool reverse = false;
+    public bool pingpong;
 
 		public MeshRenderer Renderer;
 
@@ -29,10 +29,14 @@ namespace ON{
 
 	    public override void Ping()
 	    {
-			    base.Ping ();
-	        if(getOldColorFromCurrent)
-	            oldColor = mat.GetColor(channel);
-	        StartCoroutine(animate());
+      //Debug.Log(counter);
+      if (counter <= 0)
+      {
+        base.Ping();
+        if (getOldColorFromCurrent)
+          oldColor = mat.GetColor(channel);
+        StartCoroutine(animate());
+      }
 
 	    }
 
@@ -58,7 +62,7 @@ namespace ON{
 			yield return null;
 		}
 
-	    IEnumerator animate()
+	  IEnumerator animate()
 	    {
 			counter = 0;
 	        while (counter < speed)

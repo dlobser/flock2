@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 public class SettingsManager2 :  NetworkBehaviour {
 
   [SyncVar(hook ="OnChangeExperienceLength")]
@@ -22,6 +22,8 @@ public class SettingsManager2 :  NetworkBehaviour {
   public string headsetText;
 	[SyncVar(hook="OnChangeWhichHeadset")]
 	public int whichHeadset;
+  [SyncVar(hook = "OnChangeFenceSize")]
+  public float fenceSize = 2.5f;
 
   public float   ExperienceLengthSeconds = 420;
   public float   DeathLengthSeconds = 30;
@@ -33,6 +35,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   public string  HeadsetText;
 	public int WhichHeadset;
   public int ThisPlayer { get; set; }
+  public float FenceSize = 2.5f;
 
   public LevelHandler levelHandler;
   public ManageRigidBugs bugManagement;
@@ -40,6 +43,10 @@ public class SettingsManager2 :  NetworkBehaviour {
   public FaderManager[] fader;
   public TextMesh displayText;
   string prevHeadsetText;
+
+  public Text headsetTextInput;
+
+  public GameObject fence;
   
   void Start () {
 
@@ -65,12 +72,14 @@ public class SettingsManager2 :  NetworkBehaviour {
   public void OnChangeResetHeadset(bool e) { resetHeadset = e;  }
   public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e;  }
 	public void OnChangeWhichHeadset(int e) { whichHeadset = e;  }
+  public void OnChangeFenceSize(float e) { fenceSize = e; }
 
-	public void onChangeExperienceLength(float e){ExperienceLengthSeconds = e;}
+  public void onChangeExperienceLength(float e){ExperienceLengthSeconds = e;}
 	public void onChangeDeathLengthSeconds(float e) { DeathLengthSeconds = e;}
 	public void onChangeFaderLevelsMax(float e) { FaderLevelsMax = e; }
 	public void onChangeBugPushStrength(float e) { BugPushStrength = e; }
 	public void onChangeBugPullStrength(float e) { BugPullStrength = e;  }
+  public void onChangeFenceSize(float e) { FenceSize = e; }
 //	public void onChangeBugPullStrength(float e) { BugPullStrength = e;  }
 
   //public void OnChangeDeathLengthSeconds2(float e) { DeathLengthSeconds = e; }
@@ -81,6 +90,7 @@ public class SettingsManager2 :  NetworkBehaviour {
   //public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e; ResetHeadsetImmediate = e; }
 
   public void OnChangeHeadsetText(string e) { headsetText = e; }
+  public void onChangeHeadsetText(string e) { HeadsetText = e; }
 
 
   void Update(){
@@ -113,10 +123,18 @@ public class SettingsManager2 :  NetworkBehaviour {
 		if (Input.GetKeyUp (KeyCode.Alpha5)) {
 			WhichHeadset = 5;
 		}
-		if (Input.GetKeyUp (KeyCode.Alpha5)) {
+		if (Input.GetKeyUp (KeyCode.Alpha6)) {
 			WhichHeadset = 6;
 		}
-		if (Input.GetKeyUp (KeyCode.Alpha9)) {
+    if (Input.GetKeyUp(KeyCode.Alpha7))
+    {
+      WhichHeadset = 7;
+    }
+    if (Input.GetKeyUp(KeyCode.Alpha8))
+    {
+      WhichHeadset = 8;
+    }
+    if (Input.GetKeyUp (KeyCode.Alpha9)) {
 			WhichHeadset = -1;
 		}
     if (isServer)
@@ -128,9 +146,16 @@ public class SettingsManager2 :  NetworkBehaviour {
       bugPullStrength = BugPullStrength;
       resetHeadset = ResetHeadset;
       resetHeadsetImmediate = ResetHeadsetImmediate;
-      headsetText = HeadsetText;
+      headsetText = headsetTextInput.text;
       experienceLengthSeconds = ExperienceLengthSeconds;
 			whichHeadset = WhichHeadset;
+      fenceSize = FenceSize;
+    }
+    //Debug.Log(fenceSize);
+    if (fenceSize != fence.transform.localScale.x)
+    {
+      fence.transform.localScale = new Vector3(fenceSize,fenceSize, fenceSize);
+      fence.GetComponent<F_FakeFence>().size = fenceSize;
     }
 		levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;
 		levelHandler.maxLevel = faderLevelsMax;
@@ -140,10 +165,10 @@ public class SettingsManager2 :  NetworkBehaviour {
 		fader[0].maxLevel = faderLevelsMax;
 
         if (prevHeadsetText != headsetText)
-            displayText.text = headsetText;
+            displayText.text = headsetTextInput.text;
 
     ThisPlayer = F_Players.thisPlayerID;
-
+   
   if (resetHeadsetImmediate)
 	{
 		Debug.Log (F_Players.thisPlayerID);

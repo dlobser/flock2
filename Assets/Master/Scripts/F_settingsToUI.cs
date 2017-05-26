@@ -27,6 +27,7 @@ public class F_settingsToUI : MonoBehaviour {
 			"Push: " + settings.bugPushStrength + " \n " +
 			"DeathTime: " + (int)lHandler.timeStartDeathClock + " \n " +
 			"Level: " + (int)lHandler.level + "\n" +
+      "Fence Size: " + settings.fenceSize + "\n" +
 
             "Time: " + (int)lHandler.timer;
     }

@@ -17,7 +17,7 @@ public class F_settingsToUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     uiText.text =
-      "alt 'd' hides UI, alt'r' resets selected headset,\n '0-8' selects headset, '9' selects all headsets" + "\n" +
+      "alt 'd' hides UI, shift'R' resets selected headset,\n '0-8' selects headset, '9' selects all headsets" + "\n" +
       "This Player ID: " + settings.ThisPlayer + "\n" +
 
       "Headset Select: " + settings.whichHeadset + "\n" + 

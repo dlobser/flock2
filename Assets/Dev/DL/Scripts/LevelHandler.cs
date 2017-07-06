@@ -62,7 +62,8 @@ public class LevelHandler : MonoBehaviour {
 
         if (debug)
         {
-            Debug.Log(deathClock);
+            Debug.Log("Timer: " + timer);
+            Debug.Log("Death Clock " + deathClock);
         }
 
 		UpdateFaders ();

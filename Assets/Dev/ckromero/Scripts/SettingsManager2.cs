@@ -97,7 +97,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     void Update(){
         if (Input.GetKeyUp(KeyCode.A))
         {
-            ResetHeadset = true;
+            //ResetHeadset = true;
         }
      
         if (Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.LeftShift))
@@ -152,7 +152,7 @@ public class SettingsManager2 :  NetworkBehaviour {
             displayText.text = headsetTextInput.text;
         }
         else{
-         displayText.text = headsetText;
+            displayText.text = headsetText;
         }
 
         if (fenceSize != fence.transform.localScale.x){
@@ -170,7 +170,7 @@ public class SettingsManager2 :  NetworkBehaviour {
         ThisPlayer = F_Players.thisPlayerID;
    
         if (resetHeadsetImmediate){
-            Debug.Log (F_Players.thisPlayerID);
+            //Debug.Log (F_Players.thisPlayerID);
             if (whichHeadset == F_Players.thisPlayerID || whichHeadset == -1) {
                 levelHandler.timer = 0;
                 levelHandler.deathClock = 0;

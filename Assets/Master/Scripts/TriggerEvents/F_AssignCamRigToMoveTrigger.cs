@@ -21,6 +21,12 @@ public class F_AssignCamRigToMoveTrigger : MonoBehaviour {
                 found = true;
                 GetComponent<ON.ON_Trigger_Move>().objectToMove = rig;
             }
+            else if(rig == null && GameObject.Find("FakeFPS(Clone)") != null) {
+                rig = GameObject.Find("FakeFPS(Clone)");
+                found = true;
+                GetComponent<ON.ON_Trigger_Move>().objectToMove = rig;
+            }
         }
+
 	}
 }

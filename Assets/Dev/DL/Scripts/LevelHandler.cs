@@ -62,7 +62,7 @@ public class LevelHandler : MonoBehaviour {
 
         if (debug)
         {
-            Debug.Log("Timer: " + timer);
+            //Debug.Log("Timer: " + timer);
             Debug.Log("Death Clock " + deathClock);
         }
 
@@ -152,7 +152,7 @@ public class LevelHandler : MonoBehaviour {
 			fader.level = levelDelta;
 		}
 		foreach (FaderManager fader in DeathCount) {
-	    fader.level = deathCount;
+	        fader.level = deathCount;
 		}
 
 	}

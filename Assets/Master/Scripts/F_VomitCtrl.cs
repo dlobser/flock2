@@ -48,7 +48,7 @@ public class F_VomitCtrl : MonoBehaviour {
     float counter = 0;
     while (counter < beakSpeed)
     {
-
+           
       counter += Time.deltaTime;
       UpperBeak.transform.localEulerAngles = new Vector3(((Mathf.Cos((counter / beakSpeed)*6.28f) - 1f) * -.5f) * -20,0, 0);
       LowerBeak.transform.localEulerAngles = new Vector3(((Mathf.Cos((counter / beakSpeed)*6.28f) - 1f) * -.5f) * 20,0, 0);

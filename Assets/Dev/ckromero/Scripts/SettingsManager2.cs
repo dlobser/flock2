@@ -83,7 +83,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     public void OnChangeWhichHeadset(int e) { whichHeadset = e;  }
     public void OnChangeFenceSize(float e) { fenceSize = e; }
 
-    public void onChangeExperienceLength(float e){ExperienceLengthSeconds = e;}
+    public void onChangeExperienceLength(float e){ExperienceLengthSeconds = e; levelHandler.timeMax = e; }
     public void onChangeDeathLengthSeconds(float e) { DeathLengthSeconds = e;}
     public void onChangeFaderLevelsMax(float e) { FaderLevelsMax = e; }
     public void onChangeBugPushStrength(float e) { BugPushStrength = e; }
@@ -93,7 +93,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     public void OnChangeHeadsetText(string e) { headsetText = e; }
     public void onChangeHeadsetText(string e) { HeadsetText = e; }
 
-
+    
     void Update(){
         if (Input.GetKeyUp(KeyCode.A))
         {
@@ -162,6 +162,7 @@ public class SettingsManager2 :  NetworkBehaviour {
 
         levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;
         levelHandler.maxLevel = faderLevelsMax;
+        levelHandler.timeMax = ExperienceLengthSeconds;
         bugManagement.pullForce = bugPullStrength;
         bugManagement.pushForce = bugPushStrength;
 
@@ -180,6 +181,7 @@ public class SettingsManager2 :  NetworkBehaviour {
                     fade.Refresh ();
                     fade.level = 0;
                 }
+                StartCoroutine(resetHeadsetText());
             }
             ResetHeadsetImmediate = false;
             ResetHeadsetImmediate = false;
@@ -199,6 +201,30 @@ public class SettingsManager2 :  NetworkBehaviour {
 
         prevHeadsetText = headsetText;
     }
-		
+
+    IEnumerator resetHeadsetText() {
+        Material mat = displayText.GetComponent<MeshRenderer>().material;
+        Color col = mat.color;
+        float counter = 0;
+        headsetTextInput.transform.parent.GetComponent<InputField>().text = "Begin Flocking!";
+        while (counter < 1) {
+            counter += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        counter = 0;
+        while (counter < 1) {
+            counter += Time.deltaTime;
+            mat.color = new Color(col.r, col.g, col.b, 1 - counter);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        headsetTextInput.transform.parent.GetComponent<InputField>().text = "";
+        counter = 0;
+        while (counter < .1f) {
+            counter += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        mat.color = new Color(col.r, col.g, col.b, col.a);
+    }
+
 }
 

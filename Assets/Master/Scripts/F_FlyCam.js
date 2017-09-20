@@ -73,11 +73,11 @@ function Update () {
 
 public function ClampAngle (angle, min, max) : float
 {
-     if (angle < -360)
-    angle += 360;
-if (angle > 360)
-angle -= 360;
-return Mathf.Clamp (angle, min, max);
+    if (angle < -360)
+        angle += 360;
+    if (angle > 360)
+        angle -= 360;
+    return Mathf.Clamp (angle, min, max);
 }
  
 private function GetBaseInput() : Vector3 { //returns the basic values, if it's 0 than it's not active.

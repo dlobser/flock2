@@ -25,9 +25,12 @@ public class F_settingsToUI : MonoBehaviour {
         "Total Length: " + (int)settings.experienceLengthSeconds + "\n " +
         "Death Length: " + (int)settings.deathLengthSeconds + " \n " +
         "Death Start Time: " + (int)lHandler.timeStartDeathClock + " \n " +
+        "Death Count: " + lHandler.deathCount + " \n " +
+        "Death Clock: " + lHandler.deathClock + "\n" +
         "Pull: " + settings.bugPullStrength + " \n " +
         "Push: " + settings.bugPushStrength + " \n " +
         "Level: " + (int)lHandler.level + "\n" +
+        "Max Time: " + (int)lHandler.timeMax + "\n" +
         "Fence Size: " + settings.fenceSize + "\n" +
         "Time: " + (int)lHandler.timer;
     }

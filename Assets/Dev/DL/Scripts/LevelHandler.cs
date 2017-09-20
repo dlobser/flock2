@@ -23,7 +23,7 @@ public class LevelHandler : MonoBehaviour {
     public GameObject DeathFader;
 
 	public float deathClock { get; set; }
-	float deathCount;
+	public float deathCount { get; set; }
 	float lerpLevel = 0;
 	float hungerTimer;
 	float reduceLevelCounter = 0;
@@ -48,7 +48,7 @@ public class LevelHandler : MonoBehaviour {
 		timer += Time.deltaTime;
 
 
-		if (timer > timeStartDeathClock && timer < timeMax) {
+		if (timer > timeStartDeathClock) {// && timer < timeMax) {
             if (DeathFader != null && DeathFader.activeInHierarchy == false)
                 DeathFader.SetActive(true);
 			deathClock += Time.deltaTime;

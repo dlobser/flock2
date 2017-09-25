@@ -2,16 +2,13 @@
 using System.Collections;
 
 public class TapToReset : MonoBehaviour {
-	
-//	float tapCounter = 1.5f;
-//	int taps;
 
 	LevelHandler lHandler;
 	public GameObject[] activateOnReset;
 	public GameObject[] deactivateOnReset;
-  public string[] resetPosition;
+	public Resetable[] reset;
+	public string[] resetPosition;
 
-	// Use this for initialization
 	void Start () {
 		lHandler = GameObject.Find ("LevelHandler").GetComponent<LevelHandler> ();
 	}
@@ -25,6 +22,9 @@ public class TapToReset : MonoBehaviour {
 			if (deactivateOnReset [i].activeInHierarchy)
 				deactivateOnReset [i].gameObject.SetActive (false);
 		}
+		for (int i = 0; i < reset.Length; i++) {
+			reset [i].Reset ();
+		}
         for (int i = 0; i < resetPosition.Length; i++)
         {
             if (GameObject.Find(resetPosition[i])!=null)
@@ -33,27 +33,6 @@ public class TapToReset : MonoBehaviour {
 		lHandler.Reset ();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        //tapCounter -= Time.deltaTime;
-        //if (tapCounter <= 0)
-        //{
-        //    tapCounter = 1.5f;
-        //    if (taps > 0)
-        //        taps--;
-        //}
-        if (Input.GetKeyUp(KeyCode.Space))// && tapCounter > 0)
-        {
-            Debug.Log("reset");
-            //taps++;
-            //tapCounter = 1.5f;
-            //if (taps == 4)
-            //{
-            //    //				Debug.Log ("poop");
-                Reset();
-            //    taps = 0;
-            //}
-        }
-    }
+    
+//    }
 }

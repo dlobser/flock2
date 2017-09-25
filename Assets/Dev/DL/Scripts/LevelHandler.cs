@@ -22,8 +22,8 @@ public class LevelHandler : MonoBehaviour {
 
     public GameObject DeathFader;
 
-	float deathClock;
-	float deathCount;
+	public float deathClock { get; set; }
+	public float deathCount { get; set; }
 	float lerpLevel = 0;
 	float hungerTimer;
 	float reduceLevelCounter = 0;
@@ -48,7 +48,7 @@ public class LevelHandler : MonoBehaviour {
 		timer += Time.deltaTime;
 
 
-		if (timer > timeStartDeathClock && timer < timeMax) {
+		if (timer > timeStartDeathClock) {// && timer < timeMax) {
             if (DeathFader != null && DeathFader.activeInHierarchy == false)
                 DeathFader.SetActive(true);
 			deathClock += Time.deltaTime;
@@ -62,7 +62,8 @@ public class LevelHandler : MonoBehaviour {
 
         if (debug)
         {
-            Debug.Log(deathClock);
+            //Debug.Log("Timer: " + timer);
+            Debug.Log("Death Clock " + deathClock);
         }
 
 		UpdateFaders ();
@@ -151,7 +152,7 @@ public class LevelHandler : MonoBehaviour {
 			fader.level = levelDelta;
 		}
 		foreach (FaderManager fader in DeathCount) {
-	    fader.level = deathCount;
+	        fader.level = deathCount;
 		}
 
 	}

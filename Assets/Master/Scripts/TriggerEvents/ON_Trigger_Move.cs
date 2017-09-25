@@ -37,6 +37,7 @@ namespace ON{
 		}
 
 	    public override void Ping() {
+            Debug.Log("ping");
 			base.Ping ();
 			counter = 0;
 			GetInitialPosition ();

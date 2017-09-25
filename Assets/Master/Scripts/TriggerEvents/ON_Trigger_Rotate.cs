@@ -18,6 +18,7 @@ namespace ON{
 
 
 		float counter = 0;
+        float unCounter = 0;
 //		bool triggered = false;
 
 		void Awake(){
@@ -97,9 +98,10 @@ namespace ON{
 		}
 
 		IEnumerator UnAnimate(){
-			while (counter > 0) {
-				counter -= Time.deltaTime;
-				Animate (counter / timeToRotate);
+            unCounter = timeToRotate;
+			while (unCounter > 0) {
+                unCounter -= Time.deltaTime;
+				Animate (unCounter / timeToRotate);
 				yield return null;
 			}
 			Reset ();

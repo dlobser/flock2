@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class F_HideChild : MonoBehaviour {
+
+
   bool onOff;
 	// Use this for initialization
 	void Start () {
@@ -11,7 +13,7 @@ public class F_HideChild : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetKeyUp(KeyCode.H))
+	    if (Input.GetKeyUp(KeyCode.H) && Input.GetKey(KeyCode.LeftShift))
 	    {
 	      onOff = true;
 	    }

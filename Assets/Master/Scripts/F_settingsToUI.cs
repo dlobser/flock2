@@ -17,17 +17,21 @@ public class F_settingsToUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     uiText.text =
-      "'h' hides UI, 'r' resets selected headset,\n '0-8' selects headset, '9' selects all headsets" + "\n" +
-      "This Player ID: " + settings.ThisPlayer + "\n" +
+        "shift 'H' hides UI, shift 'R' resets selected headset(s),\n '0-8' selects headset, '9' selects all headsets" + "\n" +
+        "This Player ID: " + settings.ThisPlayer + "\n" +
 
-      "Headset Select: " + settings.whichHeadset + "\n" + 
-			"Faders: " + (int)settings.faderLevelsMax + " \n " +
-			"Length: " + (int)settings.experienceLengthSeconds + "\n " +
-			"Pull: " + settings.bugPullStrength + " \n " +
-			"Push: " + settings.bugPushStrength + " \n " +
-			"DeathTime: " + (int)lHandler.timeStartDeathClock + " \n " +
-			"Level: " + (int)lHandler.level + "\n" +
-
-            "Time: " + (int)lHandler.timer;
+        "Headset Select: " + settings.whichHeadset + "\n" + 
+        "Faders: " + (int)settings.faderLevelsMax + " \n " +
+        "Total Length: " + (int)settings.experienceLengthSeconds + "\n " +
+        "Death Length: " + (int)settings.deathLengthSeconds + " \n " +
+        "Death Start Time: " + (int)lHandler.timeStartDeathClock + " \n " +
+        "Death Count: " + lHandler.deathCount + " \n " +
+        "Death Clock: " + lHandler.deathClock + "\n" +
+        "Pull: " + settings.bugPullStrength + " \n " +
+        "Push: " + settings.bugPushStrength + " \n " +
+        "Level: " + (int)lHandler.level + "\n" +
+        "Max Time: " + (int)lHandler.timeMax + "\n" +
+        "Fence Size: " + settings.fenceSize + "\n" +
+        "Time: " + (int)lHandler.timer;
     }
 }

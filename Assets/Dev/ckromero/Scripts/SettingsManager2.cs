@@ -15,10 +15,14 @@ public class SettingsManager2 :  NetworkBehaviour {
     public float bugPushStrength;
     [SyncVar(hook="OnChangeBugPullStrength")]
     public float bugPullStrength;
+
     [SyncVar(hook="OnChangeResetHeadset")]
     public bool resetHeadset = false;
     [SyncVar(hook = "OnChangeResetHeadsetImmediate")]
     public bool resetHeadsetImmediate = false;
+	[SyncVar(hook="OnChangePauseHeadset")]
+	public bool pauseHeadset = false;
+
     [SyncVar(hook="OnChangeHeadsetText")]
     public string headsetText;
     [SyncVar(hook="OnChangeWhichHeadset")]
@@ -33,6 +37,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     public float   BugPullStrength = .1f;
     public bool    ResetHeadset;
     public bool    ResetHeadsetImmediate;
+	public bool    PauseHeadset;
     public string  HeadsetText;
 
     public int WhichHeadset;
@@ -42,6 +47,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     public LevelHandler levelHandler;
     public ManageRigidBugs bugManagement;
     public TapToReset reset;
+	public TapToReset pause;
     public FaderManager[] fader;
     public TextMesh displayText;
     string prevHeadsetText;
@@ -79,6 +85,7 @@ public class SettingsManager2 :  NetworkBehaviour {
     public void OnChangeBugPushStrength(float e) { bugPushStrength = e; }
     public void OnChangeBugPullStrength(float e) { bugPullStrength = e;  }
     public void OnChangeResetHeadset(bool e) { resetHeadset = e;  }
+	public void OnChangePauseHeadset(bool e) { pauseHeadset = e;  }
     public void OnChangeResetHeadsetImmediate(bool e) { resetHeadsetImmediate = e;  }
     public void OnChangeWhichHeadset(int e) { whichHeadset = e;  }
     public void OnChangeFenceSize(float e) { fenceSize = e; }
@@ -104,6 +111,11 @@ public class SettingsManager2 :  NetworkBehaviour {
         {
             ResetHeadsetImmediate = true;
         }
+
+		if (Input.GetKey(KeyCode.P) && Input.GetKey(KeyCode.LeftShift))
+		{
+			PauseHeadset = true;
+		}
 
         if (Input.GetKeyUp (KeyCode.Alpha0)) {
             WhichHeadset = 0;
@@ -145,6 +157,7 @@ public class SettingsManager2 :  NetworkBehaviour {
             bugPullStrength = BugPullStrength;
             resetHeadset = ResetHeadset;
             resetHeadsetImmediate = ResetHeadsetImmediate;
+			pauseHeadset = PauseHeadset;
             headsetText = headsetTextInput.text;
             experienceLengthSeconds = ExperienceLengthSeconds;
             whichHeadset = WhichHeadset;
@@ -186,6 +199,13 @@ public class SettingsManager2 :  NetworkBehaviour {
             ResetHeadsetImmediate = false;
             ResetHeadsetImmediate = false;
         }
+		if (pauseHeadset) {
+			//Debug.Log (F_Players.thisPlayerID);
+			if (whichHeadset == F_Players.thisPlayerID || whichHeadset == -1) {
+				pause.Reset ();
+			}
+			PauseHeadset = false;
+		}
         if (resetHeadset  && levelHandler.timer > experienceLengthSeconds ){
             ResetHeadset = false;
             Debug.Log("reset");

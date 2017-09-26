@@ -103,6 +103,8 @@ public class F_Player : NetworkBehaviour {
     // delete main camera
     Camera.main.gameObject.SetActive(false);
 
+		this.gameObject.AddComponent<F_IsLocalPlayer> ();
+
     //DestroyImmediate (Camera.main.gameObject);
 
     if (VRDevice.isPresent) {

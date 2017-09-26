@@ -29,8 +29,8 @@ public class F_FlowerManager : NetworkBehaviour {
 				trackedObjects [i] = found;
 			}
 			if (found!=null && trackedObjects [i] != null && networkedObjects [i] == null) {
-				if (NetworkServer.active || NetworkClient.active) {
-                    CmdInstanceNetworkObject(i, 
+				if (NetworkServer.active) {// || NetworkClient.active) {
+                    InstanceNetworkObject(i, 
                         networkObject,
                         found);
                     //Debug.Log(g);
@@ -47,12 +47,13 @@ public class F_FlowerManager : NetworkBehaviour {
 		StartCoroutine (search ());
 	}
 
-    [Command]
-    public void CmdInstanceNetworkObject(int which,GameObject toInstance, GameObject found) {
+    //[Command]
+    public void InstanceNetworkObject(int which,GameObject toInstance, GameObject found) {
         GameObject g = GameObject.FindObjectOfType<F_Player>().gameObject;
         networkedObjects[which] = (GameObject)Instantiate(networkObject, found.transform.position, found.transform.rotation);
-        NetworkServer.SpawnWithClientAuthority( networkedObjects [which],g);
+        //NetworkServer.SpawnWithClientAuthority( networkedObjects [which],g);
+        NetworkServer.Spawn(networkedObjects[which]);
         networkedObjects[which].GetComponent<F_CopyXForms>().target = found.transform;
-        Debug.Log("spawned " + networkedObjects[which]);
+        //Debug.Log("spawned " + networkedObjects[which]);
     }
 }

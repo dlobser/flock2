@@ -44,6 +44,7 @@ public class F_FlowerManager : NetworkBehaviour {
 //			}
 			if (found!=null && trackedObjects [i] != null && networkedObjects [i] == null) {
 				if (NetworkClient.active) {// || NetworkClient.active) {
+                    Debug.Log("networkclient" + NetworkClient.active);
 					CmdInstanceNetworkObject(i, 
 						networkObject,
 						found);
@@ -63,6 +64,7 @@ public class F_FlowerManager : NetworkBehaviour {
 
     [Command]
     public void CmdInstanceNetworkObject(int which, GameObject toInstance, GameObject found) {
+        Debug.Log(this.connectionToClient);
 //        GameObject g = GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject;
         networkedObjects[which] = (GameObject)Instantiate(networkObject, found.transform.position, found.transform.rotation);
 		NetworkServer.SpawnWithClientAuthority( networkedObjects [which],this.connectionToClient);

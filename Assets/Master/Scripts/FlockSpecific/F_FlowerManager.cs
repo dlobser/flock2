@@ -11,7 +11,6 @@ public class F_FlowerManager : NetworkBehaviour {
 	GameObject[] networkedObjects;
 	public float searchFrequency;
 	public GameObject networkObject;
-	public SettingsManager2 settings;
 	bool doSearch = true;
 	GameObject found;
 	bool[] filled;
@@ -29,8 +28,7 @@ public class F_FlowerManager : NetworkBehaviour {
 			doSearch = false;
 			StartCoroutine (search ());
 		}
-		if(Input.anyKey)
-			CmdPoop ();
+
 	}
 
 	void finder(){
@@ -88,10 +86,7 @@ public class F_FlowerManager : NetworkBehaviour {
 		doSearch = true;
 	}
 
-	[Command]
-	void CmdPoop(){
-		Debug.Log ("poop");
-	}
+
     [Command]
 	public void CmdInstanceNetworkObject(int which, NetworkIdentity id){//int which, GameObject toInstance, GameObject found, NetworkConnection conn) {
 //		Debug.Log(conn);
@@ -101,8 +96,15 @@ public class F_FlowerManager : NetworkBehaviour {
         GameObject g = (GameObject)Instantiate(networkObject, this.transform.position, this.transform.rotation);
 //		GameObject g = (GameObject)Instantiate(networkObject,null);
 		NetworkServer.SpawnWithClientAuthority( g,id.connectionToClient);
+		g.name = networkObject.name + "_" + id.playerControllerId + "_" + which;
 //        NetworkServer.Spawn(networkedObjects[which]);
-		g.GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames [which]).transform;
+		RpcConnectXForm(which,g.name);
 //        Debug.Log("spawned " + networkedObjects[which]);
     }
+
+	[ClientRpc]
+	private void RpcConnectXForm(int which, string name)
+	{
+		GameObject.Find(name).GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames[which]).transform;
+	}
 }

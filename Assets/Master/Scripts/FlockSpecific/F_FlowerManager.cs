@@ -12,21 +12,14 @@ public class F_FlowerManager : MonoBehaviour {
 	public float searchFrequency;
 	public GameObject networkObject;
 
-//	void OnConnectedToServer() {
-//		
-//	}
-		
 	void Start () {
 		trackedObjects = new GameObject[trackedObjectNames.Length];
 		networkedObjects = new GameObject[trackedObjectNames.Length];
 		StartCoroutine (search ());
 	}
 
-
 	IEnumerator search(){
-
 		for (int i = 0; i < trackedObjectNames.Length; i++) {
-			float timer = Time.timeSinceLevelLoad;
 			GameObject found = GameObject.Find (trackedObjectNames [i]);
 			if (found == null && trackedObjects [i] != null) {
 				if (networkedObjects [i] != null)
@@ -41,8 +34,6 @@ public class F_FlowerManager : MonoBehaviour {
 					networkedObjects [i].GetComponent<F_CopyXForms> ().target = found.transform;
 				}
 			}
-			timer -= Time.timeSinceLevelLoad;
-			Debug.Log (timer);
 		}
 		yield return new WaitForSeconds (searchFrequency);
 		StartCoroutine (search ());

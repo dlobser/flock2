@@ -3841,6 +3841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpRate: 5
+  lerpToCamHeight: 1
   camLerpSpeed: 0.01
 --- !u!114 &114643448656923528
 MonoBehaviour:
@@ -3974,9 +3975,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 0
   lifetime: 2
-  UpperBeak: {fileID: 1274294238310776}
-  LowerBeak: {fileID: 1052604058599116}
-  beakSpeed: 0.2
 --- !u!114 &114742087483283728
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,6 +11,7 @@ public class F_FlowerManager : MonoBehaviour {
 	GameObject[] networkedObjects;
 	public float searchFrequency;
 	public GameObject networkObject;
+	public SettingsManager2 settings;
 
 	void Start () {
 		trackedObjects = new GameObject[trackedObjectNames.Length];
@@ -30,7 +31,9 @@ public class F_FlowerManager : MonoBehaviour {
 			if (found!=null && trackedObjects [i] != null && networkedObjects [i] == null) {
 				if (NetworkServer.active) {
 					networkedObjects [i] = (GameObject)Instantiate (networkObject, found.transform.position, found.transform.rotation);
-					NetworkServer.Spawn (networkedObjects [i]);
+					NetworkServer.SpawnWithClientAuthority( networkedObjects [i], GameObject.FindObjectOfType<F_Player>().gameObject);
+
+//					NetworkServer.Spawn (networkedObjects [i]);
 					networkedObjects [i].GetComponent<F_CopyXForms> ().target = found.transform;
 				}
 			}

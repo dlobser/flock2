@@ -9,6 +9,7 @@ public class Object_SyncPosition : NetworkBehaviour
 	[SerializeField] float lerpRate = 5;
 	[SyncVar] private Vector3 syncPos;
 	[SyncVar] private Quaternion syncRot;
+	public bool lerpToCamHeight = true;
 	//    private NetworkIdentity theNetID;
 
 	private Vector3 lastPos;
@@ -37,8 +38,9 @@ public class Object_SyncPosition : NetworkBehaviour
 	{
 		if (!hasAuthority)
 		{
-      camYLerp = Mathf.Lerp(camYLerp, Camera.main.transform.position.y, camLerpSpeed);
-      syncPos = new Vector3(syncPos.x, camYLerp, syncPos.z);
+			camYLerp = Mathf.Lerp(camYLerp, Camera.main.transform.position.y, camLerpSpeed);
+			if(lerpToCamHeight)
+				syncPos = new Vector3(syncPos.x, camYLerp, syncPos.z);
 			myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
 			myTransform.rotation = Quaternion.Lerp(myTransform.rotation, syncRot, Time.deltaTime * lerpRate);
 		}

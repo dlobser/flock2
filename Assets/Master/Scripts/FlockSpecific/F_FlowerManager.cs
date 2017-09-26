@@ -89,26 +89,30 @@ public class F_FlowerManager : NetworkBehaviour {
 
     [Command]
 	public void CmdInstanceNetworkObject(int which, NetworkIdentity id){//int which, GameObject toInstance, GameObject found, NetworkConnection conn) {
-//		Debug.Log(conn);
 
-		Debug.Log (GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject.GetComponent<NetworkIdentity>().connectionToClient);
-//        GameObject g = GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject;
         GameObject g = (GameObject)Instantiate(networkObject, this.transform.position, this.transform.rotation);
 //		GameObject g = (GameObject)Instantiate(networkObject,null);
 		NetworkServer.SpawnWithClientAuthority( g,id.connectionToClient);
 		g.name = networkObject.name + "_" + id.playerControllerId + "_" + which;
 		NetworkInstanceId ass =  g.GetComponent<NetworkIdentity> ().netId;
 //        NetworkServer.Spawn(networkedObjects[which]);
-		RpcConnectXForm(which,g.name,ass);
+//		RpcConnectXForm(which,g.name,ass);
+		TargetConnectXform(id.connectionToClient, which,g.name,ass);
 //        Debug.Log("spawned " + networkedObjects[which]);
     }
-
-	[ClientRpc]
-	private void RpcConnectXForm(int which, string name, NetworkInstanceId ass)
-	{
+//
+//	[ClientRpc]
+//	private void RpcConnectXForm(int which, string name, NetworkInstanceId ass)
+//	{
+//		GameObject g = ClientScene.FindLocalObject (ass);
+//		g.name = name;
+//
+//		g.GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames[which]).transform;
+//	}
+	[TargetRpc]
+	void TargetConnectXform(NetworkConnection target,int which, string name, NetworkInstanceId ass){
 		GameObject g = ClientScene.FindLocalObject (ass);
 		g.name = name;
-//		GameObject.Find (name).
 		g.GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames[which]).transform;
 	}
 }

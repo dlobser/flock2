@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class F_FlowerManager : MonoBehaviour {
+public class F_FlowerManager : NetworkBehaviour {
 
 	public string[] trackedObjectNames;
 	GameObject[] trackedObjects;
@@ -29,12 +29,15 @@ public class F_FlowerManager : MonoBehaviour {
 				trackedObjects [i] = found;
 			}
 			if (found!=null && trackedObjects [i] != null && networkedObjects [i] == null) {
-				if (NetworkServer.active) {
-					networkedObjects [i] = (GameObject)Instantiate (networkObject, found.transform.position, found.transform.rotation);
-					NetworkServer.SpawnWithClientAuthority( networkedObjects [i], GameObject.FindObjectOfType<F_Player>().gameObject);
+				if (NetworkServer.active || NetworkClient.active) {
+                    CmdInstanceNetworkObject(i, networkObject, found);
+                    //Debug.Log(g);
+                    Debug.Log("networrrrkkkk");
 
-//					NetworkServer.Spawn (networkedObjects [i]);
-					networkedObjects [i].GetComponent<F_CopyXForms> ().target = found.transform;
+                    //NetworkServer.SpawnWithClientAuthority( networkedObjects [i],g);
+
+                    //NetworkServer.Spawn(networkedObjects[i]);
+                    //networkedObjects [i].GetComponent<F_CopyXForms> ().target = found.transform;
 				}
 			}
 		}
@@ -42,4 +45,11 @@ public class F_FlowerManager : MonoBehaviour {
 		StartCoroutine (search ());
 	}
 
+    [Command]
+    public void CmdInstanceNetworkObject(int which,GameObject toInstance, GameObject found) {
+        GameObject g = GameObject.FindObjectOfType<F_Player>().gameObject;
+        networkedObjects[which] = (GameObject)Instantiate(networkObject, found.transform.position, found.transform.rotation);
+        NetworkServer.SpawnWithClientAuthority( networkedObjects [which],g);
+        networkedObjects[which].GetComponent<F_CopyXForms>().target = found.transform;
+    }
 }

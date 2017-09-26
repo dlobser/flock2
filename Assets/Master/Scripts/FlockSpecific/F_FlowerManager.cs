@@ -97,14 +97,18 @@ public class F_FlowerManager : NetworkBehaviour {
 //		GameObject g = (GameObject)Instantiate(networkObject,null);
 		NetworkServer.SpawnWithClientAuthority( g,id.connectionToClient);
 		g.name = networkObject.name + "_" + id.playerControllerId + "_" + which;
+		NetworkInstanceId ass =  g.GetComponent<NetworkIdentity> ().netId;
 //        NetworkServer.Spawn(networkedObjects[which]);
-		RpcConnectXForm(which,g.name);
+		RpcConnectXForm(which,g.name,ass);
 //        Debug.Log("spawned " + networkedObjects[which]);
     }
 
 	[ClientRpc]
-	private void RpcConnectXForm(int which, string name)
+	private void RpcConnectXForm(int which, string name, NetworkInstanceId ass)
 	{
-		GameObject.Find(name).GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames[which]).transform;
+		GameObject g = ClientScene.FindLocalObject (ass);
+		g.name = name;
+//		GameObject.Find (name).
+		g.GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames[which]).transform;
 	}
 }

@@ -48,7 +48,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: de0d1cce447cf44a486c61d44d8c06e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: f1df57743f73b4e0c82ed5979b42bc37, type: 3}
         m_Scale: {x: 12, y: 12}
         m_Offset: {x: -1.7663234, y: 0}
     - first:
@@ -148,25 +148,25 @@ Material:
       second: {r: 0, g: 0.54817426, b: 0.6911765, a: 1}
     - first:
         name: _ColorB
-      second: {r: 0.94, g: 0.8449223, b: 0.28706965, a: 0}
+      second: {r: 0.9417647, g: 0.84896266, b: 0.36908954, a: 0}
     - first:
         name: _ColorB2
-      second: {r: 0.31833047, g: 0.46659955, b: 0.52705884, a: 0}
+      second: {r: 0.36538061, g: 0.5140737, b: 0.5747059, a: 0}
     - first:
         name: _ColorG
-      second: {r: 0.33970588, g: 0.7433874, b: 1, a: 0}
+      second: {r: 0.4367647, g: 0.7882961, b: 1, a: 0}
     - first:
         name: _ColorG2
-      second: {r: 0.46294117, g: 0.21161333, b: 0.39904034, a: 0}
+      second: {r: 0.49647057, g: 0.26481402, b: 0.43954802, a: 0}
     - first:
         name: _ColorMult
-      second: {r: 0.6763223, g: 0.33146077, b: 0.9129412, a: 0}
+      second: {r: 0.9594605, g: 0.26588628, b: 0.8777163, a: 0}
     - first:
         name: _ColorR
-      second: {r: 0.9845588, g: 0.40455884, b: 0.82455873, a: 0}
+      second: {r: 0.98014706, g: 0.5201471, b: 0.85325044, a: 0}
     - first:
         name: _ColorR2
-      second: {r: 0.35190746, g: 0.45017993, b: 0.5018079, a: 0}
+      second: {r: 0.437314, g: 0.5012941, b: 0.5422405, a: 0}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
@@ -175,4 +175,4 @@ Material:
       second: {r: 1.3, g: 1, b: 0.7, a: 0}
     - first:
         name: _InSpeed
-      second: {r: 1.5, g: 1, b: 0.5, a: -7.3799996}
+      second: {r: 1.5, g: 1, b: 0.5, a: -6.06}

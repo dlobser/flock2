@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 114363928092921988}
   - component: {fileID: 114107667770427258}
   - component: {fileID: 114637400765348698}
+  - component: {fileID: 114052832356190350}
   m_Layer: 0
   m_Name: VR_BirdPlayer
   m_TagString: Avatar
@@ -3338,6 +3339,23 @@ MonoBehaviour:
   timeToRotate: 0.2
   objectToRotate: {fileID: 1274294238310776}
   pingpong: 1
+--- !u!114 &114052832356190350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1316890123221016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92118dca8d9344bbba4a63dcbfad578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedObjectNames:
+  - Controller (left)
+  - Controller (right)
+  searchFrequency: 1
+  networkObject: {fileID: 1969073981368244, guid: b1331d02627e9497ca3c768c518cb53f,
+    type: 2}
 --- !u!114 &114055879952441416
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -27,6 +27,7 @@ public class F_FlowerManager : NetworkBehaviour {
 			doSearch = false;
 			StartCoroutine (search ());
 		}
+		CmdPoop ();
 	}
 
 	void finder(){
@@ -82,6 +83,10 @@ public class F_FlowerManager : NetworkBehaviour {
 		doSearch = true;
 	}
 
+	[Command]
+	void CmdPoop(){
+		Debug.Log ("poop");
+	}
     [Command]
 	public void CmdInstanceNetworkObject(int which, NetworkIdentity id){//int which, GameObject toInstance, GameObject found, NetworkConnection conn) {
 //		Debug.Log(conn);
@@ -90,7 +95,7 @@ public class F_FlowerManager : NetworkBehaviour {
 //        GameObject g = GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject;
         networkedObjects[which] = (GameObject)Instantiate(networkObject, this.transform.position, this.transform.rotation);
 //		GameObject g = (GameObject)Instantiate(networkObject,null);
-		NetworkServer.SpawnWithClientAuthority( networkObject,id.connectionToClient);
+		NetworkServer.SpawnWithClientAuthority( networkedObjects[which],id.connectionToClient);
 //        NetworkServer.Spawn(networkedObjects[which]);
         networkedObjects[which].GetComponent<F_CopyXForms>().target = found.transform;
 //        Debug.Log("spawned " + networkedObjects[which]);

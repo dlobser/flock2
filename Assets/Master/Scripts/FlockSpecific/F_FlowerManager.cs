@@ -14,10 +14,12 @@ public class F_FlowerManager : NetworkBehaviour {
 	public SettingsManager2 settings;
 	bool doSearch = true;
 	GameObject found;
+	bool[] filled;
 
 	void Start () {
 		trackedObjects = new GameObject[trackedObjectNames.Length];
 		networkedObjects = new GameObject[trackedObjectNames.Length];
+		filled = new bool[trackedObjectNames.Length];
 		StartCoroutine (search ());
 	}
 
@@ -27,19 +29,21 @@ public class F_FlowerManager : NetworkBehaviour {
 			doSearch = false;
 			StartCoroutine (search ());
 		}
-		CmdPoop ();
+		if(Input.anyKey)
+			CmdPoop ();
 	}
 
 	void finder(){
 		found = null;
 		for (int i = 0; i < trackedObjectNames.Length; i++) {
 			found = GameObject.Find (trackedObjectNames [i]);
-			if (found == null && trackedObjects [i] != null) {
-				if (networkedObjects [i] != null)
-					NetworkServer.Destroy (networkedObjects [i]);
-			} else if (found != null && trackedObjects [i] == null) {
-				trackedObjects [i] = found;
-			}
+			if (found == null && filled[i]) {
+				if(filled[i])
+					filled[i] = false;
+			} 
+//			else if (found != null && trackedObjects [i] == null) {
+//				trackedObjects [i] = found;
+//			}
 			//			if (found!=null && trackedObjects [i] != null && networkedObjects [i] == null) {
 			//				if (NetworkServer.active) {// || NetworkClient.active) {
 			//                    InstanceNetworkObject(i, 
@@ -54,7 +58,7 @@ public class F_FlowerManager : NetworkBehaviour {
 			//                    //networkedObjects [i].GetComponent<F_CopyXForms> ().target = found.transform;
 			//				}
 			//			}
-			if (found!=null && trackedObjects [i] != null && networkedObjects [i] == null) {
+			if (found!=null && filled [i] == false) {
 				if (NetworkClient.active) {// || NetworkClient.active) {
 					Debug.Log("networkclient" + NetworkClient.active);
 					CmdInstanceNetworkObject(i ,
@@ -63,6 +67,7 @@ public class F_FlowerManager : NetworkBehaviour {
 						GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject.GetComponent<NetworkIdentity>()
 //						connectionToClient
 					);
+					filled [i] = true;
 					//Debug.Log(g);
 					Debug.Log("networrrrkkkk");
 //					Debug.Log(this.GetComponent<NetworkIdentity>().connectionToClient);
@@ -93,11 +98,11 @@ public class F_FlowerManager : NetworkBehaviour {
 
 		Debug.Log (GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject.GetComponent<NetworkIdentity>().connectionToClient);
 //        GameObject g = GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject;
-        networkedObjects[which] = (GameObject)Instantiate(networkObject, this.transform.position, this.transform.rotation);
+        GameObject g = (GameObject)Instantiate(networkObject, this.transform.position, this.transform.rotation);
 //		GameObject g = (GameObject)Instantiate(networkObject,null);
-		NetworkServer.SpawnWithClientAuthority( networkedObjects[which],id.connectionToClient);
+		NetworkServer.SpawnWithClientAuthority( g,id.connectionToClient);
 //        NetworkServer.Spawn(networkedObjects[which]);
-        networkedObjects[which].GetComponent<F_CopyXForms>().target = found.transform;
+		g.GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames [which]).transform;
 //        Debug.Log("spawned " + networkedObjects[which]);
     }
 }

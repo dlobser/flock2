@@ -34,7 +34,8 @@ public class F_InstantiateEgg : Resetable {
 	}
 
 	public override void Reset(){
-		CrackEgg ();
+		if(egg!=null)
+			CrackEgg ();
 	}
 
 	void Update(){

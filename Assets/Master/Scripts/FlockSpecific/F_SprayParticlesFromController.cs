@@ -10,6 +10,7 @@ public class F_SprayParticlesFromController : NetworkBehaviour
 	public ParticleSystem particleSystem;
 	ParticleSystem.EmissionModule emission;
 	GameObject trackedObject;
+	public float sprayAmount = 3;
 
 	[SyncVar]//(hook="UpdateSpray")]
 	public bool spray;
@@ -23,20 +24,19 @@ public class F_SprayParticlesFromController : NetworkBehaviour
 
 		if (trackedObject == null) {
 			if (this.GetComponent<F_CopyXForms> ().target != null) {
-				GameObject trackedObject = this.GetComponent<F_CopyXForms> ().target.gameObject;
+				trackedObject = this.GetComponent<F_CopyXForms> ().target.gameObject;
 				if (trackedObject != null) {
 					if (trackedObject.GetComponent<SteamVR_TrackedController> () != null) {
 						_controller = trackedObject.GetComponent<SteamVR_TrackedController> ();
 						_controller.TriggerClicked += HandleTriggerClicked;
 						_controller.TriggerUnclicked += HandleTriggerUnClicked;
-						Debug.Log ("ok");
 					}
 				}
 			}
 		}
 
 		if (spray) {
-			emission.rateOverTime = 100;
+			emission.rateOverTime = sprayAmount;
 		}
 		else
 			emission.rateOverTime = 0;
@@ -50,7 +50,8 @@ public class F_SprayParticlesFromController : NetworkBehaviour
 
 	private void OnDisable()
 	{
-		_controller.TriggerClicked -= HandleTriggerClicked;
+		if(_controller!=null)
+			_controller.TriggerClicked -= HandleTriggerClicked;
 	}
 
 	private void HandleTriggerClicked(object sender, ClickedEventArgs e)

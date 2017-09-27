@@ -14,6 +14,7 @@ public class F_FlowerManager : NetworkBehaviour {
 	bool doSearch = true;
 	GameObject found;
 	bool[] filled;
+	public bool hideLocal = false;
 
 	void Start () {
 		trackedObjects = new GameObject[trackedObjectNames.Length];
@@ -57,11 +58,9 @@ public class F_FlowerManager : NetworkBehaviour {
 	}
 
 	IEnumerator search(){
-		
 		yield return new WaitForSeconds (searchFrequency);
 		doSearch = true;
 	}
-
 
     [Command]
 	public void CmdInstanceNetworkObject(int which, NetworkIdentity id){//int which, GameObject toInstance, GameObject found, NetworkConnection conn) {
@@ -82,6 +81,12 @@ public class F_FlowerManager : NetworkBehaviour {
 	void TargetConnectXform(NetworkConnection target,int which, string name, NetworkInstanceId ass){
 		GameObject g = ClientScene.FindLocalObject (ass);
 		g.name = name;
+		if (hideLocal) {
+			Renderer[] renderers = g.GetComponentsInChildren<Renderer> ();
+			for (int i = 0; i < renderers.Length; i++) {
+				renderers [i].enabled = false;
+			}
+		}
 		g.GetComponent<F_CopyXForms>().target = GameObject.Find (trackedObjectNames[which]).transform;
 	}
 }

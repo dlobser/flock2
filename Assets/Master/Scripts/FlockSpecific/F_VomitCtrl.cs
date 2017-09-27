@@ -13,6 +13,10 @@ public class F_VomitCtrl : MonoBehaviour {
 	List<float> vomitTime;
 	GameObject vomitParent;
 
+	public GameObject UpperBeak;
+	public GameObject LowerBeak;
+	public float beakSpeed;
+
 	// Use this for initialization
 	void Start () {
 		vomitParent = GameObject.Find ("VomitParent");	
@@ -36,12 +40,26 @@ public class F_VomitCtrl : MonoBehaviour {
 			}
 			which++;
 		}
-
 	}
-	
+
+	IEnumerator AnimateBeak()
+	{
+
+		float counter = 0;
+		while (counter < beakSpeed)
+		{
+
+			counter += Time.deltaTime;
+			UpperBeak.transform.localEulerAngles = new Vector3(((Mathf.Cos((counter / beakSpeed)*6.28f) - 1f) * -.5f) * -20,0, 0);
+			LowerBeak.transform.localEulerAngles = new Vector3(((Mathf.Cos((counter / beakSpeed)*6.28f) - 1f) * -.5f) * 20,0, 0);
+			yield return null;
+		}
+	}
 	void Update () {
 		counter += Time.deltaTime * rate;
 		if (counter > 1) {
+			if(UpperBeak!=null)
+				StartCoroutine(AnimateBeak());
 			GameObject g = pool.PoolInstantiate ();
 			Vector3 v = this.transform.position;
 			g.transform.position = new Vector3 (v.x, v.y, v.z);
@@ -60,8 +78,6 @@ public class F_VomitCtrl : MonoBehaviour {
 			vomitTime [i] += Time.deltaTime;
 			if (vomitTime [i] > lifetime) {
 				vomitTime.RemoveAt (i);
-				if(vomits[i].GetComponent<TrailRenderer>()!=null)
-					vomits[i].GetComponent<TrailRenderer>().time = 0;
 				pool.PoolDestroy (vomits [i]);
 				vomits.RemoveAt (i);
 				break;

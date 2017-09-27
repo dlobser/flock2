@@ -95,8 +95,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1157766618578034}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.003}
+  m_LocalScale: {x: 1.0723606, y: 1.0723606, z: 1.0723606}
   m_Children: []
   m_Father: {fileID: 4527183222345958}
   m_RootOrder: 1
@@ -218,7 +218,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060470736843210}
-  m_Mesh: {fileID: 43797369849114254, guid: e153fd43a459540bb8a7029c51be9487, type: 2}
+  m_Mesh: {fileID: 43597932330388490, guid: 5b087902a84114b349f8d6d527d638c6, type: 2}
 --- !u!114 &114007311705549944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,11 +367,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 4527183222345958}
-  _template: {fileID: 11400000, guid: e153fd43a459540bb8a7029c51be9487, type: 2}
+  _template: {fileID: 11400000, guid: 5b087902a84114b349f8d6d527d638c6, type: 2}
   _maxTimeStep: 0.006
-  _randomSeed: 0
-  _length: 0.6
-  _lengthRandomness: 0.5
+  _randomSeed: 1.53
+  _length: 0.39
+  _lengthRandomness: 0.557
   _spring: 400
   _damping: 20
   _gravity: {x: 0, y: -3, z: 0}

@@ -11,23 +11,26 @@ public class F_SprayParticlesFromController : NetworkBehaviour
 	ParticleSystem.EmissionModule emission;
 	GameObject trackedObject;
 
-	[SyncVar(hook="UpdateSpray")]
+	[SyncVar]//(hook="UpdateSpray")]
 	public bool spray;
 
-	void UpdateSpray (bool newVal) {
+	[Command]
+	void CmdUpdateSpray (bool newVal) {
 		spray = newVal;
 	}
 
 	void Update(){
 
 		if (trackedObject == null) {
-			GameObject trackedObject = this.GetComponent<F_CopyXForms> ().target.gameObject;
-			if (trackedObject != null) {
-				if (trackedObject.GetComponent<SteamVR_TrackedController> () != null) {
-					_controller = trackedObject.GetComponent<SteamVR_TrackedController> ();
-					_controller.TriggerClicked += HandleTriggerClicked;
-					_controller.TriggerUnclicked += HandleTriggerUnClicked;
-					Debug.Log ("ok");
+			if (this.GetComponent<F_CopyXForms> ().target != null) {
+				GameObject trackedObject = this.GetComponent<F_CopyXForms> ().target.gameObject;
+				if (trackedObject != null) {
+					if (trackedObject.GetComponent<SteamVR_TrackedController> () != null) {
+						_controller = trackedObject.GetComponent<SteamVR_TrackedController> ();
+						_controller.TriggerClicked += HandleTriggerClicked;
+						_controller.TriggerUnclicked += HandleTriggerUnClicked;
+						Debug.Log ("ok");
+					}
 				}
 			}
 		}
@@ -52,12 +55,12 @@ public class F_SprayParticlesFromController : NetworkBehaviour
 
 	private void HandleTriggerClicked(object sender, ClickedEventArgs e)
 	{
-		UpdateSpray (true);
+		CmdUpdateSpray (true);
 	}
 
 	private void HandleTriggerUnClicked(object sender, ClickedEventArgs e)
 	{
-		UpdateSpray (false);
+		CmdUpdateSpray (false);
 	}
 
 }

@@ -3,6 +3,8 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_SecondTex ("Texture", 2D) = "white" {}
+
 		_Color ("Color",color) = (1,1,1,1)
 	}
 	SubShader
@@ -37,6 +39,8 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			sampler2D _SecondTex;
+			float4 _SecondTex_ST;
 			float4 _Color;
 			
 			v2f vert (appdata v)
@@ -52,11 +56,12 @@
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, TRANSFORM_TEX(i.uv, _MainTex));
+				fixed4 col2 = tex2D(_SecondTex, TRANSFORM_TEX(i.uv, _SecondTex) + float2(col.r,col.g)*.01);
 				col*=((pow(1-i.uv.y,3)))* _Color;
 				//col.a = 1-(pow(i.uv.y,1))*col.r*_Color.a;
 				// apply fog
 //				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col*_Color.a*15;
+				return col*col2*_Color.a*15;
 			}
 			ENDCG
 		}

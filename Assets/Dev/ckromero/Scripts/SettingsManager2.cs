@@ -175,7 +175,7 @@ public class SettingsManager2 :  NetworkBehaviour {
 
         levelHandler.timeStartDeathClock = experienceLengthSeconds - deathLengthSeconds;
         levelHandler.maxLevel = faderLevelsMax;
-        levelHandler.timeMax = ExperienceLengthSeconds;
+        levelHandler.timeMax = experienceLengthSeconds;
         bugManagement.pullForce = bugPullStrength;
         bugManagement.pushForce = bugPushStrength;
 

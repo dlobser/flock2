@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.UI;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public class CustomNetworkManager2 : NetworkManager
 {
@@ -64,7 +64,9 @@ public class CustomNetworkManager2 : NetworkManager
     public override void OnStopServer()
     {
         base.OnStopServer();
-    GameObject.Find("ResetPlayer").GetComponent<F_ResetPlayer>().Reset();
+    	GameObject.Find("ResetPlayer").GetComponent<F_ResetPlayer>().Reset();
+		SceneManager.LoadScene (0);
+
 
   }
 

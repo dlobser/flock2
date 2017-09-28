@@ -109,14 +109,14 @@ public class F_Player : NetworkBehaviour {
 
     if (VRDevice.isPresent) {
 			// create camera rig and attach player model to it
-			if (GameObject.FindObjectOfType<SteamVR_ControllerManager> () == null) {
+			//if (GameObject.FindObjectOfType<SteamVR_ControllerManager> () == null) {
 				vrCameraRigInstance = (GameObject)Instantiate (
 					vrCameraRig,
 					transform.position,
 					transform.rotation);
-			} else {
-				vrCameraRigInstance = GameObject.FindObjectOfType<SteamVR_ControllerManager> ().gameObject;
-			}
+			//} else {
+			//	vrCameraRigInstance = GameObject.FindObjectOfType<SteamVR_ControllerManager> ().gameObject;
+			//}
 
 			Debug.Log (VRDevice.isPresent);
 

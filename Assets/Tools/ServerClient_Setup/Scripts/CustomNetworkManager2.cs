@@ -95,6 +95,7 @@ public class CustomNetworkManager2 : NetworkManager
 
     public override void OnClientDisconnect(NetworkConnection conn)
     {
+        Debug.Log("RESET");
         base.OnClientDisconnect(conn);
         clientHudScript.DisConnect(false);
         if (reconnectAutomatically)

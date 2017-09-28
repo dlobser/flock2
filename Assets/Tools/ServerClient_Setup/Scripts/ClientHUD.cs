@@ -89,6 +89,7 @@ public class ClientHUD : MonoBehaviour
 
     public void DisConnect(bool showMessage)
     {
+        GameObject.Find("ResetPlayer").GetComponent<F_ResetPlayer>().Reset();
         if (showMessage)
             disConnectMessage.SetActive(true);
         connectToServer.SetActive(true);

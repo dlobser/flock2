@@ -3512,6 +3512,7 @@ MonoBehaviour:
   searchFrequency: 1
   networkObject: {fileID: 1969073981368244, guid: b1331d02627e9497ca3c768c518cb53f,
     type: 2}
+  hideLocal: 0
 --- !u!114 &114217283536068810
 MonoBehaviour:
   m_ObjectHideFlags: 1

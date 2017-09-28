@@ -37,9 +37,11 @@ public class F_SprayParticlesFromController : NetworkBehaviour
 
 		if (spray) {
 			emission.rateOverTime = sprayAmount;
-		}
-		else
+			this.GetComponent<AudioSource> ().volume = 1;
+		} else {
 			emission.rateOverTime = 0;
+			this.GetComponent<AudioSource> ().volume = 0;
+		}
 	}
 
 	private void Start()

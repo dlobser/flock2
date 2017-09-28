@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Wig_Sunflower
-  m_Shader: {fileID: 4800000, guid: 5976ea646a28dd34ca270c7f10efbbed, type: 3}
+  m_Shader: {fileID: 4800000, guid: e33914cc0565b422a85a0ca1f497f0b0, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -24,7 +24,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 5413c158e1abe4278b723ceaa048fcf7, type: 3}
+        m_Texture: {fileID: 2800000, guid: d7d884732f31d6b49842dbc05eec81a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -36,16 +36,16 @@ Material:
     m_Floats:
     - first:
         name: _BaseRandom
-      second: 0.109
+      second: 0.394
     - first:
         name: _GlowIntensity
       second: 0
     - first:
         name: _GlowProb
-      second: 0.1
+      second: 0.036
     - first:
         name: _GlowRandom
-      second: 1
+      second: 0
     - first:
         name: _Metallic
       second: 0
@@ -61,7 +61,7 @@ Material:
     m_Colors:
     - first:
         name: _BaseColor
-      second: {r: 0.9485294, g: 0.8425173, b: 0.68349916, a: 0}
+      second: {r: 0.8889148, g: 0.86077857, b: 0.5467993, a: 0}
     - first:
         name: _GlowColor
       second: {r: 1, g: 1, b: 1, a: 1}

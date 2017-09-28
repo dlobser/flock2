@@ -85,10 +85,10 @@ Material:
       second: {r: 0, g: 0, b: 0, a: 0}
     - first:
         name: _ColorMult
-      second: {r: 0.2509804, g: 0.9490197, b: 0.7960785, a: 0.56078434}
+      second: {r: 0.30533335, g: 0.95466673, b: 0.83278435, a: 0.5604632}
     - first:
         name: _ColorOffset
-      second: {r: 4, g: 0, b: 0, a: 0}
+      second: {r: 4.18, g: 0, b: 0.18, a: 0}
     - first:
         name: _ColorR
       second: {r: 0, g: 0, b: 0, a: 0}

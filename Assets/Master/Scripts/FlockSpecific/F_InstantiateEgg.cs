@@ -31,6 +31,7 @@ public class F_InstantiateEgg : Resetable {
 	public void CrackEgg(){
 		egg.transform.parent = null;
 		egg.GetComponent<F_AdjustForceOfChildren> ().enabled = true;
+		egg.GetComponent<AudioSource> ().Play ();
 	}
 
 	public override void Reset(){

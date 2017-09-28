@@ -4,6 +4,7 @@ half _Metallic;
 half _Smoothness;
 
 sampler2D _MainTex;
+float4 _MainTex_ST;
 half3 _BaseColor;
 half _BaseRandom;
 
@@ -47,12 +48,12 @@ void surf(Input IN, inout SurfaceOutput o)
 {
     // Random color
     half3 color = HueToRGB(frac(IN.filamentID * 314.2213));
-    half4 t = tex2D(_MainTex, IN.vu);
+    half4 t = tex2D(_MainTex, TRANSFORM_TEX(IN.vu + float2(0,-_Time.z), _MainTex));
     // Glow effect
     half glow = frac(IN.filamentID * 138.9044 + _Time.y / 2) < _GlowProb;
 
-    o.Albedo = t*lerp(_BaseColor, color, _BaseRandom);//fixed4(IN.vu.x,IN.vu.y,1,1);//lerp(_BaseColor, color, _BaseRandom);
+    o.Albedo = t*lerp(_BaseColor, color, _BaseRandom)* pow(IN.vu.y,2)*5;//fixed4(IN.vu.x,IN.vu.y,1,1);//lerp(_BaseColor, color, _BaseRandom);
 //    o.Smoothness = _Smoothness;
 //    o.Metallic = _Metallic;
-    o.Emission = lerp(_GlowColor, color, _GlowRandom) * _GlowIntensity * glow;
+    o.Emission = lerp(_GlowColor, color, _GlowRandom) * _GlowIntensity * glow * IN.vu.y;
 }

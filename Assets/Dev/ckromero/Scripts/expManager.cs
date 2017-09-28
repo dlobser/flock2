@@ -7,7 +7,7 @@ public class expManager : MonoBehaviour {
 	public bool debugOn;
 
 	//ENVIRONMENT SETTINGS
-	public Environment environment;
+	public EnvironmentOld environment;
 	public bool environmentStatus=true;
 
 	//AUDIO SETTINGS

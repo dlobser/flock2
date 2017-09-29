@@ -148,25 +148,25 @@ Material:
       second: {r: 0, g: 0.54817426, b: 0.6911765, a: 1}
     - first:
         name: _ColorB
-      second: {r: 0.9479412, g: 0.86310405, b: 0.65615916, a: 0}
+      second: {r: 0.9485294, g: 0.8644508, b: 0.68349916, a: 0}
     - first:
         name: _ColorB2
-      second: {r: 0.53005624, g: 0.6802333, b: 0.7414706, a: 0}
+      second: {r: 0.54573965, g: 0.69605803, b: 0.75735295, a: 0}
     - first:
         name: _ColorG
-      second: {r: 0.7764706, g: 0.9454766, b: 1, a: 0}
+      second: {r: 0.8088235, g: 0.9604462, b: 1, a: 0}
     - first:
         name: _ColorG2
-      second: {r: 0.61382353, g: 0.45101643, b: 0.581325, a: 0}
+      second: {r: 0.625, g: 0.46875, b: 0.59482753, a: 0}
     - first:
         name: _ColorMult
-      second: {r: 0.38001734, g: 0.52108604, b: 0.5812457, a: 0}
+      second: {r: 0.29974052, g: 0.5464563, b: 0.64705884, a: 0}
     - first:
         name: _ColorR
-      second: {r: 0.9647059, g: 0.9247059, b: 0.9536714, a: 0}
+      second: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 0}
     - first:
         name: _ColorR2
-      second: {r: 0.73623705, g: 0.6801938, b: 0.6837543, a: 0}
+      second: {r: 0.7647059, g: 0.6972318, b: 0.6972318, a: 0}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
@@ -175,4 +175,4 @@ Material:
       second: {r: 1.3, g: 1, b: 0.7, a: 0}
     - first:
         name: _InSpeed
-      second: {r: 1.5, g: 1, b: 0.5, a: -1.4399999}
+      second: {r: 1.5, g: 1, b: 0.5, a: -1}

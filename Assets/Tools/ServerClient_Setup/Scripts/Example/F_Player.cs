@@ -106,7 +106,7 @@ public class F_Player : NetworkBehaviour {
 
 	public override void OnStartLocalPlayer ()
 	{
-        if (GameObject.Find("TangoParent"){
+        if (GameObject.Find("TangoParent")){
             CmdSyncSpectator(true);
             this.gameObject.SetActive(false);
             return;

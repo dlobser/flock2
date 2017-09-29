@@ -1,5 +1,7 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
+﻿// Don't remove the following line. It is used to bypass Unity
+// upgrader change. This is necessary to make sure the shader 
+// continues to compile on Unity 5.2
+// UNITY_SHADER_NO_UPGRADE
 Shader "Tango/ARPostProcess" {
     Properties
     {
@@ -42,7 +44,7 @@ Shader "Tango/ARPostProcess" {
             {
                 v2f o;
                 o.uv = v.uv;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
                 return o;
             }
 

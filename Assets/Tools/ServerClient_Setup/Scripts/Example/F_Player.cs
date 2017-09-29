@@ -100,6 +100,9 @@ public class F_Player : NetworkBehaviour {
 	{
 		if (!isClient)
 			return;
+//		if (GameObject.Find ("Tango Camera") != null) {
+//			GameObject.Destroy (this.gameObject);
+//		}
     // delete main camera
     Camera.main.gameObject.SetActive(false);
 

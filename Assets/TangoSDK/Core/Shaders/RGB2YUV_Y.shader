@@ -1,5 +1,7 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
+﻿// Don't remove the following line. It is used to bypass Unity
+// upgrader change. This is necessary to make sure the shader 
+// continues to compile on Unity 5.2
+// UNITY_SHADER_NO_UPGRADE
 Shader "Hidden/Tango/RGB2YUV_Y"
 {
     Properties
@@ -35,7 +37,7 @@ Shader "Hidden/Tango/RGB2YUV_Y"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
                 o.uv = v.uv;
                 o.uv.y = 1 - o.uv.y;
                 return o;

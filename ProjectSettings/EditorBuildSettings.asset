@@ -10,8 +10,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Master/Scenes/old/LobbyScene.unity
   - enabled: 0
-    path: Assets/Master/Scenes/MasterScene_02.unity
+    path: Assets/Master/Scenes/old/MasterScene_02_old_01.unity
   - enabled: 0
     path: Assets/Master/Scenes/MasterScene_03.unity
+  - enabled: 0
+    path: Assets/Master/Scenes/MasterScene.unity
+  - enabled: 0
+    path: Assets/FY/Scene/TangoTemplateForSpectator.unity
+  - enabled: 0
+    path: Assets/TangoSDK/Examples/Scenes/SimpleAugmentedReality.unity
+  - enabled: 0
+    path: Assets/Dev/DL/Scenes/TangoTest.unity
   - enabled: 1
-    path: Assets/Master/Scenes/MasterScene_02_WIP_03.unity
+    path: Assets/Master/Scenes/TangoScene.unity

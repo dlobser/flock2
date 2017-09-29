@@ -37,7 +37,6 @@ public class AreaDescriptionPicker : MonoBehaviour, ITangoLifecycle
     /// The prefab of a standard button in the scrolling list.
     /// </summary>
     public GameObject m_listElement;
-    public GameObject m_VRScene;
 
     /// <summary>
     /// The container panel of the Tango space Area Description scrolling list.
@@ -60,11 +59,11 @@ public class AreaDescriptionPicker : MonoBehaviour, ITangoLifecycle
     public Toggle m_enableLearningToggle;
 
     /// <summary>
-    /// The reference of the TangoDeltaPoseController object.
+    /// The reference of the TangoPoseController object.
     /// 
-    /// TangoDeltaPoseController listens to pose updates and applies the correct pose to itself and its built-in camera.
+    /// TangoPoseController listens to pose updates and applies the correct pose to itself and its built-in camera.
     /// </summary>
-    public TangoARPoseController m_poseController;
+    public TangoPoseController m_poseController;
 
     /// <summary>
     /// Control panel game object.
@@ -107,7 +106,6 @@ public class AreaDescriptionPicker : MonoBehaviour, ITangoLifecycle
                 AndroidHelper.ShowAndroidToastMessage("Please choose an Area Description.");
                 return;
             }
-            m_VRScene.SetActive(true);
         }
         else
         {
@@ -122,13 +120,6 @@ public class AreaDescriptionPicker : MonoBehaviour, ITangoLifecycle
             // Completely new area description.
             m_guiController.m_curAreaDescription = null;
             m_tangoApplication.m_areaDescriptionLearningMode = true;
-            m_tangoApplication.Startup(m_guiController.m_curAreaDescription);
-
-            // Enable GUI controller to allow user tap and interactive with the environment.
-            m_poseController.gameObject.SetActive(true);
-
-            m_guiController.enabled = true;
-            m_gameControlPanel.SetActive(true);
         }
         else
         {
@@ -136,16 +127,14 @@ public class AreaDescriptionPicker : MonoBehaviour, ITangoLifecycle
             AreaDescription areaDescription = AreaDescription.ForUUID(m_curAreaDescriptionUUID);
             m_guiController.m_curAreaDescription = areaDescription;
             m_tangoApplication.m_areaDescriptionLearningMode = m_enableLearningToggle.isOn;
-            m_tangoApplication.Startup(m_guiController.m_curAreaDescription);
-
-            // Enable GUI controller to allow user tap and interactive with the environment.
-            m_poseController.gameObject.SetActive(true);
-
-            //m_guiController.enabled = true;
-            //m_gameControlPanel.SetActive(true);
         }
 
-       
+        m_tangoApplication.Startup(m_guiController.m_curAreaDescription);
+
+        // Enable GUI controller to allow user tap and interactive with the environment.
+        m_poseController.gameObject.SetActive(true);
+        m_guiController.enabled = true;
+        m_gameControlPanel.SetActive(true);
     }
 
     /// <summary>

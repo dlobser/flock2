@@ -408,7 +408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &281429748
 Transform:
   m_ObjectHideFlags: 0
@@ -830,11 +830,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_listElement: {fileID: 166746, guid: 20ce835e0c5fc4668908a8822c9419e3, type: 2}
-  m_VRScene: {fileID: 281429747}
   m_listContentParent: {fileID: 714652754}
   m_toggleGroup: {fileID: 714652750}
   m_enableLearningToggle: {fileID: 1407116822}
-  m_poseController: {fileID: 1961331850}
+  m_poseController: {fileID: 0}
   m_gameControlPanel: {fileID: 2140867846}
   m_guiController: {fileID: 1425704611}
 --- !u!114 &511024620
@@ -3104,12 +3103,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6433b1b4ccf6f474083daeac76842ec5, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1961331850 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11482468, guid: 6433b1b4ccf6f474083daeac76842ec5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1961331849}
-  m_Script: {fileID: 11500000, guid: dac225c1aca3140fea87a8c8644eecc1, type: 3}
 --- !u!1 &1980662026
 GameObject:
   m_ObjectHideFlags: 0

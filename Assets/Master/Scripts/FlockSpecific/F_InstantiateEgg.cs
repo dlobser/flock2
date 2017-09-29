@@ -10,17 +10,20 @@ public class F_InstantiateEgg : Resetable {
 
 	// Use this for initialization
 	void OnEnable () {
-		
-		GameObject avatar = GameObject.FindObjectOfType<F_IsLocalPlayer> ().gameObject;
-		F_CopyXForms xForms = this.gameObject.AddComponent<F_CopyXForms> ();
-		xForms.target = avatar.transform;
-		xForms.copyPosition = true;
 
-		egg = Instantiate (Egg);
-		egg.transform.position = this.transform.position;
-		egg.transform.SetParent (this.transform);
+        if (GameObject.FindObjectOfType<F_IsLocalPlayer>() != null) {
+            GameObject avatar = GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject;
+            F_CopyXForms xForms = this.gameObject.AddComponent<F_CopyXForms>();
+            xForms.target = avatar.transform;
+            xForms.copyPosition = true;
 
-		force = egg.GetComponent<F_AdjustForceOfChildren> ();
+            egg = Instantiate(Egg);
+            egg.transform.position = this.transform.position;
+            egg.transform.SetParent(this.transform);
+
+            force = egg.GetComponent<F_AdjustForceOfChildren>();
+        }
+        else this.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame

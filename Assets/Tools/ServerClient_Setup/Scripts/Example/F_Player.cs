@@ -10,7 +10,7 @@ public class F_Player : NetworkBehaviour {
     //for example purposes
     public InputField inputField;
     public Renderer cubeMat;
-    public bool isGreen;
+    //public bool isGreen;
 
 	public GameObject vrCameraRig;
 	public GameObject fpsCtrl;
@@ -22,9 +22,9 @@ public class F_Player : NetworkBehaviour {
 
 
     //Setting up the SyncVar.
-   // [SyncVar(hook = "OnVarSynced")]//this needs to be above the variable you want to sync. (you can name the "Hook" everything you want, but be aware that this is the name of a function that is called on the clients when the SyncVar changes on the server)
-   // public string varToSync; //if this changes on the server a "message" will be send to the clients automaticaly. 
-                             // (if you change this on a client it will only change on THAT client, it will not be send anywhere).
+    // [SyncVar(hook = "OnVarSynced")]//this needs to be above the variable you want to sync. (you can name the "Hook" everything you want, but be aware that this is the name of a function that is called on the clients when the SyncVar changes on the server)
+    // public string varToSync; //if this changes on the server a "message" will be send to the clients automaticaly. 
+    // (if you change this on a client it will only change on THAT client, it will not be send anywhere).
 
     //the "Hook" function is executed on the clients when a change of the SyncVar is recieved.
     //the actual value of the SyncVar on the Clients is not changed when a change mesage is recieved from the server.
@@ -35,79 +35,86 @@ public class F_Player : NetworkBehaviour {
 
 
 
-	// --- Start Sync Position -- //
-//
-//
-//
-//
-//	private Transform myTransform;
-//	[SerializeField] float lerpRate = 5;
-//	[SyncVar] private Vector3 syncPos;
-//	//    private NetworkIdentity theNetID;
-//
-//	private Vector3 lastPos;
-//	private float threshold = 0.5f;
-//
-//
-//	void Start()
-//	{
-//		myTransform = GetComponent<Transform>();
-//		syncPos = GetComponent<Transform>().position;
-//	}
-//
-//
-//	void FixedUpdate()
-//	{
-//		TransmitPosition();
-//		LerpPosition();
-//	}
-//
-//
-//	void LerpPosition()
-//	{
-//		if (!hasAuthority)
-//		{
-//			myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
-//		}
-//	}
-//
-//
-//
-//	[Command]
-//	void Cmd_ProvidePositionToServer(Vector3 pos)
-//	{
-//		syncPos = pos;
-//	}
-//
-//	[ClientCallback]
-//	void TransmitPosition()
-//	{
-//		if (hasAuthority && Vector3.Distance(myTransform.position, lastPos) > threshold)
-//		{
-//			Cmd_ProvidePositionToServer(myTransform.position);
-//			lastPos = myTransform.position;
-//		}
-//	}
-//
+    // --- Start Sync Position -- //
+    //
+    //
+    //
+    //
+    //	private Transform myTransform;
+    //	[SerializeField] float lerpRate = 5;
+    //	[SyncVar] private Vector3 syncPos;
+    //	//    private NetworkIdentity theNetID;
+    //
+    //	private Vector3 lastPos;
+    //	private float threshold = 0.5f;
+    //
+    //
+    //	void Start()
+    //	{
+    //		myTransform = GetComponent<Transform>();
+    //		syncPos = GetComponent<Transform>().position;
+    //	}
+    //
+    //
+    //	void FixedUpdate()
+    //	{
+    //		TransmitPosition();
+    //		LerpPosition();
+    //	}
+    //
+    //
+    //	void LerpPosition()
+    //	{
+    //		if (!hasAuthority)
+    //		{
+    //			myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
+    //		}
+    //	}
+    //
+    //
+    //
+    //	[Command]
+    //	void Cmd_ProvidePositionToServer(Vector3 pos)
+    //	{
+    //		syncPos = pos;
+    //	}
+    //
+    //	[ClientCallback]
+    //	void TransmitPosition()
+    //	{
+    //		if (hasAuthority && Vector3.Distance(myTransform.position, lastPos) > threshold)
+    //		{
+    //			Cmd_ProvidePositionToServer(myTransform.position);
+    //			lastPos = myTransform.position;
+    //		}
+    //	}
+    //
 
 
 
-	// --- End Sync Position -- //
+    // --- End Sync Position -- //
 
 
+    [SyncVar]
+    public bool spectator;
 
 	public override void OnStartLocalPlayer ()
 	{
-		if (!isClient)
+        if (GameObject.Find("TangoParent"))
+            spectator = true;
+
+        if (!isClient)
 			return;
     // delete main camera
     Camera.main.gameObject.SetActive(false);
 
 		this.gameObject.AddComponent<F_IsLocalPlayer> ();
 
-    //DestroyImmediate (Camera.main.gameObject);
+        //DestroyImmediate (Camera.main.gameObject);
 
-    if (VRDevice.isPresent) {
+
+
+        if (VRDevice.isPresent) {
 			// create camera rig and attach player model to it
 			//if (GameObject.FindObjectOfType<SteamVR_ControllerManager> () == null) {
 				vrCameraRigInstance = (GameObject)Instantiate (

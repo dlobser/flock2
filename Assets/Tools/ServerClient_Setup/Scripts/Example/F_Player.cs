@@ -101,12 +101,19 @@ public class F_Player : NetworkBehaviour {
     [Command]
     public void CmdSyncSpectator(bool val) {
         spectator = val;
+        this.gameObject.SetActive(!val);
     }
 
 	public override void OnStartLocalPlayer ()
 	{
-        if (GameObject.Find("TangoParent"))
+        if (GameObject.Find("TangoParent"){
             CmdSyncSpectator(true);
+            this.gameObject.SetActive(false);
+            return;
+        }
+
+        if (spectator)
+            this.gameObject.SetActive(false);
 
         if (!isClient)
 			return;
@@ -174,136 +181,141 @@ public class F_Player : NetworkBehaviour {
 		}
 	}
 
-  /* de nada
-   * 
-    //the string "syncedVar" is the new value of "varToSync" that it now has on the server.
-    public void OnVarSynced(string syncedVar)//this is the "Hook" function that is called on clients when the Syncvar changes on the server.
-    {
-        //everyting in here will be executed on the clients.
-        inputField.text = syncedVar;
-
-        //you can either use the new variable of "syncedVar" in the "Hook" function immediately or,
-        //if you want the "varToSync" to keep the same value as it is on the server (so you can use it later on in the update funtion or somewhere else), 
-        //you will have to change it on the clients in the "Hook" function right here.
-        varToSync = syncedVar;
-
-        //if you want to do something on the Local player only (the one that you are controlling)
-        if (isLocalPlayer)
-        {
-
-        }
-
-        //if you want to do something on the Remote players only (the copys of you on the other Clients)
-        if (!isLocalPlayer)
-        {
-
-        }
+    void Update() {
+        if (spectator)
+            this.gameObject.SetActive(false);
     }
 
-    void Update()
-    {
-        //for this example on the server the Syncvar "varToSync" is the text of an input field.
-        //if new text is inputted the Syncvar changes and is sent to the clients.
-        if (isServer)
-            varToSync = inputField.text;
-    }
+    /* de nada
+     * 
+      //the string "syncedVar" is the new value of "varToSync" that it now has on the server.
+      public void OnVarSynced(string syncedVar)//this is the "Hook" function that is called on clients when the Syncvar changes on the server.
+      {
+          //everyting in here will be executed on the clients.
+          inputField.text = syncedVar;
 
-    //this is used to have a Local Player do someting on the server. (Tell the server to do something)
-    [Command]//Send from the Local Client (Called on the Local Client) executed (recieved) on the Server.
-    void CmdChangeColor()
-    {
-        //everything in here will be executed on the Server.
-        ChangeColor();
+          //you can either use the new variable of "syncedVar" in the "Hook" function immediately or,
+          //if you want the "varToSync" to keep the same value as it is on the server (so you can use it later on in the update funtion or somewhere else), 
+          //you will have to change it on the clients in the "Hook" function right here.
+          varToSync = syncedVar;
 
-        //as this is send from a Local client, that client basically has "acces" to everything on the server,
-        //and can tell/ask the server to do everything that can only be done server side.
-    }
+          //if you want to do something on the Local player only (the one that you are controlling)
+          if (isLocalPlayer)
+          {
 
-    //this is used to have the Server do something on the Clients. (tell clients to do something)
-    [ClientRpc]//Send from the Server (Called on the Server) executed (recieved) on the Clients
-    void RpcChangeColor()
-    {
-        //everything in here will be executed on all the Clients (Remote and Local).
-        ChangeColor();
+          }
 
-        //as this is send from the Server to all clients, the server basically tells the clients to do something on their side.
+          //if you want to do something on the Remote players only (the copys of you on the other Clients)
+          if (!isLocalPlayer)
+          {
 
-        //if you want to do something on the Local player only (the one that you are controlling)
-        if (isLocalPlayer)
-        {
-            //I think a "TargetRpc" is being implemented to send Rpc calls to a single Client, but for now this will have to do.
-        }
+          }
+      }
 
-        //if you want to do something on the Remote players only (the copys of you on the other Clients)
-        if (!isLocalPlayer)
-        {
+      void Update()
+      {
+          //for this example on the server the Syncvar "varToSync" is the text of an input field.
+          //if new text is inputted the Syncvar changes and is sent to the clients.
+          if (isServer)
+              varToSync = inputField.text;
+      }
 
-        }
-    }
+      //this is used to have a Local Player do someting on the server. (Tell the server to do something)
+      [Command]//Send from the Local Client (Called on the Local Client) executed (recieved) on the Server.
+      void CmdChangeColor()
+      {
+          //everything in here will be executed on the Server.
+          ChangeColor();
 
-    /*
-        Combining a Rpc call with a command lets you do something on other clients from a local client.
-        Send a Rpc call to the server that has a Command in it to tell the clients to do something.
+          //as this is send from a Local client, that client basically has "acces" to everything on the server,
+          //and can tell/ask the server to do everything that can only be done server side.
+      }
 
-        ---
+      //this is used to have the Server do something on the Clients. (tell clients to do something)
+      [ClientRpc]//Send from the Server (Called on the Server) executed (recieved) on the Clients
+      void RpcChangeColor()
+      {
+          //everything in here will be executed on all the Clients (Remote and Local).
+          ChangeColor();
 
-        [ClientRpc]  //send from local client to server.
-        void RpcSendToServer()
-        {
-            //do something on the server.
-            //in this case send a command to the clients
-            CmdSendToClients();
-        }
+          //as this is send from the Server to all clients, the server basically tells the clients to do something on their side.
 
-        [Command]  //send from server to clients
-        void CmdSendToClients()
-        {
-            //Do something on clients.
-        }
+          //if you want to do something on the Local player only (the one that you are controlling)
+          if (isLocalPlayer)
+          {
+              //I think a "TargetRpc" is being implemented to send Rpc calls to a single Client, but for now this will have to do.
+          }
 
-        ---
+          //if you want to do something on the Remote players only (the copys of you on the other Clients)
+          if (!isLocalPlayer)
+          {
 
-        This could also be done by changing a SyncVar from a local client
+          }
+      }
 
-        [ClientRpc]  //send from local client to server.
-        void RpcSendToServer()
-        {
-            //Change the SyncVar on the server, and this will trigger the "Hook" function on all clients.           
-        }
+      /*
+          Combining a Rpc call with a command lets you do something on other clients from a local client.
+          Send a Rpc call to the server that has a Command in it to tell the clients to do something.
 
-        ---
-    */
-//
-//	protected void CmdSendPosition(Vector3 newPos)
-//	{
-//		Debug.Log (newPos);
-//		RpcReceivePosition(newPos, newRot);
-//	}
-//
-//	[ClientRpc]//[ClientRpc(channel = 1)]
-//	protected void RpcReceivePosition(Vector3 newPos)
-//	{
-//		int frames = (SendRate + 1);
-//		lastDirectionPerFrame = newPos - lastPositionSent;
-//		//right now prediction is made with the new direction and amount of frames
-//		lastDirectionPerFrame /= frames;
-//		if (lastDirectionPerFrame.magnitude > thresholdMovementPrediction)
-//		{
-//			lastDirectionPerFrame = Vector3.zero;
-//		}
-//		Vector3 lastEuler = lastRotationSent.eulerAngles;
-//		Vector3 newEuler = newRot.eulerAngles;
-//		if (Quaternion.Angle(lastRotationDirectionPerFrame, newRot) < thresholdRotationPrediction)
-//		{
-//			lastRotationDirectionPerFrame = Quaternion.Euler((newEuler - lastEuler) / frames);
-//		}
-//		else
-//		{
-//			lastRotationDirectionPerFrame = Quaternion.identity;
-//		}
-//		lastPositionSent = newPos;
-//		lastRotationSent = newRot;
-//	}
+          ---
+
+          [ClientRpc]  //send from local client to server.
+          void RpcSendToServer()
+          {
+              //do something on the server.
+              //in this case send a command to the clients
+              CmdSendToClients();
+          }
+
+          [Command]  //send from server to clients
+          void CmdSendToClients()
+          {
+              //Do something on clients.
+          }
+
+          ---
+
+          This could also be done by changing a SyncVar from a local client
+
+          [ClientRpc]  //send from local client to server.
+          void RpcSendToServer()
+          {
+              //Change the SyncVar on the server, and this will trigger the "Hook" function on all clients.           
+          }
+
+          ---
+      */
+    //
+    //	protected void CmdSendPosition(Vector3 newPos)
+    //	{
+    //		Debug.Log (newPos);
+    //		RpcReceivePosition(newPos, newRot);
+    //	}
+    //
+    //	[ClientRpc]//[ClientRpc(channel = 1)]
+    //	protected void RpcReceivePosition(Vector3 newPos)
+    //	{
+    //		int frames = (SendRate + 1);
+    //		lastDirectionPerFrame = newPos - lastPositionSent;
+    //		//right now prediction is made with the new direction and amount of frames
+    //		lastDirectionPerFrame /= frames;
+    //		if (lastDirectionPerFrame.magnitude > thresholdMovementPrediction)
+    //		{
+    //			lastDirectionPerFrame = Vector3.zero;
+    //		}
+    //		Vector3 lastEuler = lastRotationSent.eulerAngles;
+    //		Vector3 newEuler = newRot.eulerAngles;
+    //		if (Quaternion.Angle(lastRotationDirectionPerFrame, newRot) < thresholdRotationPrediction)
+    //		{
+    //			lastRotationDirectionPerFrame = Quaternion.Euler((newEuler - lastEuler) / frames);
+    //		}
+    //		else
+    //		{
+    //			lastRotationDirectionPerFrame = Quaternion.identity;
+    //		}
+    //		lastPositionSent = newPos;
+    //		lastRotationSent = newRot;
+    //	}
 
     /*
     void ChangeColor()

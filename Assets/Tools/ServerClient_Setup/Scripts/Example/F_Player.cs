@@ -95,17 +95,18 @@ public class F_Player : NetworkBehaviour {
     // --- End Sync Position -- //
 
 
-    [SyncVar(hook = "SyncSpectator")]
+    [SyncVar]
     public bool spectator;
 
-    public void SyncSpectator(bool val) {
+    [Command]
+    public void CmdSyncSpectator(bool val) {
         spectator = val;
     }
 
 	public override void OnStartLocalPlayer ()
 	{
         if (GameObject.Find("TangoParent"))
-            SyncSpectator(true);
+            CmdSyncSpectator(true);
 
         if (!isClient)
 			return;

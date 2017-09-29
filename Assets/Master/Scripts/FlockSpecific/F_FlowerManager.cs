@@ -11,12 +11,12 @@ public class F_FlowerManager : NetworkBehaviour {
 	GameObject[] networkedObjects;
 	public float searchFrequency;
 	public GameObject networkObject;
-	bool doSearch = true;
+	bool doSearch = false;
 	GameObject found;
 	bool[] filled;
 	public bool hideLocal = false;
 
-	void Start () {
+	public override void OnStartLocalPlayer () {
 		trackedObjects = new GameObject[trackedObjectNames.Length];
 		networkedObjects = new GameObject[trackedObjectNames.Length];
 		filled = new bool[trackedObjectNames.Length];
@@ -24,11 +24,13 @@ public class F_FlowerManager : NetworkBehaviour {
 	}
 
 	void Update(){
-		if (doSearch) {
-			finder ();
-			doSearch = false;
-			StartCoroutine (search ());
-		}
+        if (isClient) {
+            if (doSearch) {
+                finder();
+                doSearch = false;
+                StartCoroutine(search());
+            }
+        }
 
 	}
 
@@ -47,6 +49,7 @@ public class F_FlowerManager : NetworkBehaviour {
 			} 
 			if (found!=null && filled [i] == false) {
 				if (NetworkClient.active) {
+                    Debug.Log("running here");
 					CmdInstanceNetworkObject(
 						i,
 						GameObject.FindObjectOfType<F_IsLocalPlayer>().gameObject.GetComponent<NetworkIdentity>()
@@ -81,6 +84,7 @@ public class F_FlowerManager : NetworkBehaviour {
 	void TargetConnectXform(NetworkConnection target,int which, string name, NetworkInstanceId ass){
 		GameObject g = ClientScene.FindLocalObject (ass);
 		g.name = name;
+        Debug.Log("LOOOCCCAAALLLLL");
 		if (hideLocal) {
 			Renderer[] renderers = g.GetComponentsInChildren<Renderer> ();
 			for (int i = 0; i < renderers.Length; i++) {

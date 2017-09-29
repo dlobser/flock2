@@ -279,8 +279,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearDistance: 0.3
   farDistance: 2
-  nearScale: 0.5
-  farScale: 0.2
+  nearScale: 0.04
+  farScale: 0.01
   dist: {fileID: 0}
   scale: 0
 --- !u!114 &114562095516713462

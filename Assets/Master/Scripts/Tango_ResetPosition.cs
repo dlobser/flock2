@@ -6,7 +6,12 @@ public class Tango_ResetPosition : MonoBehaviour {
 
 	int taps;
 	public float tapAmount = 3;
+	public float holdLength;
 	float counter = 1;
+	float holdCounter;
+	float prevHoldCounter;
+	public GameObject[] showHide;
+	bool shown = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,6 +23,17 @@ public class Tango_ResetPosition : MonoBehaviour {
 			if (taps == 0)
 				counter = 0;
 			taps++;
+		}
+		if (Input.anyKey) {
+			holdCounter += Time.deltaTime;
+			prevHoldCounter = holdCounter;
+		}
+		if (prevHoldCounter < 0) {
+			holdCounter = 0;
+		}
+		if (holdCounter > holdLength) {
+			ShowHide ();
+			holdCounter = 0;
 
 		}
 		if(taps!=0)
@@ -29,8 +45,19 @@ public class Tango_ResetPosition : MonoBehaviour {
 		}
 		if (counter > 1)
 			taps = 0;
+
+		if(holdCounter>0)
+			prevHoldCounter -= Time.deltaTime;
 //		Debug.Log (counter + " , " + taps);
 		
+	}
+
+	void ShowHide(){
+		for (int i = 0; i < showHide.Length; i++) {
+			showHide [i].SetActive (shown);
+		}
+		shown = !shown;
+
 	}
 
 	void MoveParent(){

@@ -19,7 +19,7 @@ public class F_HideWigWhenNoTarget : MonoBehaviour {
 			rend.material.SetFloat ("_Thickness", 0);
 			rend.enabled = false;
 
-			Debug.Log ("hide");
+//			Debug.Log ("hide");
 		}
 	}
 }

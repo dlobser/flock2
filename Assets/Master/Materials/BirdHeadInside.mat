@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: BirdHeadInside
-  m_Shader: {fileID: 4800000, guid: 74c7233e122037440803890f88737448, type: 3}
+  m_Shader: {fileID: 4800000, guid: a5eddd4b2d3d3470fa4788a007375253, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1

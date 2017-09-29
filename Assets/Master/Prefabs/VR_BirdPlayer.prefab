@@ -755,8 +755,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731850462680344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.05}
-  m_LocalScale: {x: 3.1391127, y: 3.1391118, z: 1.6015455}
+  m_LocalPosition: {x: 0, y: 0, z: -0.71432}
+  m_LocalScale: {x: 1.8232249, y: 1.8232243, z: 0.930192}
   m_Children: []
   m_Father: {fileID: 4561149774082350}
   m_RootOrder: 0
@@ -3315,7 +3315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearDistance: 1
   farDistance: 2
-  nearScale: 1.2
+  nearScale: 0.5
   farScale: 0.1
   dist: {fileID: 114183535645886322}
   scale: 0
@@ -3394,7 +3394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 0}
   cubeMat: {fileID: 0}
-  isGreen: 0
   vrCameraRig: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
   fpsCtrl: {fileID: 1857131474040466, guid: 3054a0b8ee6cf7c409fad751ae07325d, type: 2}
   AvatarHide:
@@ -3409,6 +3408,7 @@ MonoBehaviour:
   - {fileID: 1088169588927380}
   AvatarShow:
   - {fileID: 1654889333963012}
+  spectator: 0
 --- !u!114 &114120985859615212
 MonoBehaviour:
   m_ObjectHideFlags: 1

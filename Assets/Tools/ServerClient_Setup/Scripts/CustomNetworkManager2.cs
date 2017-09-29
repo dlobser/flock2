@@ -83,6 +83,12 @@ public class CustomNetworkManager2 : NetworkManager
         clientHudScript.ConnectSuccses();
     }
 
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
+        Debug.Log("adding player");
+        var player = (GameObject)GameObject.Instantiate(playerPrefab);
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+    }
+
     //when client recieves password information from the server.
     public void OnReceivePassword(NetworkMessage netMsg)
     {
@@ -92,6 +98,7 @@ public class CustomNetworkManager2 : NetworkManager
         if (msg != clientHudScript.passwordText.text)
             clientHudScript.DisConnect(true);
     }
+
 
     public override void OnClientDisconnect(NetworkConnection conn)
     {

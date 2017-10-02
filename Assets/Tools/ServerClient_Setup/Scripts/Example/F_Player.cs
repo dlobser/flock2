@@ -19,6 +19,7 @@ public class F_Player : NetworkBehaviour {
 
 	public GameObject[] AvatarHide;
 	public GameObject[] AvatarShow;
+    public GameObject[] AvatarSpectate;
 
 
     //Setting up the SyncVar.
@@ -101,19 +102,34 @@ public class F_Player : NetworkBehaviour {
     [Command]
     public void CmdSyncSpectator(bool val) {
         spectator = val;
-        this.gameObject.SetActive(!val);
+        SetSpectator();
+    }
+
+    public void SetSpectator() {
+        for (int i = 0; i < AvatarSpectate.Length; i++) {
+            if (AvatarSpectate[i].activeInHierarchy)
+                AvatarSpectate[i].SetActive(!spectator);
+        }
+    }
+
+    void Update() {
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.J)) {
+            CmdSyncSpectator(!spectator);
+        }
+        //if (spectator)
+        //    this.gameObject.SetActive(false);
     }
 
 	public override void OnStartLocalPlayer ()
 	{
         if (GameObject.Find("TangoParent")){
             CmdSyncSpectator(true);
-            this.gameObject.SetActive(false);
+            SetSpectator();
             return;
         }
 
         if (spectator)
-            this.gameObject.SetActive(false);
+            SetSpectator();
 
         if (!isClient)
 			return;
@@ -181,10 +197,9 @@ public class F_Player : NetworkBehaviour {
 		}
 	}
 
-    void Update() {
-        if (spectator)
-            this.gameObject.SetActive(false);
-    }
+    //void Update() {
+       
+    //}
 
     /* de nada
      * 

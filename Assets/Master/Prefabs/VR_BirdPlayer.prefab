@@ -3394,7 +3394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 0}
   cubeMat: {fileID: 0}
-  isGreen: 0
   vrCameraRig: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
   fpsCtrl: {fileID: 1857131474040466, guid: 3054a0b8ee6cf7c409fad751ae07325d, type: 2}
   AvatarHide:
@@ -3409,6 +3408,9 @@ MonoBehaviour:
   - {fileID: 1088169588927380}
   AvatarShow:
   - {fileID: 1654889333963012}
+  AvatarSpectate:
+  - {fileID: 1787098559882672}
+  spectator: 0
 --- !u!114 &114120985859615212
 MonoBehaviour:
   m_ObjectHideFlags: 1

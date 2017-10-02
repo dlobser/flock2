@@ -11,7 +11,7 @@ public class F_HideChild : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetKeyUp(KeyCode.H))
+	    if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyUp(KeyCode.H))
 	    {
 	      onOff = true;
 	    }

@@ -67,17 +67,18 @@ public class ManageRigidBugs : MonoBehaviour {
         //Logic to check for spectator
         int c = 0;
         for (int i = 0; i < Avatars.Length; i++) {
-            if (Avatars[i].transform.childCount > 0)
+            if (Avatars[i].transform.GetChild(0).gameObject.activeInHierarchy)
                 c++;
         }
         Avatar = new GameObject[c];
         c = 0;
         for (int i = 0; i < Avatars.Length; i++) {
-            if (Avatars[i].transform.childCount > 0) {
+            if (Avatars[i].transform.GetChild(0).gameObject.activeInHierarchy) {
                 Avatar[c] = Avatars[i];
                 c++;
             }
         }
+        Debug.Log(Avatar.Length);
         //end spectator logic
 		
 		if (Avatar.Length > 0) {

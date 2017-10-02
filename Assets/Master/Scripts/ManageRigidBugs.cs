@@ -62,7 +62,23 @@ public class ManageRigidBugs : MonoBehaviour {
 	
 	void Update () {
 
-		Avatar = GameObject.FindGameObjectsWithTag (avatarTag);
+		GameObject[] Avatars = GameObject.FindGameObjectsWithTag (avatarTag);
+
+        //Logic to check for spectator
+        int c = 0;
+        for (int i = 0; i < Avatars.Length; i++) {
+            if (Avatars[i].transform.childCount > 0)
+                c++;
+        }
+        Avatar = new GameObject[c];
+        c = 0;
+        for (int i = 0; i < Avatars.Length; i++) {
+            if (Avatars[i].transform.childCount > 0) {
+                Avatar[c] = Avatars[i];
+                c++;
+            }
+        }
+        //end spectator logic
 		
 		if (Avatar.Length > 0) {
 			for (int i = 0; i < RigidParent.transform.childCount; i++) {

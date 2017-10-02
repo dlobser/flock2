@@ -61,7 +61,7 @@ Material:
     m_Colors:
     - first:
         name: _BaseColor
-      second: {r: 0.9485294, g: 0.8425173, b: 0.68349916, a: 0}
+      second: {r: 0.9338235, g: 0, b: 0, a: 0}
     - first:
         name: _GlowColor
       second: {r: 1, g: 1, b: 1, a: 1}

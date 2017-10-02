@@ -37,6 +37,9 @@ public class LevelHandler : MonoBehaviour {
 
 	void Update () {
 		
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha0)) {
+            eatBug = true;
+        }
 		hungerTimer += Time.deltaTime;
 		if (hungerTimer > hungryTime) {
 			ReduceLevel ();

@@ -15,7 +15,7 @@ public class F_HideWigWhenNoTarget : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (xForm.target == null) {
+		if (xForm.target == null || !xForm.target.gameObject.activeInHierarchy) {
 			rend.material.SetFloat ("_Thickness", 0);
 			rend.enabled = false;
 

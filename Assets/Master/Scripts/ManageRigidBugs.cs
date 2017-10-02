@@ -78,7 +78,7 @@ public class ManageRigidBugs : MonoBehaviour {
                 c++;
             }
         }
-        Debug.Log(Avatar.Length);
+        //Debug.Log(Avatar.Length);
         //end spectator logic
 		
 		if (Avatar.Length > 0) {

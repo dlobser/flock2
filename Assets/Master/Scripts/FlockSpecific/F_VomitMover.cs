@@ -24,7 +24,7 @@ public class F_VomitMover : MonoBehaviour {
 			b.GetComponent<ParticleSystem> ().Emit (40);
 			vCtrl.SendMessage("DestroyVomit", this.gameObject); //Callback
 		}
-		Debug.Log (c.name);
+		//Debug.Log (c.name);
 	}
 
 	void Start () {

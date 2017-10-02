@@ -45,6 +45,6 @@ public class F_InstantiateEgg : Resetable {
 	void Update(){
 		if (!force.doit)
 			this.gameObject.SetActive (false);
-        Debug.Log(force.doit);
+        //Debug.Log(force.doit);
 	}
 }

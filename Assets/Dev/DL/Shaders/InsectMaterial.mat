@@ -18,49 +18,49 @@ Material:
     - first:
         name: _Tex1
       second:
-        m_Texture: {fileID: 2800000, guid: b1c215ebd3fea44d9a24667b74ee0a72, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1affe94c8b9644a12b204c800b9ec781, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex2
       second:
-        m_Texture: {fileID: 2800000, guid: 0555d3f6746c24da4ad1797babdd7424, type: 3}
+        m_Texture: {fileID: 2800000, guid: 73b59983864c742adaa5e1b699df10ea, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex3
       second:
-        m_Texture: {fileID: 2800000, guid: 13407d5d9a6ad465f9544d05e24979cc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 396a90a3cd85d4467b0612767ff60a22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex4
       second:
-        m_Texture: {fileID: 2800000, guid: 82f0e9c68e93b442fadf6124c45b60b4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c2c48c7412334b0cac97ad9cebd66cc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex5
       second:
-        m_Texture: {fileID: 2800000, guid: 8e2d0d29871f64e689145fed5576b7fe, type: 3}
+        m_Texture: {fileID: 2800000, guid: 130630135cc8b45dc8583a41383d23a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex6
       second:
-        m_Texture: {fileID: 2800000, guid: c8522ae112e2b4a578cd53db4ac2fb8a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 306ea31a38df8402883b7614b3ffef23, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex7
       second:
-        m_Texture: {fileID: 2800000, guid: ae932e9b85af248ecae277cd771ae30e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 35f0c9f67f3fa41a9b1789373d31934f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex8
       second:
-        m_Texture: {fileID: 2800000, guid: 7b24f4f95197848de81737d39de7df4f, type: 3}
+        m_Texture: {fileID: 2800000, guid: d11f757933c684b99b2b89a177494dab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -85,10 +85,10 @@ Material:
       second: {r: 0, g: 0, b: 0, a: 0}
     - first:
         name: _ColorMult
-      second: {r: 0.9634888, g: 0.79391485, b: 0.5952942, a: 0.559}
+      second: {r: 0.2509804, g: 0.9490197, b: 0.7960785, a: 0.56078434}
     - first:
         name: _ColorOffset
-      second: {r: 9.4, g: 1.7, b: 5.4, a: 0.44000003}
+      second: {r: 4, g: 0, b: 0, a: 0}
     - first:
         name: _ColorR
       second: {r: 0, g: 0, b: 0, a: 0}

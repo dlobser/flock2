@@ -107,8 +107,7 @@ public class F_Player : NetworkBehaviour {
 
     public void SetSpectator() {
         for (int i = 0; i < AvatarSpectate.Length; i++) {
-            if (AvatarSpectate[i].activeInHierarchy)
-                AvatarSpectate[i].SetActive(!spectator);
+            AvatarSpectate[i].SetActive(!spectator);
         }
     }
 

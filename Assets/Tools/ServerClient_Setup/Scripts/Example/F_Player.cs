@@ -115,7 +115,7 @@ public class F_Player : NetworkBehaviour {
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.J)) {
             spectator = !spectator;
             CmdSyncSpectator(spectator);
-            if(isLocalPlayer)
+            if(isLocalPlayer && this.GetComponent<F_IsLocalPlayer>()!=null)
                 SetSpectator();
         }
         //if (spectator)

@@ -113,7 +113,9 @@ public class F_Player : NetworkBehaviour {
 
     void Update() {
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.J)) {
-            CmdSyncSpectator(!spectator);
+            spectator = !spectator;
+            CmdSyncSpectator(spectator);
+            SetSpectator();
         }
         //if (spectator)
         //    this.gameObject.SetActive(false);

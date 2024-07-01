@@ -8,7 +8,7 @@ public class NetworkManagerMirror : NetworkManager
 {
     public Text clientsInfoText;
     public ClientHUD clientHudScript;
-    public ServerHUD serverHudScript;
+    public ServerHUDMirror serverHudScript;
 
     private int connectedClients = 0;
 

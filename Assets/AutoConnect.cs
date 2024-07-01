@@ -9,6 +9,8 @@ public class AutoConnect : MonoBehaviour
     public string autoConnectIP = "127.0.0.1";
     public int autoConnectPort = 7777;
 
+    public GameObject hideNotAndroid;
+
     IEnumerator PingServer()
     {
         while (true)
@@ -27,25 +29,33 @@ public class AutoConnect : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(PingServer());
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            hideNotAndroid.SetActive(false);
+            StartCoroutine(PingServer());
 
-        manager = GetComponent<NetworkManagerMirror>();
+            manager = GetComponent<NetworkManagerMirror>();
 
-        manager.networkAddress = autoConnectIP;
+            manager.networkAddress = autoConnectIP;
+            
+            // Set the port for the transport component (TelepathyTransport)
+            var transport = Transport.activeTransport as TelepathyTransport;
+            if (transport != null)
+            {
+                transport.port = (ushort)autoConnectPort;
+            }
+            else
+            {
+                Debug.LogError("Unsupported transport type. Please set the port manually.");
+            }
+
+            StartCoroutine(Connect());
+            StartCoroutine(CheckConnection());
+        }
+        // else{
+        //     this.gameObject.SetActive(false);
+        // }
         
-        // Set the port for the transport component (TelepathyTransport)
-        var transport = Transport.activeTransport as TelepathyTransport;
-        if (transport != null)
-        {
-            transport.port = (ushort)autoConnectPort;
-        }
-        else
-        {
-            Debug.LogError("Unsupported transport type. Please set the port manually.");
-        }
-
-        StartCoroutine(Connect());
-        StartCoroutine(CheckConnection());
     }
 
     IEnumerator Connect()

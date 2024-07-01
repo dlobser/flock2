@@ -6,10 +6,23 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject serverCanvas, clientCanvas;
     public ClientHUD clientHudScript;
-    public ServerHUD serverHUDScript;
+    public ServerHUDMirror serverHUDScript;
 
 	public GameObject[] show;
 	public GameObject[] hide;
+
+    void Start()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            serverCanvas.SetActive(false);
+            clientCanvas.SetActive(false);
+            for (int i = 0; i < show.Length; i++) {
+                show [i].SetActive (true);
+            }
+        }
+        
+    }
 
     public void StartServer()
     {

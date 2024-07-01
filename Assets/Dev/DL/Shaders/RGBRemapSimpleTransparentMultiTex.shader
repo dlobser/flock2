@@ -1,4 +1,6 @@
-﻿Shader "Holojam/RGBRemapSimpleTransparentMultiTex"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Holojam/RGBRemapSimpleTransparentMultiTex"
 {
 	Properties
 	{
@@ -80,7 +82,7 @@
 				o.ColorR = v.ColorR;
 //				o.ColorG = mul(UNITY_MATRIX_IT_MV, v.ColorG);
 //				o.ColorB = v.ColorB;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 //				UNITY_TRANSFER_FOG(o,o.vertex);
 //				float d = length(mul (UNITY_MATRIX_MV,v.vertex));
 				return o;

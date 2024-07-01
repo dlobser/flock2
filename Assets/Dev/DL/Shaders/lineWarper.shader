@@ -1,4 +1,6 @@
-﻿Shader "Unlit/lineWarper"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Unlit/lineWarper"
 {
 	Properties
 	{
@@ -61,7 +63,7 @@
 		
 				float4 offset = ( (v.vertex * float4(v.uv.x*mult,v.uv.x*mult,v.uv.x*mult,0)  - sub ) );// * v.uv.x  ;
 
-				o.vertex = mul(UNITY_MATRIX_MVP, (v.vertex + offset) + noise*_Data.y );
+				o.vertex = UnityObjectToClipPos((v.vertex + offset) + noise*_Data.y );
 
 				o.pos = float4(v.uv.x,v.uv.x,v.uv.x,0);
 

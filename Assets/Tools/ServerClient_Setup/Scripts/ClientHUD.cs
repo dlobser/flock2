@@ -15,6 +15,11 @@ public class ClientHUD : MonoBehaviour
     private float connectingTimer, connectionFaileTimer;
     private bool connected;
 
+    public bool autoConnectToServer;
+    public string autoConnectIP;
+    public string autoConnectPort;
+    public bool isConnected;
+
     // Use this for initialization
     void Start()
     {
@@ -31,6 +36,9 @@ public class ClientHUD : MonoBehaviour
         {
             manager.networkAddress = PlayerPrefs.GetString("IPAddressC");
             ipText.text = PlayerPrefs.GetString("IPAddressC");
+        }
+        if(autoConnectToServer){
+            StartCoroutine(Connect());
         }
     }
 
@@ -53,6 +61,33 @@ public class ClientHUD : MonoBehaviour
     }
 
     public void ConnectToServer()
+    {
+        if (ipText.text != "" && portText.text != "")//is the information filled in ?.
+        {
+            connected = false;
+            disConnectMessage.SetActive(false);
+            connectingText.text = "Connecting !!";
+            connecting.SetActive(true);
+            connectingTimer = 8;//how long we try to connect until the fail message appears.
+            connectionFaileTimer = 2;//how long the fail message is showing.
+            manager.networkAddress = ipText.text;
+            manager.networkPort = Convert.ToInt32(portText.text);
+            PlayerPrefs.SetString("IPAddressC", autoConnectIP);//saving the filled in ip.
+            PlayerPrefs.SetString("nwPortC", autoConnectPort);//saving the filled in port.
+
+            manager.StartClient();
+        }
+    }
+
+    IEnumerator Connect(){
+        while(!connected){
+            yield return new WaitForSeconds(1);
+            Debug.Log("Connecting to server");
+            ConnectToServer();
+        }
+    }
+
+    public void AutoConnect()
     {
         if (ipText.text != "" && portText.text != "")//is the information filled in ?.
         {

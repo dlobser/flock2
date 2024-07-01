@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
@@ -81,7 +83,7 @@ v2f vert(appdata v)
 	//SET VERTEX POSITION BY ADDING DISPLACEMENT POSITION
 	//OUTPUT VERTEX VIEWPORT POSITION
 	float4 wpos = float4(v.vertex.xyz + displacement.xyz, 1.0);
-	o.vertex = mul(UNITY_MATRIX_MVP, wpos);
+	o.vertex = UnityObjectToClipPos(wpos);
 
 	//OUTPUT TEXTURE COORDINATES
 	o.uv = TRANSFORM_TEX(v.uv, _MainTex);

@@ -2,66 +2,47 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Wig_Sunflower
   m_Shader: {fileID: 4800000, guid: e33914cc0565b422a85a0ca1f497f0b0, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TexEnvs:
-    - first:
-        name: _BasisBuffer
-      second:
+    - _BasisBuffer:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MainTex
-      second:
+    - _MainTex:
         m_Texture: {fileID: 2800000, guid: d7d884732f31d6b49842dbc05eec81a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _PositionBuffer
-      second:
+    - _PositionBuffer:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
-    - first:
-        name: _BaseRandom
-      second: 0.394
-    - first:
-        name: _GlowIntensity
-      second: 0
-    - first:
-        name: _GlowProb
-      second: 0.036
-    - first:
-        name: _GlowRandom
-      second: 0
-    - first:
-        name: _Metallic
-      second: 0
-    - first:
-        name: _Smoothness
-      second: 0
-    - first:
-        name: _ThickRandom
-      second: 0.255
-    - first:
-        name: _Thickness
-      second: 0.0145
+    - _BaseRandom: 0.394
+    - _GlowIntensity: 0
+    - _GlowProb: 0.036
+    - _GlowRandom: 0
+    - _Metallic: 0
+    - _Smoothness: 0
+    - _ThickRandom: 0.255
+    - _Thickness: 0.0145
     m_Colors:
-    - first:
-        name: _BaseColor
-      second: {r: 0.9485294, g: 0.8425173, b: 0.68349916, a: 0}
-    - first:
-        name: _GlowColor
-      second: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.9485294, g: 0.8425173, b: 0.68349916, a: 0}
+    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

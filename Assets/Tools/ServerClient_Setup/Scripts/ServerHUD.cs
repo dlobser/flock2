@@ -1,27 +1,29 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
-using UnityEngine.SceneManagement;
+using System.IO;
+using System.Collections;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Linq;
 
-public class ServerHUD : MonoBehaviour {
-
+public class ServerHUD : MonoBehaviour
+{
     public GameObject stopServer, startHost, startServer, resetSettings, getIP, checking, clientsInfo;
     public Text serverInfoText, portPlaceholderText, paswPlaceholderText, clientsInfoText;
     public InputField portText, passwordText, maxConnText;
 
     private NetworkManager manager;
     private bool noConnection, setText, checkIP;
-    private string externalip="?", localIP="?";
+    private string externalip = "?", localIP = "?";
     private int maximumConnections;
 
-    // Use this for initialization
-    void Start () {
-        if (!manager)
-            manager = GetComponent<NetworkManager>();
-        
-        //Checking if we have saved Server Infomation and filling the text fields.
+    void Start()
+    {
+        manager = GetComponent<NetworkManager>();
+
+        // Checking if we have saved Server Information and filling the text fields.
         if (PlayerPrefs.HasKey("nwPortS"))
         {
             manager.networkPort = Convert.ToInt32(PlayerPrefs.GetString("nwPortS"));
@@ -45,16 +47,15 @@ public class ServerHUD : MonoBehaviour {
         }
 
         clientsInfoText = clientsInfo.GetComponentInChildren<Text>();
-        setText = true;       
-    } 
-	
-	// Update is called once per frame
-	void Update () {
-        
+        setText = true;
+    }
+
+    void Update()
+    {
         noConnection = (manager.client == null || manager.client.connection == null ||
                      manager.client.connection.connectionId == -1);
 
-        //Showing and hiding the appropriate buttons and text depending on if the server is running or not.
+        // Showing and hiding the appropriate buttons and text depending on if the server is running or not.
         if (!manager.IsClientConnected() && !NetworkServer.active && manager.matchMaker == null)
         {
             if (noConnection)
@@ -75,23 +76,15 @@ public class ServerHUD : MonoBehaviour {
             if (setText)
             {
                 serverInfoText.color = new Color(0.2f, 0.6f, 0.2f, 1f);
-                string pw="";               
-                if (passwordText.text == "")               
-                    pw = "(no password)";                
-                else pw = passwordText.text;
+                string pw = passwordText.text == "" ? "(no password)" : passwordText.text;
+                string maxConn = maxConnText.text == "" ? "8" : maxConnText.text;
 
-                string maxConn = "";
-                if (maxConnText.text == "")
-                    maxConn = "8";
-                else maxConn = maxConnText.text;
-
-                serverInfoText.text = "Server Is Running !\n" +"\nIP Address\nExternal : " +externalip+"\nLocal : "+localIP+"\n\nServer Port : " + manager.networkPort+"\nPassword : "+pw+"\nMax Connections : "+ maxConn;
+                serverInfoText.text = "Server Is Running !\n" + "\nIP Address\nExternal : " + externalip + "\nLocal : " + localIP + "\n\nServer Port : " + manager.networkPort + "\nPassword : " + pw + "\nMax Connections : " + maxConn;
                 setText = false;
             }
         }
     }
 
-    //shutdown the server.
     public void StopHostCustom()
     {
         startServer.SetActive(true);
@@ -105,109 +98,31 @@ public class ServerHUD : MonoBehaviour {
 
     public void StartServerCustom()
     {
-        //setting the network managers port to use.
-        if (portText.text == "")//did we not set a port number ?
-        {
-            if (PlayerPrefs.HasKey("nwPortS"))//did we have a previous one saved.
-            {
-                manager.networkPort = Convert.ToInt32(PlayerPrefs.GetString("nwPortS"));
-            }
-            else//if not, use the default port.
-            {
-                manager.networkPort = 7777;
-                portPlaceholderText.text = manager.networkPort.ToString()+"(Default)";
-            }
-        }
-        else
-        {
-            PlayerPrefs.SetString("nwPortS", portText.text);//save the port we are using.         
-            manager.networkPort = Convert.ToInt32(portText.text);
-            portPlaceholderText.text = manager.networkPort.ToString();
-        }
-
-        PlayerPrefs.SetString("Password", passwordText.text);//save the servers pasword.  
+        SetPort();
+        PlayerPrefs.SetString("Password", passwordText.text); // Save the server's password.  
         PlayerPrefs.SetString("MaxConnections", maxConnText.text.ToString());
-        //Showing and hiding the appropriate buttons and text.  
-        resetSettings.SetActive(false);
-        portText.transform.parent.gameObject.SetActive(false);
-        getIP.SetActive(false);
-        startServer.SetActive(false);
-    startHost.SetActive(false);
-    stopServer.SetActive(true);
-        clientsInfo.SetActive(true);
-        setText = true;
 
-        if (maxConnText.text != "")
-        {
-            maximumConnections = Convert.ToInt32(maxConnText.text);
-        }
-        else maximumConnections = 8;
-        manager.maxConnections = maximumConnections;
+        ShowAndHideButtons();
 
+        manager.maxConnections = GetMaximumConnections();
         manager.StartServer();
-
-        //var config = new ConnectionConfig();
-        //config.AddChannel(QosType.Reliable);
-        //config.AddChannel(QosType.Unreliable);
-
-        //manager.StartServer(config, maximumConnections);
     }
 
-      public void StartHostCustom()
+    public void StartHostCustom()
     {
-  
-        //setting the network managers port to use.
-        if (portText.text == "")//did we not set a port number ?
-        {
-          if (PlayerPrefs.HasKey("nwPortS"))//did we have a previous one saved.
-          {
-            manager.networkPort = Convert.ToInt32(PlayerPrefs.GetString("nwPortS"));
-          }
-          else//if not, use the default port.
-          {
-            manager.networkPort = 7777;
-            portPlaceholderText.text = manager.networkPort.ToString() + "(Default)";
-          }
-        }
-        else
-        {
-          PlayerPrefs.SetString("nwPortS", portText.text);//save the port we are using.         
-          manager.networkPort = Convert.ToInt32(portText.text);
-          portPlaceholderText.text = manager.networkPort.ToString();
-        }
-
-        PlayerPrefs.SetString("Password", passwordText.text);//save the servers pasword.  
+        SetPort();
+        PlayerPrefs.SetString("Password", passwordText.text); // Save the server's password.  
         PlayerPrefs.SetString("MaxConnections", maxConnText.text.ToString());
-        //Showing and hiding the appropriate buttons and text.  
-        resetSettings.SetActive(false);
-        portText.transform.parent.gameObject.SetActive(false);
-        getIP.SetActive(false);
-        startServer.SetActive(false);
-    startHost.SetActive(false);
-    stopServer.SetActive(true);
-        clientsInfo.SetActive(true);
-        setText = true;
 
-        if (maxConnText.text != "")
-        {
-          maximumConnections = Convert.ToInt32(maxConnText.text);
-        }
-        else maximumConnections = 8;
-        manager.maxConnections = maximumConnections;
+        ShowAndHideButtons();
 
+        manager.maxConnections = GetMaximumConnections();
         manager.StartHost();
-
-        //var config = new ConnectionConfig();
-        //config.AddChannel(QosType.Reliable);
-        //config.AddChannel(QosType.Unreliable);
-
-        //manager.StartServer(config, maximumConnections);
-    
     }
 
     public void ResetToDefault()
     {
-        //deleting all saved info and resetting to use the default ones.
+        // Deleting all saved info and resetting to use the default ones.
         PlayerPrefs.DeleteKey("IPAddressS");
         getIP.GetComponentInChildren<Text>().text = "Find Server IP Address.";
         externalip = "?";
@@ -223,42 +138,100 @@ public class ServerHUD : MonoBehaviour {
         maxConnText.text = "";
     }
 
-    //Finding the servers ip addresses.
     public void GetIP()
     {
         getIP.GetComponentInChildren<Text>().text = "If this takes too long\nClick again.";
-        StartCoroutine(GetPublicIP());//start the actual checkking.
+        StartCoroutine(GetPublicIP()); // Start the actual checking.
         checking.SetActive(true);
     }
 
     IEnumerator GetPublicIP()
     {
-        WWW www = new WWW("http://checkip.dyndns.org");//the website to use to find your external ip, use any "find my ip" site you want.
-        yield return www;//wait till we get a response.
-        if (www.error==null)
+        UnityWebRequest request = UnityWebRequest.Get("http://checkip.dyndns.org");
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
-            //filter the response message for the ip address.
-            string response = www.text;
+            // Filter the response message for the IP address.
+            string response = request.downloadHandler.text;
             string[] a = response.Split(':');
             string a2 = a[1].Substring(1);
             string[] a3 = a2.Split('<');
             string a4 = a3[0];
-            externalip = a4;//TADAA..!!   your external ip addres :)
+            externalip = a4; // TADAA..!! Your external IP address :)
 
-            //getting the ip from the pc the server is running on. (a local Lan address) 
-            //onely used to connect from inside your house/network.
-            localIP = Network.player.ipAddress;
+            // Getting the IP from the PC the server is running on (a local LAN address)
+            localIP = GetLocalIPAddress();
 
-            getIP.GetComponentInChildren<Text>().text = "Server IP Address\nExternal :" + externalip+"\nLocal :"+localIP;
-            //saving the ip addresses.
+            getIP.GetComponentInChildren<Text>().text = "Server IP Address\nExternal :" + externalip + "\nLocal :" + localIP;
+            // Saving the IP addresses.
             PlayerPrefs.SetString("IPAddressS", externalip);
             PlayerPrefs.SetString("LocalIP", localIP);
             checking.SetActive(false);
         }
         else
         {
-            getIP.GetComponentInChildren<Text>().text = "Someting went wrong\nPlease try again";
+            getIP.GetComponentInChildren<Text>().text = "Something went wrong\nPlease try again";
             checking.SetActive(false);
         }
+    }
+
+    private void SetPort()
+    {
+        if (string.IsNullOrEmpty(portText.text))
+        {
+            if (PlayerPrefs.HasKey("nwPortS"))
+            {
+                manager.networkPort = Convert.ToInt32(PlayerPrefs.GetString("nwPortS"));
+            }
+            else
+            {
+                manager.networkPort = 7777;
+                portPlaceholderText.text = manager.networkPort.ToString() + "(Default)";
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetString("nwPortS", portText.text); // Save the port we are using.
+            manager.networkPort = Convert.ToInt32(portText.text);
+            portPlaceholderText.text = manager.networkPort.ToString();
+        }
+    }
+
+    private void ShowAndHideButtons()
+    {
+        resetSettings.SetActive(false);
+        portText.transform.parent.gameObject.SetActive(false);
+        getIP.SetActive(false);
+        startServer.SetActive(false);
+        startHost.SetActive(false);
+        stopServer.SetActive(true);
+        clientsInfo.SetActive(true);
+        setText = true;
+    }
+
+    private int GetMaximumConnections()
+    {
+        if (!string.IsNullOrEmpty(maxConnText.text))
+        {
+            return Convert.ToInt32(maxConnText.text);
+        }
+        else
+        {
+            return 8;
+        }
+    }
+
+    private string GetLocalIPAddress()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+        throw new Exception("No network adapters with an IPv4 address in the system!");
     }
 }

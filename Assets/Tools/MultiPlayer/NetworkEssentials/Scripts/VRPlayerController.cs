@@ -28,7 +28,7 @@ public class VRPlayerController : NetworkBehaviour
 			transform.rotation);
 
         // ?????
-		Transform bodyOfVrPlayer = transform.FindChild ("VRPlayerBody");
+		Transform bodyOfVrPlayer = transform.Find ("VRPlayerBody");
 		if (bodyOfVrPlayer != null)
 			bodyOfVrPlayer.parent = null;
 

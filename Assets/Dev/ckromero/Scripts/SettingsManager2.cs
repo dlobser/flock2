@@ -70,7 +70,7 @@ public class SettingsManager2 :  NetworkBehaviour {
             }
         }
  
-        Debug.Log("Network Player#: " +  (Network.player.ToString()));
+        // Debug.Log("Network Player#: " +  (Network.player.ToString()));
     
     }
 

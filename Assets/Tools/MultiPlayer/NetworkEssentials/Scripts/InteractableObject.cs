@@ -31,7 +31,7 @@ public class InteractableObject : NetworkBehaviour
     public void AttachToHand(GameObject hand)
     {
         //var controller = hand.transform.parent;
-        var attachpoint = hand.transform.FindChild("Attachpoint");
+        var attachpoint = hand.transform.Find("Attachpoint");
         switch (snapType)
         {
             case ObjectSnap.Exact:

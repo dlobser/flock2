@@ -8,7 +8,7 @@ public class GunItem : NetworkBehaviour, IUsable {
 
     void Start()
     {
-        barrel = transform.FindChild("Barrel");
+        barrel = transform.Find("Barrel");
     }
 
 	public void StartUsing(NetworkInstanceId handId)

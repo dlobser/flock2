@@ -110,27 +110,27 @@ public class LevelHandler : MonoBehaviour {
 		lerpLevel = 0;
 		hungerTimer = 0;
 		level = 0;
-    foreach (FaderManager fader in BugsEaten)
-    {
-      fader.Refresh();
-    }
-    foreach (FaderManager fader in Level)
-    {
-      fader.Refresh();
-    }
-    foreach (FaderManager fader in LerpLevel)
-    {
-      fader.Refresh();
-    }
-    foreach (FaderManager fader in LevelDelta)
-    {
-      fader.Refresh();
-    }
-    foreach (FaderManager fader in DeathCount)
-    {
-      fader.Refresh();
-    }
-  }
+		foreach (FaderManager fader in BugsEaten)
+		{
+		fader.Refresh();
+		}
+		foreach (FaderManager fader in Level)
+		{
+		fader.Refresh();
+		}
+		foreach (FaderManager fader in LerpLevel)
+		{
+		fader.Refresh();
+		}
+		foreach (FaderManager fader in LevelDelta)
+		{
+		fader.Refresh();
+		}
+		foreach (FaderManager fader in DeathCount)
+		{
+		fader.Refresh();
+		}
+	}
 
 	void Debugger(){
 		Debug.Log ("level: " + level);
@@ -155,7 +155,7 @@ public class LevelHandler : MonoBehaviour {
 			fader.level = levelDelta;
 		}
 		foreach (FaderManager fader in DeathCount) {
-	        fader.level = deathCount;
+	        fader.level = deathCount * maxLevel;
 		}
 
 	}

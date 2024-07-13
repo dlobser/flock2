@@ -53,10 +53,10 @@ public class ServerHUDMirror : MonoBehaviour
     void Update()
     {
         noConnection = (Mirror.NetworkClient.active == false || Mirror.NetworkClient.isConnected == false);
-
         // Showing and hiding the appropriate buttons and text depending on if the server is running or not.
-        if (!Mirror.NetworkClient.isConnected && !Mirror.NetworkServer.active)
+        if (!Mirror.NetworkServer.active)//!Mirror.NetworkClient.isConnected && !Mirror.NetworkServer.active)
         {
+            GetIP();
             if (noConnection)
             {
                 stopServer.SetActive(false);
@@ -66,7 +66,7 @@ public class ServerHUDMirror : MonoBehaviour
                 {
                     serverInfoText.color = Color.red;
                     serverInfoText.text = "Server Not Running !";
-                    setText = false;
+                    // setText = false;
                 }
             }
         }
@@ -79,7 +79,7 @@ public class ServerHUDMirror : MonoBehaviour
                 string maxConn = maxConnText.text == "" ? "8" : maxConnText.text;
 
                 serverInfoText.text = "Server Is Running !\n" + "\nIP Address\nExternal : " + externalip + "\nLocal : " + localIP + "\n\nServer Port : " + portPlaceholderText.text + "\nPassword : " + pw + "\nMax Connections : " + maxConn;
-                setText = false;
+                // setText = false;
             }
         }
     }
@@ -237,6 +237,7 @@ public class ServerHUDMirror : MonoBehaviour
         {
             if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
             {
+                // Debug.Log("This IP: " + ip.ToString());
                 return ip.ToString();
             }
         }

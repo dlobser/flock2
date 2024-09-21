@@ -3,6 +3,7 @@ using Mirror;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 public class NetworkManagerMirror : NetworkManager
 {

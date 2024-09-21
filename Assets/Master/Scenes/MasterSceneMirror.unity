@@ -154519,7 +154519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379b8b2131ffa544187c3f545eab8103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultIP: 192.168.0.30
+  defaultIP: 10.0.0.2
   autoConnectPort: 7777
   remoteIPLocation: https://pastebin.com/raw/GDwhNP9a
   hideNotAndroid: {fileID: 287}
